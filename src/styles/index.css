@@ -1,1 +1,7 @@
+* {
+    box-sizing: border-box;
+}
 
+main {
+    margin-top: 55px;
+}
