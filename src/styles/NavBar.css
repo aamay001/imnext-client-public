@@ -6,32 +6,70 @@ nav {
     height: 55px;
 }
 
-nav h1, 
-nav ul, 
-nav li,
+nav h1,
 nav li a {
-    display: inline-block;
+    display: block;
     height: 100%;
+}
+
+
+
+nav a:visited {
+    color: white;
 }
 
 nav h1 {
     margin: 0;
-    margin-top: 7px;
-    margin-left: 5px;
-    width: 25%;    
-}
-
-nav ul {
-    float:right;
-    margin: 0;
-    text-align: right;
+    padding-top: 7px;
+    margin-left: 15px;
+    width: 25%;
 }
 
 nav a {
     text-decoration: none;
+    color: white;
+    text-align: center;
+    padding-top: 17px;
 }
 
-nav ul li a {    
-    width: 100%;
-    padding: 20px;
+nav ul li {
+    background-color: slategrey;
+}
+
+nav ul li a:hover {
+    background-color: navy;
+}
+
+nav ul
+, nav li {
+    display: block;
+    height: 0%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+@media only screen and (min-width: 768px) {
+    nav h1,
+    nav ul,
+    nav li,
+    nav li a {
+        display: inline-block ! important;
+        height: 100% ! important;
+    }
+
+    nav ul {
+        float: right;
+        margin: 0;
+        text-align: right;
+    }
+
+    nav li {
+        border: none;
+    }
+
+    nav ul li a {
+        width: 100%;
+        padding: 20px;
+    }
 }

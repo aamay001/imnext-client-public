@@ -1,0 +1,48 @@
+.nav-menu-button {
+  margin-right:15px;
+  margin-top: 13px;
+  position: fixed;
+  right: 0;
+  z-index: 10;
+}
+
+.menu-open{
+  position: relative;
+  float: right;
+}
+
+.nav-menu-button div {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin-bottom: 5px;
+  -webkit-transition: .5s;
+  -moz-transition: .5s;
+  transition: .5s all;
+}
+
+.nav-menu-button div.menu-shown:first-of-type {
+  transform: rotate(45deg);
+  position: relative;
+  width: 35px;
+  top: 10px;
+}
+
+.nav-menu-button div.menu-shown:nth-of-type(2) {
+  width: 0;
+  position: relative;
+
+}
+
+.nav-menu-button div.menu-shown:last-of-type {
+  transform: rotate(-45deg);
+  position: relative;
+  top: -10px;
+  width: 35px;
+}
+
+@media only screen and (min-width: 768px) {
+  .nav-menu-button {
+    display: none;
+  }
+}

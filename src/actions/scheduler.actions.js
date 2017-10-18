@@ -1,15 +1,7 @@
-export const SCHEDULE_APPOINTMENT = 'SCHEDULE_APPOINTMENT';
-export const scheduleAppointment = appointment => {
+export const NEXT_STEP = 'NEXT_STEP';
+export const nextStep = data => {
     return {
-        type: SCHEDULE_APPOINTMENT,
-        appointment
+        type: NEXT_STEP,
+        data
     };
 }
-
-export const CANCEL_APPOINTMENT = 'CANCEL_APPOINTMENT';
-export const cancelAppointment = appointmentId => {
-    return {
-        type : CANCEL_APPOINTMENT,
-        appointmentId
-    }
-} 

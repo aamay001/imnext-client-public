@@ -1,20 +1,20 @@
-.login-page {
+.signup-page {
   padding: 15px;
 }
 
-.login-page h1 {
+.signup-page h1 {
   width: 100%;
   text-align: center;
   margin-bottom: 0;
 }
 
-.login-page em {
+.signup-page em {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
-.login-page form {
+.signup-page form {
   margin-right: auto;
   margin-left: auto;
   margin-top: 25px;
@@ -22,26 +22,26 @@
   width: 100%;
 }
 
-.login-page label
-,.login-page input
-,.login-page button[type=submit] {
+.signup-page label
+,.signup-page input
+,.signup-page button[type=submit] {
   display: block;
   width: 100%;
   text-align: center;
 }
 
-.login-page label {
+.signup-page label {
   margin-bottom: 5px;
 }
 
-.login-page input {
+.signup-page input {
   border: none;
   border-bottom: 2px solid black;
   margin-bottom: 15px;
   height: 45px;
 }
 
-.login-page button[type=submit] {
+.signup-page button[type=submit] {
   height: 45px;
   background-color: lightblue;
   border: none;
@@ -50,20 +50,20 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .login-page form {
+  .signup-page form {
       width: 60%;
   }
 
-  .login-page input {
+  .signup-page input {
       width: 80%;
   }
 
-  .login-page button[type=submit] {
+  .signup-page button[type=submit] {
     width: 65%
   }
 
-  .login-page input
-  , .login-page button[type=submit] {
+  .signup-page input
+  , .signup-page button[type=submit] {
       margin-left: auto;
       margin-right: auto;
   }
@@ -71,12 +71,11 @@
 
 @media only screen and (min-width: 1024px) {
 
-  .login-page input {
+  .signup-page input {
     width: 45%;
   }
 
-  .login-page button[type=submit] {
+  .signup-page button[type=submit] {
     width: 35%
   }
 }
-

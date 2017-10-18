@@ -1,24 +1,38 @@
 import {
-    SCHEDULE_APPOINTMENT,
-    CANCEL_APPOINTMENT
+    NEXT_STEP
 } from '../actions/scheduler.actions';
 
-const initialState = {};
+export const STEP_ONE = 1;
+export const STEP_TWO = 2
 
-const scheduleAppointment = (state, action) => {
-    return undefined;
-}
+const initialState = {
+    step: STEP_ONE,
+    data: {
+        firstName: '',
+        lastName: '',
+        mobilePhone: '',
+        providerId: -1,
+        date: undefined,
+        time: undefined,
+        validation: undefined
+    }
+};
 
-const cancelAppointment = (state, action) => {
-    return undefined;
+const nextStep = (state, action) => {
+    const data = {...state.data};
+    data.firstName = action.data.firstName;
+    data.lastName = action.data.lastName;
+    data.mobilePhone = action.data.mobilePhone;
+    return {
+        ...state,
+        data: data
+    }
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
-        case SCHEDULE_APPOINTMENT:
-            return scheduleAppointment(state, action);
-        case CANCEL_APPOINTMENT:
-            return cancelAppointment(state, action);
+        case NEXT_STEP :
+            return nextStep(state, action);
         default:
             return state;
     }
