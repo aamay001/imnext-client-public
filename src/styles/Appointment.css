@@ -1,0 +1,86 @@
+.scheduling-page {
+  padding: 15px;
+}
+
+.scheduling-page h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.scheduling-page em {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.scheduling-page p {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.scheduling-page form {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 25px;
+  padding: 10px;
+  width: 100%;
+}
+
+.scheduling-page label
+,.scheduling-page input
+,.scheduling-page button[type=submit] {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.scheduling-page label {
+  margin-bottom: 5px;
+}
+
+.scheduling-page input {
+  border: none;
+  border-bottom: 2px solid black;
+  margin-bottom: 15px;
+  height: 45px;
+}
+
+.scheduling-page button[type=submit] {
+  height: 45px;
+  background-color: lightblue;
+  border: none;
+  outline: none;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .scheduling-page form {
+      width: 60%;
+  }
+
+  .scheduling-page input {
+      width: 80%;
+  }
+
+  .scheduling-page button[type=submit] {
+    width: 65%
+  }
+
+  .scheduling-page input
+  , .scheduling-page button[type=submit] {
+      margin-left: auto;
+      margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .scheduling-page input {
+    width: 45%;
+  }
+
+  .scheduling-page button[type=submit] {
+    width: 35%
+  }
+}

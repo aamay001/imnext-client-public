@@ -1,1 +1,14 @@
+* {
+    box-sizing: border-box;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
 
+html, body {
+    min-width: 326px;
+}
+
+main {
+    margin-top: 55px;
+}

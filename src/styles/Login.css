@@ -1,0 +1,82 @@
+.login-page {
+  padding: 15px;
+}
+
+.login-page h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.login-page em {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.login-page form {
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 25px;
+  padding: 10px;
+  width: 100%;
+}
+
+.login-page label
+,.login-page input
+,.login-page button[type=submit] {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+.login-page label {
+  margin-bottom: 5px;
+}
+
+.login-page input {
+  border: none;
+  border-bottom: 2px solid black;
+  margin-bottom: 15px;
+  height: 45px;
+}
+
+.login-page button[type=submit] {
+  height: 45px;
+  background-color: lightblue;
+  border: none;
+  outline: none;
+  margin-top: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .login-page form {
+      width: 60%;
+  }
+
+  .login-page input {
+      width: 80%;
+  }
+
+  .login-page button[type=submit] {
+    width: 65%
+  }
+
+  .login-page input
+  , .login-page button[type=submit] {
+      margin-left: auto;
+      margin-right: auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+
+  .login-page input {
+    width: 45%;
+  }
+
+  .login-page button[type=submit] {
+    width: 35%
+  }
+}
+

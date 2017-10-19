@@ -1,0 +1,83 @@
+.landing-page {
+    padding: 15px;
+}
+
+.landing-page h1 {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.landing-page em {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.landing-page p {
+    margin-top: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    text-align: justify;
+    background-color: lightgray;
+    line-height: 24px;
+}
+
+.landing-page a {
+    display: inline-block;
+    text-align: center;
+    height: 45px;
+    background-color: lightblue;
+    width: 80%;
+    margin-right: 10%;
+    margin-left: 10%;
+    margin-bottom: 15px;
+    text-decoration: none;
+    padding-top: 13px;
+}
+
+.landing-page a:visited {
+    color: black;
+}
+
+.landing-page a:hover {
+    background-color: navy;
+    color: white;
+}
+
+@media only screen and (min-width: 768px) {
+    .landing-page p {
+        width: 60%;
+    }
+
+    .landing-page a {
+        width: 40%;
+    }
+
+    .landing-page p
+    , .landing-page a {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+    .landing-page p {
+        width: 35%;
+    }
+
+    .landing-page a {
+        width: 25%;
+    }
+
+    .landing-page p
+    , .landing-page a {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+
+
