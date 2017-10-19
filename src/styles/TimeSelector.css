@@ -1,0 +1,34 @@
+div.time-selection-input {
+  display: block;
+  height: 55px;
+  border: 2px solid black;
+  margin: 0 auto 5px auto;
+}
+
+div.time-selection-input:hover {
+  background-color: lightblue;
+}
+
+label.time-selection-input {
+  display: inline-block;
+  margin: 0;
+  padding: 15px 0 15px 0;
+  height: 100%;
+  width: 100%;
+}
+
+input.time-selection-input {
+  visibility: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+  div.time-selection-input {
+      width: 80%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  div.time-selection-input {
+    width: 45%;
+  }
+}

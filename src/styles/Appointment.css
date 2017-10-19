@@ -14,6 +14,11 @@
   text-align: center;
 }
 
+.scheduling-page p {
+  text-align: center;
+  margin-top: 25px;
+}
+
 .scheduling-page form {
   margin-right: auto;
   margin-left: auto;

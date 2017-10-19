@@ -1,9 +1,9 @@
 import {
-    NEXT_STEP
+    NEXT_STEP,
+    STEP_ONE,
+    SCHEDULE_APPOINTMENT,
+    NEW_APPOINTMENT
 } from '../actions/scheduler.actions';
-
-export const STEP_ONE = 1;
-export const STEP_TWO = 2
 
 const initialState = {
     step: STEP_ONE,
@@ -18,21 +18,42 @@ const initialState = {
     }
 };
 
+const newAppointment = () => {
+    return {
+        ...initialState
+    };
+}
+
 const nextStep = (state, action) => {
-    const data = {...state.data};
-    data.firstName = action.data.firstName;
-    data.lastName = action.data.lastName;
-    data.mobilePhone = action.data.mobilePhone;
+    const data = {
+        ...state.data,
+        ...action.data
+    };
     return {
         ...state,
+        step: ++state.step,
         data: data
+    }
+}
+
+const scheduleAppointment = (state, action) => {
+    return {
+        ...state,
+        data: {
+            ...state.data,
+            ...action.data
+        }
     }
 }
 
 export default (state = initialState, action) => {
     switch (action.type) {
+        case NEW_APPOINTMENT :
+            return newAppointment();
         case NEXT_STEP :
             return nextStep(state, action);
+        case(SCHEDULE_APPOINTMENT) :
+            return scheduleAppointment(state, action);
         default:
             return state;
     }

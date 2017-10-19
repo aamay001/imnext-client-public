@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
 
 import {REGEX} from '../config/constants';
 import '../styles/SignUp.css'
@@ -20,6 +19,7 @@ export class SignUp extends Component {
               id="first-name"
               name="firstName"
               required
+              autoComplete="off"
               minLength={2}
               maxLength={32}/>
 
@@ -28,6 +28,7 @@ export class SignUp extends Component {
               id="last-name"
               name="lastName"
               required
+              autoComplete="off"
               minLength={2}
               maxLength={32}/>
 
@@ -36,6 +37,7 @@ export class SignUp extends Component {
               id="user-email"
               name="email"
               required
+              autoComplete="off"
               pattern={REGEX.EMAIL}/>
 
           <label htmlFor="mobile-phone" >Mobile Phone</label>
@@ -43,6 +45,7 @@ export class SignUp extends Component {
               id="mobile-phone"
               name="mobilePhone"
               required
+              autoComplete="off"
               patter={REGEX.PHONE}/>
 
           <label htmlFor="user-password">Password</label>
@@ -50,6 +53,7 @@ export class SignUp extends Component {
             id="user-password"
             name="password"
             required
+            autoComplete="off"
             minLength={8}
             maxLength={70}
             pattern={REGEX.PASSWORD}/>
@@ -59,6 +63,7 @@ export class SignUp extends Component {
             id="confirm-password"
             name="password"
             required
+            autoComplete="off"
             minLength={8}
             maxLength={70}
             pattern={REGEX.PASSWORD} />
@@ -70,9 +75,4 @@ export class SignUp extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-
-});
-
-const ConnectedSignUp = connect(mapStateToProps)(SignUp);
-export default ConnectedSignUp;
+export default SignUp;

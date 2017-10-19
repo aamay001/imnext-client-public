@@ -1,7 +1,8 @@
 import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  TOGGLE_MENU
+  TOGGLE_MENU,
+  SIGN_UP
 } from '../actions/user.actions';
 
 const initialState = {
@@ -30,6 +31,12 @@ const toggleMenu = (state, action) => {
   };
 }
 
+const signUp = (state, action) => {
+  return {
+    ...state
+  }
+}
+
 export default (state = initialState, action) => {
   switch(action.type) {
     case USER_LOGGED_IN :
@@ -38,6 +45,8 @@ export default (state = initialState, action) => {
       return userLoggedOut(state, action);
     case TOGGLE_MENU :
       return toggleMenu(state, action);
+    case SIGN_UP :
+      return signUp(state, action);
     default:
       return state;
   }
