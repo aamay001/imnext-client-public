@@ -1,0 +1,92 @@
+.dashboard-page {
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.dashboard-page h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.dashboard-page em {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.dashboard-page h2 {
+  text-align: center;
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+.dashboard-page h2:nth-of-type(2) {
+  margin-bottom: 10px;
+}
+
+.dashboard-page p {
+  text-align: center;
+  font-size: 20px;
+}
+
+.dashboard-page big {
+  display: inline-block;
+  width: 100%;
+  font-weight: bold;
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+div.appointment-details div {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.appointment-details div h3 {
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+div.appointment-details div h3 span {
+  font-weight: normal;
+}
+
+div.appointment-navigation {
+  margin: 25px 0 20px 0;
+  width: 100%;
+  position: relative;
+  left: 0;
+  bottom: -75px;
+}
+
+div.appointment-navigation div {
+  height: 55px;
+  width: 40%;
+  border: 1px solid black;
+  outline:  none;
+  text-align: center;
+  padding-top: 15px;
+}
+
+div.appointment-navigation div:first-of-type {
+  float: left;
+  margin-left: 15px;
+}
+
+div.appointment-navigation div:first-of-type::before {
+  content: '< '
+}
+
+div.appointment-navigation div:nth-of-type(2) {
+  float: right;
+  margin-right: 15px;
+}
+
+div.appointment-navigation div:nth-of-type(2)::after {
+  content: ' >'
+}

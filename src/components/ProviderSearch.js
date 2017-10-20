@@ -3,6 +3,9 @@ import Autosuggest from 'react-autosuggest';
 import '../styles/ProviderSearch.css';
 
 export class ProviderSearch extends Component {
+  // Add time delay for searching 300ms
+  // Only search after 2-3 letters
+
   state = {
     value: '',
     providers: [],

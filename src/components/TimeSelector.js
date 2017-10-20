@@ -24,7 +24,7 @@ export class TimeSelector extends Component {
       return (
         <div key={index}
           className="time-selection-input"
-          style={{backgroundColor: this.state.value === slot.value ? 'lightblue' : ''}}>
+          style={{backgroundColor: this.state.value === slot.value && 'lightblue' }}>
           <label htmlFor={"timeSlot" + index} className="time-selection-input">{slot.display}</label>
           <input type="radio"
             name="time-slot"
