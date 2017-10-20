@@ -52,7 +52,7 @@ export class NavBar extends Component {
                     this.props.location.pathname !== ROUTES.APPOINTMENT ?
                         <li style={{height: height }}>
                             <Link to={ROUTES.APPOINTMENT}
-                                style={{display: show}}>Appointments</Link>
+                                style={{display: show}}>Appointment</Link>
                         </li> : '' }
                     {
                     this.props.isUserLoggedIn &&

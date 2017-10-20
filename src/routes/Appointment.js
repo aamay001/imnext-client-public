@@ -46,7 +46,7 @@ export class Appointment extends Component {
     return (
       <section className="scheduling-page">
         <h1>Appointment</h1>
-        <em>schedule and appointment with your service provider</em>
+        <em>schedule an appointment with your service provider</em>
         {
         this.props.step === STEP_ONE ?
           <p>To schedule an appointment, first enter your information and then click next.</p> :

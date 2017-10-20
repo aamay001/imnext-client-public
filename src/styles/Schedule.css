@@ -1,0 +1,17 @@
+.schedule-page {
+  padding: 15px;
+  height: 100%;
+  width: 100%;
+}
+
+.schedule-page h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.schedule-page em {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}

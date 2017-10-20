@@ -1,23 +1,22 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
-import {ROUTES} from '../config/constants';
+import format from 'date-fns/format';
+import isEqual from 'date-fns/is_equal'
+import '../styles/Schedule.css'
 
 export class Schedule extends Component {
-  componentDidMount() {
-    if(!this.props.isUserLoggedIn) {
-      this.props.history.replace(ROUTES.LANDING);
-    }
-  }
   render() {
     return (
-      <h1>Schedule</h1>
+      <section className="schedule-page">
+        <h1>Schedule</h1>
+        <em>so many appointments</em>
+      </section>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  isUserLoggedIn : state.user.isLoggedIn
+  appointments: state.dashboard.appointments
 });
 
 const ConnectedSchedule = connect(mapStateToProps)(Schedule);
