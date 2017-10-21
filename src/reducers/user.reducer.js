@@ -6,7 +6,7 @@ import {
 } from '../actions/user.actions';
 
 const initialState = {
-  isLoggedIn : true,
+  isLoggedIn : false,
   isMenuOpen: false
 };
 

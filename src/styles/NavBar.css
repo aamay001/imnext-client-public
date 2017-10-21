@@ -4,6 +4,7 @@ nav {
     width : 100%;
     background-color: gray;
     height: 55px;
+    z-index: 10;
 }
 
 nav h1,

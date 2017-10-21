@@ -7,11 +7,12 @@
     "react": "^16.0.0",
     "react-autosuggest": "^9.3.2",
     "react-dom": "^16.0.0",
+    "react-infinite-scroll-component": "^2.4.0",
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
-    "react-touch-events": "^2.1.0",
+    "react-swipeable-views": "^0.12.8",
     "redux": "^3.7.2"
   },
   "scripts": {
