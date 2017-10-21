@@ -45,27 +45,29 @@ export class Dashboard extends Component {
   }
 
   getAppointments(today) {
-    const appointmentsToday = this.props.appointments.get(today).sort((a,b)=> compareAsc(a.time, b.time));
-    if (appointmentsToday.length > 0) {
-      const appointmentTimesToday = appointmentsToday.map(a=>a.time);
-      const now = new Date();
-      return appointmentsToday.map( (appointment, index) => {
-        const {name, phone, confirmed, time} = appointment;
-        const isNextAppointment = isAfter(time, now) && isEqual(closestTo(now, appointmentTimesToday), time);
-        return (
-          <div key={index}>
-            <h2>{isNextAppointment ? 'Next Appointment' : isAfter(time,now) ? 'Future Appointment' : 'Past Appointment'}</h2>
-            <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
-            <div className="appointment-details" >
-              <div>
-                <h3>Name: <span className="client-name">{name}</span></h3>
-                <h3>Phone: <span className="client-phone"><a href={`tel:${phone}`}>{phone}</a></span></h3>
-                <h3>Confirmed: <span className="client-confirmed">{confirmed}</span></h3>
+    if (this.props.appointments.size > 0) {
+      const appointmentsToday = this.props.appointments.get(today).sort((a,b)=> compareAsc(a.time, b.time));
+      if (appointmentsToday.length > 0) {
+        const appointmentTimesToday = appointmentsToday.map(a=>a.time);
+        const now = new Date();
+        return appointmentsToday.map( (appointment, index) => {
+          const {name, phone, confirmed, time} = appointment;
+          const isNextAppointment = isAfter(time, now) && isEqual(closestTo(now, appointmentTimesToday), time);
+          return (
+            <div key={index}>
+              <h2>{isNextAppointment ? 'Next Appointment' : isAfter(time,now) ? 'Future Appointment' : 'Past Appointment'}</h2>
+              <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
+              <div className="appointment-details" >
+                <div>
+                  <h3>Name: <span className="client-name">{name}</span></h3>
+                  <h3>Phone: <span className="client-phone"><a href={`tel:${phone}`}>{phone}</a></span></h3>
+                  <h3>Confirmed: <span className="client-confirmed">{confirmed}</span></h3>
+                </div>
               </div>
             </div>
-          </div>
-        );
-      });
+          );
+        });
+      }
     } else {
       return (
         <div className="appointment-details">
@@ -77,7 +79,7 @@ export class Dashboard extends Component {
 
   render() {
     const today = format(new Date(), DATE_FORMAT);
-    const appointmentCount = this.props.appointments.get(today).length || 0;
+    const appointmentCount = this.props.appointments.size ? this.props.appointments.get(today).length : 0;
     return (
       <section className="dashboard-page">
           <div>
