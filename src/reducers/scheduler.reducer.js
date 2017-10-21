@@ -1,6 +1,7 @@
 import {
   NEXT_STEP,
   STEP_ONE,
+  STEP_TWO,
   SCHEDULE_APPOINTMENT,
   NEW_APPOINTMENT,
 } from '../actions/scheduler.actions';
@@ -31,7 +32,7 @@ const nextStep = (state, action) => {
   };
   return {
     ...state,
-    step: ++state.step,
+    step: STEP_TWO,
     data: data,
   };
 };
