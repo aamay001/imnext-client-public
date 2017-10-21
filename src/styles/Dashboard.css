@@ -2,6 +2,7 @@
   padding: 15px;
   height: 100%;
   width: 100%;
+  margin-bottom: 100px;
 }
 
 .dashboard-page h1 {
@@ -18,8 +19,6 @@
 
 .dashboard-page h2 {
   text-align: center;
-  margin-top: 35px;
-  margin-bottom: 35px;
 }
 
 .dashboard-page h2:nth-of-type(2) {
@@ -57,11 +56,15 @@ div.appointment-details div h3 span {
 }
 
 div.appointment-navigation {
-  margin: 25px 0 20px 0;
+  margin: 0;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  border-top: 1px solid black;
+  background-color: white;
   width: 100%;
-  position: relative;
+  position: fixed;
   left: 0;
-  bottom: -75px;
+  bottom: 0;
 }
 
 div.appointment-navigation div {
