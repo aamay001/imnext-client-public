@@ -6,17 +6,19 @@ import {
 import format from 'date-fns/format';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
+import addDays from 'date-fns/add_days';
 import compareAsc from 'date-fns/compare_asc';
 import { DATE_FORMAT } from '../config/constants';
 
 const initialState = {
-  startDate: format(new Date(), DATE_FORMAT),
+  startDate: format( new Date(), DATE_FORMAT),
   appointments: new Map(),
   visibleAppointments: new Map(),
   offset: DEFAULT_OFFSET,
   hasMore: false,
 };
 
+// Loads data from appointments to visible.
 const getAppointments = (state, action) => {
   const offset = Math.min(state.appointments.size - 1, action.offset);
   const dates = [...state.appointments.keys()]
@@ -45,6 +47,7 @@ const getAppointments = (state, action) => {
   };
 };
 
+/// Should get data from API.
 const refreshAppointments = (state, action) => {
   const appointments = new Map();
   loadMockData(appointments);
@@ -66,224 +69,40 @@ export default (state = initialState, action) => {
 };
 
 const loadMockData = appointments => {
-  appointments.set(format(new Date('2017-10-25'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-  appointments.set(format(new Date(), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: format(new Date().setHours(13, 30)),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: format(new Date().setHours(14, 30)),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: format(new Date().setHours(15, 30)),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: format(new Date().setHours(11, 30)),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: format(new Date().setHours(9, 30)),
-    },
-  ]);
 
-  appointments.set(format(new Date('2017-10-22'), DATE_FORMAT).toString(), [
+    for( let i = -2; i < 10; i++ )
     {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-23'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-24'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-26'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-27'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-28'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-29'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-
-  appointments.set(format(new Date('2017-10-30'), DATE_FORMAT).toString(), [
-    {
-      name: 'Andy Amaya',
-      phone: '323-350-1224',
-      confirmed: 'Yes',
-      time: new Date('2017-10-15 13:00'),
-    },
-    {
-      name: 'John Doe',
-      phone: '323-350-6552',
-      confirmed: 'Yes',
-      time: new Date('2017-10-25 13:45'),
-    },
-    {
-      name: 'Randy Jade',
-      phone: '323-350-4525',
-      confirmed: 'No',
-      time: new Date('2017-10-25 14:15'),
-    },
-  ]);
-};
+      appointments.set(format( addDays(new Date(), i), DATE_FORMAT).toString(), [
+        {
+          name: 'Andy Amaya',
+          phone: '323-350-1224',
+          confirmed: 'Yes',
+          time: format(addDays( new Date().setHours(13, 30), i )),
+        },
+        {
+          name: 'John Doe',
+          phone: '323-350-6552',
+          confirmed: 'Yes',
+          time: format(addDays( new Date().setHours(14, 30), i )),
+        },
+        {
+          name: 'Randy Jade',
+          phone: '323-350-4525',
+          confirmed: 'No',
+          time: format(addDays( new Date().setHours(15, 30), i )),
+        },
+        {
+          name: 'John Doe',
+          phone: '323-350-6552',
+          confirmed: 'Yes',
+          time: format(addDays( new Date().setHours(11, 30), i )),
+        },
+        {
+          name: 'Randy Jade',
+          phone: '323-350-4525',
+          confirmed: 'No',
+          time: format(addDays( new Date().setHours(9, 30), i )),
+        },
+      ])
+    }
+  };

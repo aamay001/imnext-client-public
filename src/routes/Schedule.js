@@ -7,7 +7,6 @@ import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
 import '../styles/Schedule.css'
 import {
-  DATE_FORMAT,
   DISPLAY_DATE_FORMAT,
   DISPLAY_TIME_FORMAT
 } from '../config/constants';
@@ -20,16 +19,14 @@ import {
 export class Schedule extends Component {
 
   componentDidMount() {
-    const today = format(new Date(), DATE_FORMAT);
-    this.props.dispatch(refreshAppointments(today));
-    this.props.dispatch(getAppointments(today));
+    this.props.dispatch(refreshAppointments(this.props.startDate));
+    this.props.dispatch(getAppointments(this.props.startDate));
   }
 
   loadMoreAppointments = () => {
-    const today = format(new Date(), DATE_FORMAT);
     setTimeout(() => {
       this.props.dispatch(
-        getAppointments(today, this.props.offset + 1)
+        getAppointments(this.props.startDate, this.props.offset + 1)
       );
     }, 250);
   }
@@ -92,7 +89,8 @@ Schedule.defaultProps = {
 const mapStateToProps = state => ({
   hasMore: state.scheduleViewer.hasMore,
   appointments: state.scheduleViewer.visibleAppointments,
-  offset: state.scheduleViewer.offset
+  offset: state.scheduleViewer.offset,
+  startDate: state.scheduleViewer.startDate
 });
 
 const ConnectedSchedule = connect(mapStateToProps)(Schedule);
