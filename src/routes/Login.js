@@ -3,7 +3,10 @@ import {connect} from 'react-redux';
 import '../styles/Login.css';
 
 import {ROUTES} from '../config/constants';
-import {logUserIn} from '../actions/user.actions';
+import {
+  logUserIn,
+  tryAutoLogin
+} from '../actions/user.actions';
 import {REGEX} from '../config/constants';
 
 export class Login extends Component {
@@ -11,6 +14,7 @@ export class Login extends Component {
     if (this.props.isUserLoggedIn) {
       this.props.history.replace(ROUTES.DASHBOARD);
     }
+    this.props.dispatch(tryAutoLogin());
   }
 
   onFormSubmit = e => {
@@ -34,6 +38,7 @@ export class Login extends Component {
   render() {
     return (
       <section className="login-page">
+
         <h1>Log In</h1>
         <em>access you dashboard!</em>
         <p style={{
@@ -41,7 +46,11 @@ export class Login extends Component {
           textAlign: 'center',
           color: this.props.loginFailed ? 'red' : this.props.loggingIn ? 'dodgerblue' : 'green'
         }}>{this.props.loginStatusMessage}</p>
-        <form id="login-form" onSubmit={this.onFormSubmit}>
+        <form id="login-form"
+          onSubmit={this.onFormSubmit}
+          style={{
+            display: this.tryingAutoLogin ? 'none' : 'block'
+          }}>
           <label htmlFor="user-email">Email Address</label>
           <input
             type="email"
@@ -49,6 +58,8 @@ export class Login extends Component {
             name="email"
             required
             pattern={REGEX.EMAIL}
+            autoFocus={true}
+            disabled={this.props.loggingIn}
             ref={email => this.email = email}
           />
           <label htmlFor="user-password">Password</label>
@@ -60,6 +71,7 @@ export class Login extends Component {
             minLength={8}
             maxLength={70}
             pattern={REGEX.PASSWORD}
+            disabled={this.props.loggingIn}
             ref={pw => this.password = pw}
           />
           <button type="submit" disabled={this.props.loggingIn}>Log In</button>
@@ -73,7 +85,8 @@ const mapStateToProps = state => ({
   isLoggedIn: state.user.isLoggedIn,
   loggingIn: state.user.loggingIn,
   loginFailed: state.user.loginFailed,
-  loginStatusMessage: state.user.loginStatusMessage
+  loginStatusMessage: state.user.loginStatusMessage,
+  tryingAutoLogin: state.user.tryingAutoLogin
 });
 
 const ConnectedLogin = connect(mapStateToProps)(Login);

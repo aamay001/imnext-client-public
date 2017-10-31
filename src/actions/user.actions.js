@@ -24,6 +24,7 @@ export const userLoggedIn = () => {
 
 export const USER_LOGGED_OUT = "USER_LOGGED_OUT";
 export const userLoggedOut = () => {
+  localStorage.removeItem('authToken');
   return {
     type: USER_LOGGED_OUT
   };
@@ -44,6 +45,56 @@ export const loginFailed = (message) => {
   };
 }
 
+export const AUTO_LOGGING_IN = 'AUTO_LOGGING_IN';
+export const autoLogin = () => {
+  return {
+    type: AUTO_LOGGING_IN
+  }
+}
+
+export const AUTO_LOGIN_FAILED = 'AUTO_LOGIN_FAILED';
+export const autoLoginFailed = () => {
+  return {
+    type: AUTO_LOGIN_FAILED
+  };
+}
+
+export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
+export const tryAutoLogin = () => dispatch => {
+  if (localStorage.getItem('authToken')) {
+    dispatch(autoLogin());
+    const init = {
+      method: 'POST',
+      headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Authorization": 'Bearer ' + localStorage.getItem('authToken')
+      },
+      cache: 'no-store'
+    };
+    const request = new Request(API.URL + API.REFRESH_JWT, init);
+    fetch(request)
+    .then( res => {
+      if (!res.ok) {
+        return res.json().then(data =>
+          Promise.reject({
+            statusText: res.statusText,
+            message: data.message
+          })
+        );
+      }
+      return res.json();
+    })
+    .then(data => {
+      localStorage.setItem('authToken', data.authToken);
+      dispatch(userLoggedIn());
+    })
+    .catch(error => {
+      dispatch(loginFailed(error));
+    });
+  }
+}
+
 export const LOG_USER_IN = 'LOG_USER_IN';
 export const logUserIn = (email, password) => dispatch => {
   dispatch(loggingIn());
@@ -56,7 +107,7 @@ export const logUserIn = (email, password) => dispatch => {
     },
     cache: 'no-store'
   };
-  const request = new Request(API.URL + API.LOGIN, init)
+  const request = new Request(API.URL + API.LOGIN, init);
   fetch(request)
     .then( res => {
       if (!res.ok) {
@@ -75,5 +126,5 @@ export const logUserIn = (email, password) => dispatch => {
     })
     .catch(error => {
       dispatch(loginFailed(error));
-    })
+    });
 }

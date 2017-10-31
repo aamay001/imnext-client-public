@@ -10,7 +10,7 @@ import {Login} from '../../routes/Login';
 describe('<Login />', () => {
   describe('should render without crashing', () => {
     it('renders without crashing', () => {
-      shallow(<Login />);
+      shallow(<Login dispatch={()=>{}}/>);
     });
   });
 });

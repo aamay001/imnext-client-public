@@ -4,7 +4,9 @@ import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
   LOGGING_IN,
-  LOG_IN_FAILED
+  LOG_IN_FAILED,
+  AUTO_LOGGING_IN,
+  AUTO_LOGIN_FAILED
 } from '../actions/user.actions';
 
 const initialState = {
@@ -12,7 +14,8 @@ const initialState = {
   isMenuOpen: false,
   loggingIn: false,
   loginFailed: false,
-  loginStatusMessage: ''
+  loginStatusMessage: '',
+  tryingAutoLogin: false
 };
 
 const userLoggedIn = (state, action) => {
@@ -65,6 +68,24 @@ const loginFailed = (state, action) => {
   }
 }
 
+const autoLogginIn = (state) => {
+  return {
+    ...state,
+    tryingAutoLogin: true,
+    loginStatusMessage: 'Please wait...',
+    loggingIn: true
+  }
+}
+
+const autoLoginFailed = (state) => {
+  return {
+    ...state,
+    loginStatusMessage: '',
+    loggingIn: false,
+    tryAutoLogin: false
+  }
+}
+
 export default (state = initialState, action) => {
   switch(action.type) {
     case USER_LOGGED_IN :
@@ -77,6 +98,10 @@ export default (state = initialState, action) => {
       return loggingIn(state);
     case LOG_IN_FAILED :
       return loginFailed(state, action);
+    case AUTO_LOGGING_IN :
+      return autoLogginIn(state);
+    case AUTO_LOGIN_FAILED :
+      return autoLoginFailed(state);
     case SIGN_UP :
       return signUp(state, action);
     default:
