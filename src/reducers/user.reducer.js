@@ -1,26 +1,35 @@
 import {
+  SIGN_UP,
+  TOGGLE_MENU,
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
-  TOGGLE_MENU,
-  SIGN_UP
+  LOGGING_IN,
+  LOG_IN_FAILED
 } from '../actions/user.actions';
 
 const initialState = {
   isLoggedIn : false,
-  isMenuOpen: false
+  isMenuOpen: false,
+  loggingIn: false,
+  loginFailed: false,
+  loginStatusMessage: ''
 };
 
 const userLoggedIn = (state, action) => {
   return {
     ...state,
-    isLoggedIn: true
+    isLoggedIn: true,
+    loggingIn: false,
+    loginFailed: false,
+    loginStatusMessage: 'Login success!'
   };
 }
 
 const userLoggedOut = (state, action) => {
   return {
     ...state,
-    isLoggedIn: false
+    isLoggedIn: false,
+    loginStatusMessage: ''
   }
 }
 
@@ -37,6 +46,25 @@ const signUp = (state, action) => {
   }
 }
 
+const loggingIn = (state) => {
+  return  {
+    ...state,
+    loggingIn: true,
+    loginFailed: false,
+    loginStatusMessage: 'Please wait, logging you in...'
+  }
+}
+
+const loginFailed = (state, action) => {
+  return {
+    ...state,
+    loginStatusMessage: action.message.message || action.message.statusText,
+    loggingIn: false,
+    loginFailed: true,
+    isLoggedIn: false
+  }
+}
+
 export default (state = initialState, action) => {
   switch(action.type) {
     case USER_LOGGED_IN :
@@ -45,6 +73,10 @@ export default (state = initialState, action) => {
       return userLoggedOut(state, action);
     case TOGGLE_MENU :
       return toggleMenu(state, action);
+    case LOGGING_IN :
+      return loggingIn(state);
+    case LOG_IN_FAILED :
+      return loginFailed(state, action);
     case SIGN_UP :
       return signUp(state, action);
     default:

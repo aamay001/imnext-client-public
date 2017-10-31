@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import '../styles/Login.css';
 
 import {ROUTES} from '../config/constants';
-import {userLoggedIn} from '../actions/user.actions';
+import {logUserIn} from '../actions/user.actions';
 import {REGEX} from '../config/constants';
 
 export class Login extends Component {
@@ -15,14 +15,19 @@ export class Login extends Component {
 
   onFormSubmit = e => {
     e.preventDefault();
-    this.navigateToDashboard();
+    this.props.dispatch(logUserIn(this.email.value, this.password.value));
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if ( this.props.isLoggedIn ) {
+      this.navigateToDashboard();
+    }
+  }
 
   navigateToDashboard() {
     const location = {
       pathname: ROUTES.DASHBOARD,
     };
-    this.props.dispatch(userLoggedIn());
     this.props.history.push(location);
   }
 
@@ -31,6 +36,11 @@ export class Login extends Component {
       <section className="login-page">
         <h1>Log In</h1>
         <em>access you dashboard!</em>
+        <p style={{
+          display: this.props.loggingIn || this.props.loginFailed ? 'block' : 'none',
+          textAlign: 'center',
+          color: this.props.loginFailed ? 'red' : this.props.loggingIn ? 'dodgerblue' : 'green'
+        }}>{this.props.loginStatusMessage}</p>
         <form id="login-form" onSubmit={this.onFormSubmit}>
           <label htmlFor="user-email">Email Address</label>
           <input
@@ -39,6 +49,7 @@ export class Login extends Component {
             name="email"
             required
             pattern={REGEX.EMAIL}
+            ref={email => this.email = email}
           />
           <label htmlFor="user-password">Password</label>
           <input
@@ -49,8 +60,9 @@ export class Login extends Component {
             minLength={8}
             maxLength={70}
             pattern={REGEX.PASSWORD}
+            ref={pw => this.password = pw}
           />
-          <button type="submit">Log In</button>
+          <button type="submit" disabled={this.props.loggingIn}>Log In</button>
         </form>
       </section>
     );
@@ -58,7 +70,10 @@ export class Login extends Component {
 }
 
 const mapStateToProps = state => ({
-    isUserLoggedIn: state.user.isLoggedIn
+  isLoggedIn: state.user.isLoggedIn,
+  loggingIn: state.user.loggingIn,
+  loginFailed: state.user.loginFailed,
+  loginStatusMessage: state.user.loginStatusMessage
 });
 
 const ConnectedLogin = connect(mapStateToProps)(Login);
