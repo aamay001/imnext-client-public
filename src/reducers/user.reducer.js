@@ -5,8 +5,7 @@ import {
   USER_LOGGED_OUT,
   LOGGING_IN,
   LOG_IN_FAILED,
-  AUTO_LOGGING_IN,
-  AUTO_LOGIN_FAILED
+  AUTO_LOGGING_IN
 } from '../actions/user.actions';
 
 const initialState = {
@@ -15,7 +14,8 @@ const initialState = {
   loggingIn: false,
   loginFailed: false,
   loginStatusMessage: '',
-  tryingAutoLogin: false
+  tryingAutoLogin: false,
+  user: undefined
 };
 
 const userLoggedIn = (state, action) => {
@@ -24,7 +24,8 @@ const userLoggedIn = (state, action) => {
     isLoggedIn: true,
     loggingIn: false,
     loginFailed: false,
-    loginStatusMessage: 'Login success!'
+    loginStatusMessage: 'Login success!',
+    user: action.user
   };
 }
 
@@ -32,7 +33,8 @@ const userLoggedOut = (state, action) => {
   return {
     ...state,
     isLoggedIn: false,
-    loginStatusMessage: ''
+    loginStatusMessage: '',
+    user: undefined
   }
 }
 
@@ -68,21 +70,12 @@ const loginFailed = (state, action) => {
   }
 }
 
-const autoLogginIn = (state) => {
+const autoLoggingIn = (state) => {
   return {
     ...state,
     tryingAutoLogin: true,
     loginStatusMessage: 'Please wait...',
     loggingIn: true
-  }
-}
-
-const autoLoginFailed = (state) => {
-  return {
-    ...state,
-    loginStatusMessage: '',
-    loggingIn: false,
-    tryAutoLogin: false
   }
 }
 
@@ -99,9 +92,7 @@ export default (state = initialState, action) => {
     case LOG_IN_FAILED :
       return loginFailed(state, action);
     case AUTO_LOGGING_IN :
-      return autoLogginIn(state);
-    case AUTO_LOGIN_FAILED :
-      return autoLoginFailed(state);
+      return autoLoggingIn(state);
     case SIGN_UP :
       return signUp(state, action);
     default:

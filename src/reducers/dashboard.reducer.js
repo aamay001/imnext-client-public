@@ -1,67 +1,49 @@
 import {
-  GET_APPOINTMENTS
+  FETCHING_APPOINTMENTS,
+  APPOINTMENTS_FETCHED,
+  NO_APPOINTMENTS
 } from '../actions/dashboard.actions';
-import format from 'date-fns/format';
-import addDays from 'date-fns/add_days';
-
-import {
-  DATE_FORMAT
-} from '../config/constants';
 
 const initialState = {
-  appointments: new Map()
+  appointments: new Map(),
+  fetching: true,
+  dashboardStatus: 'Loading appointments...'
 };
 
-const getAppointments = (state, action) => {
-  return state;
+const fetchingAppointments = (state) => {
+  return {
+    ...state,
+    fetching: true,
+    dashboardStatus: 'Loading appointments...'
+  };
+}
+
+const appointmentsFetched = (state, action) => {
+  return {
+    ...state,
+    fetching: false,
+    appointments: action.appointments
+  };
+}
+
+const noAppointments = (state) => {
+  return {
+    ...state,
+    fetching: false,
+    showMessage: true,
+    dashboardStatus: 'No appointments were found.'
+  };
 }
 
 export default (state = initialState, action) => {
   switch(action.type) {
-    case GET_APPOINTMENTS :
-      return getAppointments(state, action);
+    case FETCHING_APPOINTMENTS :
+      return fetchingAppointments(state);
+    case APPOINTMENTS_FETCHED :
+      return appointmentsFetched(state, action);
+    case NO_APPOINTMENTS :
+      return noAppointments(state);
     default:
       return state;
   }
 }
-
-const loadMockData = appointments => {
-
-  for( let i = -2; i < 10; i++ )
-  {
-    appointments.set(format( addDays(new Date(), i), DATE_FORMAT).toString(), [
-      {
-        name: 'Andy Amaya',
-        phone: '323-350-1224',
-        confirmed: 'Yes',
-        time: format(addDays( new Date().setHours(13, 30), i )),
-      },
-      {
-        name: 'John Doe',
-        phone: '323-350-6552',
-        confirmed: 'Yes',
-        time: format(addDays( new Date().setHours(14, 30), i )),
-      },
-      {
-        name: 'Randy Jade',
-        phone: '323-350-4525',
-        confirmed: 'No',
-        time: format(addDays( new Date().setHours(15, 30), i )),
-      },
-      {
-        name: 'John Doe',
-        phone: '323-350-6552',
-        confirmed: 'Yes',
-        time: format(addDays( new Date().setHours(11, 30), i )),
-      },
-      {
-        name: 'Randy Jade',
-        phone: '323-350-4525',
-        confirmed: 'No',
-        time: format(addDays( new Date().setHours(9, 30), i )),
-      },
-    ])
-  }
-};
-
-loadMockData(initialState.appointments);

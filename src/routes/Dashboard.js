@@ -10,21 +10,30 @@ import isEqual from 'date-fns/is_equal';
 import compareAsc from 'date-fns/compare_asc';
 
 import {
+  getAppointments
+} from '../actions/dashboard.actions';
+
+import {
   DATE_FORMAT,
   DISPLAY_DATE_FORMAT,
   DISPLAY_TIME_FORMAT
 } from '../config/constants';
 
 export class Dashboard extends Component {
-
   state = {
     currentAppointmentIndex: 0
   }
 
+  componentDidMount() {
+    if( this.props.isLoggedIn ) {
+      this.props.dispatch(getAppointments(this.props.user, format(new Date(), DATE_FORMAT)));
+    }
+  }
+
   componentWillMount() {
     // If no user is logged in, redirect to the landing page.
-    if (!this.props.isUserLoggedIn) {
-      this.props.history.replace(ROUTES.LANDING);
+    if (!this.props.isLoggedIn) {
+      this.props.history.replace(ROUTES.LOGIN);
       return;
     }
   }
@@ -51,7 +60,7 @@ export class Dashboard extends Component {
         const appointmentTimesToday = appointmentsToday.map(a=>a.time);
         const now = new Date();
         return appointmentsToday.map( (appointment, index) => {
-          const {name, phone, confirmed, time} = appointment;
+          const {name, mobilePhone, confirmed, time} = appointment;
           const isNextAppointment = isAfter(time, now) && isEqual(closestTo(now, appointmentTimesToday), time);
           return (
             <div key={index}>
@@ -60,8 +69,8 @@ export class Dashboard extends Component {
               <div className="appointment-details" >
                 <div>
                   <h3>Name: <span className="client-name">{name}</span></h3>
-                  <h3>Phone: <span className="client-phone"><a href={`tel:${phone}`}>{phone}</a></span></h3>
-                  <h3>Confirmed: <span className="client-confirmed">{confirmed}</span></h3>
+                  <h3>Phone: <span className="client-phone"><a href={`tel:${mobilePhone}`}>{mobilePhone}</a></span></h3>
+                  <h3>Confirmed: <span className="client-confirmed">{confirmed ? 'Yes': 'No'}</span></h3>
                 </div>
               </div>
             </div>
@@ -86,15 +95,27 @@ export class Dashboard extends Component {
             <h1>Dashboard</h1>
             <em>see your next appiontments...</em>
             <h2>{format(today, DISPLAY_DATE_FORMAT)}</h2>
+            <p style={{
+              display: this.props.fetching || this.props.showMessage ? 'block' : 'none',
+              marginTop: '55px',
+              color: 'dodgerblue'
+            }}>{this.props.dashboardStatus}</p>
             <SwipeableViews enableMouseEvents={true}
               ref={slider => this.slider = slider}
-              index={this.state.currentAppointmentIndex} >
+              index={this.state.currentAppointmentIndex}
+              style={{
+                display: this.props.fetching || this.props.showMessage ? 'none' : 'block'
+              }}>
               {this.getAppointments(today)}
             </SwipeableViews>
-            <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>appointments today.</p>
-            <div className="appointment-navigation">
-              <div onClick={this.slideToPrevAppointment}>Prev</div>
-              <div onClick={this.slideToNextAppointment}>Next</div>
+            <div style={{
+              display: this.props.fetching || this.props.showMessage ? 'none' : 'block'
+            }}>
+              <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>appointments today.</p>
+              <div className="appointment-navigation">
+                <div onClick={this.slideToPrevAppointment}>Prev</div>
+                <div onClick={this.slideToNextAppointment}>Next</div>
+              </div>
             </div>
           </div>
       </section>
@@ -104,12 +125,16 @@ export class Dashboard extends Component {
 
 Dashboard.defaultProps = {
   appointments: new Map(),
-  isUserLoggedIn: false
+  isLoggedIn: false
 }
 
 const mapStateToProps = state => ({
-  isUserLoggedIn: state.user.isLoggedIn,
-  appointments: state.dashboard.appointments
+  isLoggedIn: state.user.isLoggedIn,
+  appointments: state.dashboard.appointments,
+  fetching: state.dashboard.fetching,
+  dashboardStatus: state.dashboard.dashboardStatus,
+  showMessage: state.dashboard.showMessage,
+  user: state.user.user
 });
 
 const ConnectedDashboard = connect(mapStateToProps)(Dashboard);

@@ -11,10 +11,13 @@ import {REGEX} from '../config/constants';
 
 export class Login extends Component {
   componentDidMount() {
+    this.props.dispatch(tryAutoLogin());
+  }
+
+  componentWillMount() {
     if (this.props.isUserLoggedIn) {
       this.props.history.replace(ROUTES.DASHBOARD);
     }
-    this.props.dispatch(tryAutoLogin());
   }
 
   onFormSubmit = e => {
@@ -38,7 +41,6 @@ export class Login extends Component {
   render() {
     return (
       <section className="login-page">
-
         <h1>Log In</h1>
         <em>access you dashboard!</em>
         <p style={{

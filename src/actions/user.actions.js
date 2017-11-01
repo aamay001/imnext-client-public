@@ -16,9 +16,10 @@ export const toggleMenu = () => {
 }
 
 export const USER_LOGGED_IN = "USER_LOGGED_IN";
-export const userLoggedIn = () => {
+export const userLoggedIn = (user) => {
   return {
-    type: USER_LOGGED_IN
+    type: USER_LOGGED_IN,
+    user
   };
 }
 
@@ -31,14 +32,14 @@ export const userLoggedOut = () => {
 }
 
 export const LOGGING_IN = "LOGGIN_IN";
-export const loggingIn = () => {
+const loggingIn = () => {
   return {
     type: LOGGING_IN
   }
 }
 
 export const LOG_IN_FAILED = 'LOG_IN_FAILED';
-export const loginFailed = (message) => {
+const loginFailed = (message) => {
   return {
     type: LOG_IN_FAILED,
     message
@@ -50,13 +51,6 @@ export const autoLogin = () => {
   return {
     type: AUTO_LOGGING_IN
   }
-}
-
-export const AUTO_LOGIN_FAILED = 'AUTO_LOGIN_FAILED';
-export const autoLoginFailed = () => {
-  return {
-    type: AUTO_LOGIN_FAILED
-  };
 }
 
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
@@ -87,10 +81,12 @@ export const tryAutoLogin = () => dispatch => {
     })
     .then(data => {
       localStorage.setItem('authToken', data.authToken);
-      dispatch(userLoggedIn());
+      dispatch(userLoggedIn(data.user));
     })
     .catch(error => {
-      dispatch(loginFailed(error));
+      dispatch(loginFailed({
+        message: 'Welcome back! Login to access your dashboard!'
+      }));
     });
   }
 }
@@ -122,7 +118,7 @@ export const logUserIn = (email, password) => dispatch => {
     })
     .then(data => {
       localStorage.setItem('authToken', data.authToken);
-      dispatch(userLoggedIn());
+      dispatch(userLoggedIn(data.user));
     })
     .catch(error => {
       dispatch(loginFailed(error));
