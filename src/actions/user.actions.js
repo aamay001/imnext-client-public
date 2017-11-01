@@ -1,4 +1,5 @@
 import {API} from '../config/settings.js';
+import differenceInDays from 'date-fns/difference_in_days';
 
 export const SIGN_UP = 'SIGN_UP';
 export const signUp = (data) => {
@@ -58,7 +59,6 @@ export const tryAutoLogin = () => dispatch => {
   if (localStorage.getItem('authToken')) {
     dispatch(autoLogin());
     const init = {
-      method: 'POST',
       headers: {
         "Accept": "application/json",
         "Content-Type": "application/json",
@@ -66,28 +66,57 @@ export const tryAutoLogin = () => dispatch => {
       },
       cache: 'no-store'
     };
-    const request = new Request(API.URL + API.REFRESH_JWT, init);
-    fetch(request)
-    .then( res => {
-      if (!res.ok) {
-        return res.json().then(data =>
-          Promise.reject({
-            statusText: res.statusText,
-            message: data.message
-          })
-        );
-      }
-      return res.json();
-    })
-    .then(data => {
-      localStorage.setItem('authToken', data.authToken);
-      dispatch(userLoggedIn(data.user));
-    })
-    .catch(error => {
-      dispatch(loginFailed({
-        message: 'Welcome back! Login to access your dashboard!'
-      }));
-    });
+    const lastRefresh = Date.parse(localStorage.getItem('lastTokenRefresh'));
+    if (differenceInDays(lastRefresh, new Date()) < 4) {
+      init.method = 'GET';
+      const request = new Request(API.URL + API.USER, init);
+      fetch(request)
+      .then( res => {
+        if (!res.ok) {
+          return res.json().then(data =>
+            Promise.reject({
+              statusText: res.statusText,
+              message: data.message
+            })
+          );
+        }
+        return res.json();
+      })
+      .then(data => {
+        dispatch(userLoggedIn(data));
+      })
+      .catch(error => {
+        dispatch(loginFailed({
+          message: 'Welcome back! Login to access your dashboard!'
+        }));
+      });
+    }
+    else {
+      init.method = 'POST';
+      const request = new Request(API.URL + API.REFRESH_JWT, init);
+      fetch(request)
+      .then( res => {
+        if (!res.ok) {
+          return res.json().then(data =>
+            Promise.reject({
+              statusText: res.statusText,
+              message: data.message
+            })
+          );
+        }
+        return res.json();
+      })
+      .then(data => {
+        localStorage.setItem('authToken', data.authToken);
+        localStorage.setItem('lastTokenRefresh', new Date());
+        dispatch(userLoggedIn(data.user));
+      })
+      .catch(error => {
+        dispatch(loginFailed({
+          message: 'Welcome back! Login to access your dashboard!'
+        }));
+      });
+    }
   }
 }
 

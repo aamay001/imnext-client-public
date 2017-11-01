@@ -10,13 +10,11 @@ import {
 import {REGEX} from '../config/constants';
 
 export class Login extends Component {
-  componentDidMount() {
-    this.props.dispatch(tryAutoLogin());
-  }
-
   componentWillMount() {
-    if (this.props.isUserLoggedIn) {
+    if (this.props.isLoggedIn) {
       this.props.history.replace(ROUTES.DASHBOARD);
+    } else {
+      this.props.dispatch(tryAutoLogin());
     }
   }
 

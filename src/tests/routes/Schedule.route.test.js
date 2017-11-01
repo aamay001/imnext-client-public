@@ -10,7 +10,10 @@ import {Schedule} from '../../routes/Schedule';
 describe('<Schedule />', () => {
   describe('should render without crashing', () => {
     it('renders without crashing', () => {
-      shallow(<Schedule dispatch={()=>{}}/>);
+      const history = {
+        replace:  () => {}
+      }
+      shallow(<Schedule history={history} dispatch={()=>{}}/>);
     });
   });
 });

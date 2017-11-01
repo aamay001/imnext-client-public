@@ -8,27 +8,37 @@ import isToday from 'date-fns/is_today';
 import '../styles/Schedule.css'
 import {
   DISPLAY_DATE_FORMAT,
-  DISPLAY_TIME_FORMAT
+  DISPLAY_TIME_FORMAT,
+  ROUTES
 } from '../config/constants';
-
 import {
-  getAppointments,
-  refreshAppointments
-} from '../actions/scheduleviewer.actions';
+  loadScheduleAppointments,
+  getAppointments
+} from '../actions/dashboard.actions';
 
 export class Schedule extends Component {
-
   componentDidMount() {
-    this.props.dispatch(refreshAppointments(this.props.startDate));
-    this.props.dispatch(getAppointments(this.props.startDate));
+    if (this.props.isLoggedIn ) {
+      this.props.dispatch(loadScheduleAppointments(this.props.startDate));
+    }
+  }
+
+  componentWillMount() {
+    if (!this.props.isLoggedIn) {
+      this.props.history.replace(ROUTES.LOGIN);
+    }
   }
 
   loadMoreAppointments = () => {
     setTimeout(() => {
       this.props.dispatch(
-        getAppointments(this.props.startDate, this.props.offset + 1)
+        loadScheduleAppointments(this.props.startDate, this.props.offset + 1)
       );
     }, 250);
+  }
+
+  refreshData(){
+    this.props.dispatch(getAppointments(this.props.user, this.props.startDate));
   }
 
   render() {
@@ -87,10 +97,12 @@ Schedule.defaultProps = {
 }
 
 const mapStateToProps = state => ({
-  hasMore: state.scheduleViewer.hasMore,
-  appointments: state.scheduleViewer.visibleAppointments,
-  offset: state.scheduleViewer.offset,
-  startDate: state.scheduleViewer.startDate
+  isLoggedIn: state.user.isLoggedIn,
+  hasMore: state.dashboard.scheduleHasMore,
+  appointments: state.dashboard.schduleVisibleAppointments,
+  offset: state.dashboard.scheduleOffset,
+  startDate: state.dashboard.scheduleStartDate,
+  user: state.user.user
 });
 
 const ConnectedSchedule = connect(mapStateToProps)(Schedule);

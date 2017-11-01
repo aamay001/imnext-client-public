@@ -1,5 +1,12 @@
 import {API} from '../config/settings';
 
+export const FETCHING_APPOINTMENTS = 'FETCHING_APPOINTMENTS';
+export const fetchingAppointments = () => {
+  return  {
+    type: FETCHING_APPOINTMENTS
+  };
+}
+
 export const APPOINTMENTS_FETCHED = 'APPOINTMENTS_FETCHED';
 const appointmentsFetched = (appointments) => {
   return {
@@ -12,6 +19,15 @@ export const NO_APPOINTMENTS = 'NO_APPOINTMENTS';
 const noAppointments = () => {
   return {
     type: NO_APPOINTMENTS
+  };
+}
+
+export const LOAD_SCHEDULE_APPOINTMENTS = 'LOAD_SCHEDULE_APPOINTMENTS';
+export const loadScheduleAppointments = (startDate, offset = 5) => {
+  return {
+    type: LOAD_SCHEDULE_APPOINTMENTS,
+    startDate,
+    offset
   };
 }
 
@@ -56,10 +72,3 @@ export const getAppointments = (user, date) => dispatch => {
     console.log(error);
   });
 };
-
-export const FETCHING_APPOINTMENTS = 'FETCHING_APPOINTMENTS';
-export const fetchingAppointments = () => {
-  return  {
-    type: FETCHING_APPOINTMENTS
-  };
-}

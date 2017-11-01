@@ -111,7 +111,7 @@ export class Dashboard extends Component {
             <div style={{
               display: this.props.fetching || this.props.showMessage ? 'none' : 'block'
             }}>
-              <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>appointments today.</p>
+              <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>{`appointment${appointmentCount === 1 ? '' : 's'} today.`}</p>
               <div className="appointment-navigation">
                 <div onClick={this.slideToPrevAppointment}>Prev</div>
                 <div onClick={this.slideToNextAppointment}>Next</div>

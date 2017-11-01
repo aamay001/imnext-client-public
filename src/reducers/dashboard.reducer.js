@@ -1,13 +1,27 @@
 import {
   FETCHING_APPOINTMENTS,
   APPOINTMENTS_FETCHED,
-  NO_APPOINTMENTS
+  NO_APPOINTMENTS,
+  LOAD_SCHEDULE_APPOINTMENTS
 } from '../actions/dashboard.actions';
+
+import format from 'date-fns/format';
+import isAfter from 'date-fns/is_after';
+import isEqual from 'date-fns/is_equal';
+import compareAsc from 'date-fns/compare_asc';
+import {
+  DATE_FORMAT,
+  DEFAULT_SCHEDULE_OFFSET as DEFAULT_OFFSET
+} from '../config/constants';
 
 const initialState = {
   appointments: new Map(),
   fetching: true,
-  dashboardStatus: 'Loading appointments...'
+  dashboardStatus: 'Loading appointments...',
+  scheduleStartDate: format( new Date(), DATE_FORMAT),
+  schduleVisibleAppointments: new Map(),
+  scheduleOffset: DEFAULT_OFFSET,
+  scheduleHasMore: false,
 };
 
 const fetchingAppointments = (state) => {
@@ -35,6 +49,32 @@ const noAppointments = (state) => {
   };
 }
 
+const loadScheduleVisibleAppointments = (state, action) => {
+  const offset = Math.min(state.appointments.size - 1, action.offset);
+  const dates = [...state.appointments.keys()]
+    .sort((a, b) => compareAsc(a, b))
+    .filter((key, index) => {
+      if (index <= offset) {
+        return isEqual(key, action.startDate) || isAfter(key, action.startDate);
+      } else {
+        return false;
+      }
+    });
+  const appointments = new Map();
+  dates.forEach((date, index) => {
+    if (index <= offset) {
+      appointments.set(date, state.appointments.get(date));
+    }
+  });
+  const hasMore = state.appointments.size - 1 > offset;
+  return {
+    ...state,
+    schduleVisibleAppointments: appointments,
+    scheduleOffset: offset,
+    scheduleHasMore: hasMore,
+  };
+};
+
 export default (state = initialState, action) => {
   switch(action.type) {
     case FETCHING_APPOINTMENTS :
@@ -43,6 +83,8 @@ export default (state = initialState, action) => {
       return appointmentsFetched(state, action);
     case NO_APPOINTMENTS :
       return noAppointments(state);
+    case LOAD_SCHEDULE_APPOINTMENTS :
+      return loadScheduleVisibleAppointments(state, action);
     default:
       return state;
   }
