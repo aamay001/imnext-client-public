@@ -16,4 +16,4 @@ export const REGEX = {
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const DISPLAY_DATE_FORMAT = 'dddd, MMMM DD';
 export const DISPLAY_TIME_FORMAT = 'h:mm A';
-export const DEFAULT_SCHEDULE_OFFSET = 5;
+export const DEFAULT_SCHEDULE_OFFSET = 10;

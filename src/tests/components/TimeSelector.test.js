@@ -10,7 +10,7 @@ import {TimeSelector} from '../../components/TimeSelector';
 describe('<TimeSelector />', () => {
   describe('should render without crashing', () => {
     it('renders without crashing', () => {
-      shallow(<TimeSelector />);
+      shallow(<TimeSelector store={{}}  dispatch={()=>{}} timeSlots={[]}/>);
     });
   });
 });

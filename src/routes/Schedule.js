@@ -37,13 +37,14 @@ export class Schedule extends Component {
     }, 250);
   }
 
-  refreshData(){
+  refreshData() {
     this.props.dispatch(getAppointments(this.props.user, this.props.startDate));
   }
 
   render() {
+    let appointments;
     if (this.props.appointments.size > 0) {
-      const appointments = [...this.props.appointments.keys()].map( (key, index) => {
+      appointments = [...this.props.appointments.keys()].map( (key, index) => {
         const times = this.props.appointments.get(key)
                         .sort((a,b) => compareAsc(a.time,b.time))
                         .map((time, tIndex) => {
@@ -53,7 +54,6 @@ export class Schedule extends Component {
             </div>
           );
         });
-
         return (
           <div key={index}>
             <h2>{ isToday(key) ? 'Today' : isTomorrow(key) ? 'Tomorrow' :
@@ -62,32 +62,34 @@ export class Schedule extends Component {
           </div>
         );
       });
-
-      return (
-        <section className="schedule-page">
-          <header style={{backgroundColor:'white', width:'100%'}}>
-            <h1>Schedule</h1>
-            <em>so many appointments</em>
-          </header>
-          <div>
-            <InfiniteScroll
-              next={this.loadMoreAppointments}
-              hasMore={this.props.hasMore}
-              loader={<h3 style={{textAlign:'center'}}>Loading...</h3>}
-              endMessage={<h3 style={{textAlign:'center'}}>No More Appointments</h3>}
-              releaseToRefreshContent={<h3 style={{textAlign:'center'}}>release to refresh</h3>}
-              refreshFunction={this.refreshData}
-              hasChildren={true}
-              children={appointments}
-              scrollThreshold={0.50}
-            >
-            </InfiniteScroll>
-          </div>
-        </section>
-      );
-    } else {
-      return <h3>Loading...</h3>
     }
+    return (
+      <section className="schedule-page">
+        <header style={{backgroundColor:'white', width:'100%'}}>
+          <h1>Schedule</h1>
+          <em>so many appointments</em>
+        </header>
+        <div>
+          { appointments ?
+          <InfiniteScroll
+            next={this.loadMoreAppointments}
+            hasMore={this.props.hasMore}
+            loader={<h3 style={{textAlign:'center'}}>Loading...</h3>}
+            endMessage={<h3 style={{textAlign:'center'}}>No More Appointments</h3>}
+            releaseToRefreshContent={<h3 style={{textAlign:'center'}}>release to refresh</h3>}
+            refreshFunction={this.refreshData}
+            hasChildren={true}
+            children={appointments}
+            scrollThreshold={0.50}
+          >
+          </InfiniteScroll> :
+          <p style={{
+            textAlign: 'center'
+          }}>No appointments found!</p>
+          }
+        </div>
+      </section>
+    );
   }
 }
 

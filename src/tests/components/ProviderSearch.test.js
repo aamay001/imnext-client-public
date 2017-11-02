@@ -10,7 +10,7 @@ import {ProviderSearch} from '../../components/ProviderSearch';
 describe('<ProviderSearch />', () => {
   describe('should render without crashing', () => {
     it('renders without crashing', () => {
-      shallow(<ProviderSearch />);
+      shallow(<ProviderSearch store={{}}  dispatch={()=>{}}/>);
     });
   });
 });

@@ -10,7 +10,7 @@ import {Appointment} from '../../routes/Appointment';
 describe('<Appointment />', () => {
   describe('should render without crashing', () => {
     it('renders without crashing', () => {
-      mount(<Appointment store={{}}  dispatch={()=>{}}/>);
+      shallow(<Appointment store={{}}  dispatch={()=>{}}/>);
     });
   });
 });

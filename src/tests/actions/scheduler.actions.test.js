@@ -15,23 +15,6 @@ describe('Scheduler Actions', () => {
     });
   });
 
-  describe('SCHEDULE_APPOINTMENT', () => {
-    describe('should create a SCHEDULE_APPOINTMENT action containing all of the appointment data', () => {
-      const data = {
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        mobilePhone: faker.phone.phoneNumber(),
-        providerId: faker.random.number(),
-        date: faker.date.future(),
-        time: faker.date.future(),
-        validation: faker.random.number(0,99999999)
-      };
-      const action = actions.scheduleAppointment(data);
-      expect(action.type).toEqual(actions.SCHEDULE_APPOINTMENT);
-      expect(action.data).toEqual(data);
-    });
-  });
-
   describe('NEW_APPOINTMENT', () => {
     describe('should create NEW_APPOINTMENT action', () => {
       const action = actions.newAppointment();

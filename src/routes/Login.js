@@ -12,7 +12,7 @@ import {REGEX} from '../config/constants';
 export class Login extends Component {
   componentWillMount() {
     if (this.props.isLoggedIn) {
-      this.props.history.replace(ROUTES.DASHBOARD);
+      this.navigateToDashboard();
     } else {
       this.props.dispatch(tryAutoLogin());
     }
@@ -23,8 +23,9 @@ export class Login extends Component {
     this.props.dispatch(logUserIn(this.email.value, this.password.value));
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if ( this.props.isLoggedIn ) {
+  componentWillReceiveProps(nextProps) {
+    if ( nextProps.isLoggedIn !== this.props.isLoggedIn
+      &&  nextProps.isLoggedIn ) {
       this.navigateToDashboard();
     }
   }

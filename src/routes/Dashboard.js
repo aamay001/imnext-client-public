@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {ROUTES} from '../config/constants';
 import format from 'date-fns/format';
@@ -21,12 +22,23 @@ import {
 
 export class Dashboard extends Component {
   state = {
-    currentAppointmentIndex: 0
+    currentAppointmentIndex: 0,
+    dashboardAppointments: []
   }
 
   componentDidMount() {
     if( this.props.isLoggedIn ) {
       this.props.dispatch(getAppointments(this.props.user, format(new Date(), DATE_FORMAT)));
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.appointments !== nextProps.appointments) {
+      const today = format(new Date(), DATE_FORMAT);
+      const newApps = this.getAppointments(today, nextProps.appointments);
+      this.setState({
+        dashboardAppointments: newApps
+      });
     }
   }
 
@@ -53,15 +65,24 @@ export class Dashboard extends Component {
     });
   }
 
-  getAppointments(today) {
-    if (this.props.appointments.size > 0) {
-      const appointmentsToday = this.props.appointments.get(today).sort((a,b)=> compareAsc(a.time, b.time));
+  getAppointments(today, _appointments) {
+    if (_appointments.size > 0) {
+      const appointmentsToday = _appointments.get(today).sort((a,b)=> compareAsc(a.time, b.time));
+      let nextAppIndex;
       if (appointmentsToday.length > 0) {
         const appointmentTimesToday = appointmentsToday.map(a=>a.time);
         const now = new Date();
         return appointmentsToday.map( (appointment, index) => {
           const {name, mobilePhone, confirmed, time} = appointment;
-          const isNextAppointment = isAfter(time, now) && isEqual(closestTo(now, appointmentTimesToday), time);
+          const isNextAppointment = isAfter(time, now) && isEqual(closestTo(now, appointmentTimesToday.filter(a=>isAfter(a,now))), time);
+          if ( isNextAppointment ){
+            nextAppIndex = index;
+            if ( this.state.currentAppointmentIndex !== nextAppIndex ) {
+              this.setState({
+                currentAppointmentIndex: nextAppIndex
+              })
+            }
+          }
           return (
             <div key={index}>
               <h2>{isNextAppointment ? 'Next Appointment' : isAfter(time,now) ? 'Future Appointment' : 'Past Appointment'}</h2>
@@ -71,6 +92,7 @@ export class Dashboard extends Component {
                   <h3>Name: <span className="client-name">{name}</span></h3>
                   <h3>Phone: <span className="client-phone"><a href={`tel:${mobilePhone}`}>{mobilePhone}</a></span></h3>
                   <h3>Confirmed: <span className="client-confirmed">{confirmed ? 'Yes': 'No'}</span></h3>
+                  <h4 style={{textAlign:'center'}}>{`${index + 1} / ${appointmentsToday.length}`}</h4>
                 </div>
               </div>
             </div>
@@ -106,12 +128,18 @@ export class Dashboard extends Component {
               style={{
                 display: this.props.fetching || this.props.showMessage ? 'none' : 'block'
               }}>
-              {this.getAppointments(today)}
+              {this.state.dashboardAppointments}
             </SwipeableViews>
             <div style={{
               display: this.props.fetching || this.props.showMessage ? 'none' : 'block'
             }}>
-              <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>{`appointment${appointmentCount === 1 ? '' : 's'} today.`}</p>
+              <div>
+                <Link to={ROUTES.SCHEDULE} style={{
+                  textDecoration: 'none'
+                }}>
+                  <p style={{marginTop:'50px'}}>You have<br/><strong>{appointmentCount}</strong><br/>{`appointment${appointmentCount === 1 ? '' : 's'} today.`}</p>
+                </Link>
+              </div>
               <div className="appointment-navigation">
                 <div onClick={this.slideToPrevAppointment}>Prev</div>
                 <div onClick={this.slideToNextAppointment}>Next</div>

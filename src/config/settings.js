@@ -1,5 +1,5 @@
 export const API = {
-  URL: (process.env.REACT_APP_ENV === 'dev' ? 'http://localhost:8080' : 'https://api.imnext.online'),
+  URL: (process.env.REACT_APP_ENV === 'dev' ? 'http://192.168.1.163:8080' : 'https://api.imnext.online'),
   USER:  '/user',
   USER_SETTINGS: '/user/settings',
   LOGIN: '/auth/login',
