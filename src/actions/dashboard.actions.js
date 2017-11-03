@@ -1,74 +1,51 @@
-import {API} from '../config/settings';
+import { API } from '../config/settings';
+import fetchHelper from '../helpers/fetch.helper';
 
 export const FETCHING_APPOINTMENTS = 'FETCHING_APPOINTMENTS';
 export const fetchingAppointments = () => {
-  return  {
-    type: FETCHING_APPOINTMENTS
+  return {
+    type: FETCHING_APPOINTMENTS,
   };
-}
+};
 
 export const APPOINTMENTS_FETCHED = 'APPOINTMENTS_FETCHED';
-const appointmentsFetched = (appointments) => {
+const appointmentsFetched = appointments => {
   return {
     type: APPOINTMENTS_FETCHED,
-    appointments
+    appointments,
   };
-}
+};
 
 export const NO_APPOINTMENTS = 'NO_APPOINTMENTS';
 const noAppointments = () => {
   return {
-    type: NO_APPOINTMENTS
+    type: NO_APPOINTMENTS,
   };
-}
+};
 
 export const LOAD_SCHEDULE_APPOINTMENTS = 'LOAD_SCHEDULE_APPOINTMENTS';
 export const loadScheduleAppointments = (startDate, offset = 5) => {
   return {
     type: LOAD_SCHEDULE_APPOINTMENTS,
     startDate,
-    offset
+    offset,
   };
-}
+};
 
 export const GET_APPOINTMENTS = 'GET_APPOINTMENTS';
 export const getAppointments = (user, date) => dispatch => {
   dispatch(fetchingAppointments());
-  const init = {
-    method: 'GET',
-    headers: {
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "Authorization": 'Bearer ' + localStorage.getItem('authToken')
-    },
-    cache: 'no-store'
-  };
-  const request = new Request(
-    `${API.URL + API.APPOINTMENT}/provider?email=${user.email}&date=${date}`,
-    init
-  );
-  fetch(request)
-  .then( res => {
-    if (!res.ok) {
-      return res.json().then(data =>
-        Promise.reject({
-          statusText: res.statusText,
-          message: data.message
-        })
-      );
-    }
-    return res.json();
-  })
-  .then(data => {
-    const map = new Map(data);
-    if (map.size === 0){
-      dispatch(noAppointments());
-      return;
-    }
-    dispatch(appointmentsFetched(map));
-  })
-  .catch(error => {
-    //dispatch(loginFailed(error));
-    console.log(error);
-  });
+  fetchHelper('GET', API.APPOINTMENTS(user.email, date), undefined, 'reaload', 'T')
+    .then(data => {
+      const map = new Map(data);
+      if (map.size === 0) {
+        dispatch(noAppointments());
+        return;
+      }
+      dispatch(appointmentsFetched(map));
+    })
+    .catch(error => {
+      //dispatch(loginFailed(error));
+      console.log(error);
+    });
 };

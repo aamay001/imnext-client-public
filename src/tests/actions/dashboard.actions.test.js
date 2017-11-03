@@ -4,7 +4,7 @@ describe('Dasboard Actions', () => {
   describe('GET_APPOINTMENTS', () => {
     it('should return an action with type GET_APPOINTMENTS', () => {
       const action = actions.getAppointments();
-      expect(typeof(action)).toBe('function');
+      expect(typeof action).toBe('function');
     });
   });
 });

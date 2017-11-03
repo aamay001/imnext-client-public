@@ -3,7 +3,8 @@ global.requestAnimationFrame = function(callback) {
 };
 
 global.localStorage = {
-  setItem(key,value){},
-  getItem(key){},
-  removeItem(key){}
-}
+  setItem() {},
+  getItem() {},
+  removeItem() {},
+  clear(){}
+};

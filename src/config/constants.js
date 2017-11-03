@@ -1,17 +1,18 @@
 export const ROUTES = {
-  LANDING : '/',
+  LANDING: '/',
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
   APPOINTMENT: '/appointment',
   SCHEDULE: '/schedule',
   SIGNUP: '/signup',
-  LOGOUT: '/logout'
-}
+  LOGOUT: '/logout',
+  ACTIVATE: '/user/activate'
+};
 
 export const REGEX = {
-  PASSWORD: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$",
-  PHONE: "^(+0?1s)?(?d{3})?[s.-]d{3}[s.-]d{4}$"
-}
+  PASSWORD: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$',
+  PHONE: '^(+0?1s)?(?d{3})?[s.-]d{3}[s.-]d{4}$',
+};
 
 export const DATE_FORMAT = 'YYYY-MM-DD';
 export const DISPLAY_DATE_FORMAT = 'dddd, MMMM DD';

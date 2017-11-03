@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import {ROUTES} from '../config/constants';
-import {userLoggedOut} from '../actions/user.actions';
+import { ROUTES } from '../config/constants';
+import { userLoggedOut } from '../actions/user.actions';
 
 export class Logout extends Component {
   componentDidMount() {
@@ -10,15 +10,11 @@ export class Logout extends Component {
     this.props.history.replace(ROUTES.LANDING);
   }
   render() {
-    return (
-      <div>Loging Out...</div>
-    );
+    return <div>Loging Out...</div>;
   }
 }
 
-const mapStateToProps = state => ({
-
-});
+const mapStateToProps = state => ({});
 
 const ConnectedLogOut = connect(mapStateToProps)(Logout);
 export default ConnectedLogOut;

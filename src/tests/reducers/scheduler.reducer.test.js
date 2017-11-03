@@ -6,16 +6,16 @@ describe('Appointment Scheduler Reducer', () => {
   describe('UNDEFINED_ACTION', () => {
     it('should return the initial state', () => {
       const action = {
-        type: undefined
+        type: undefined,
       };
       let state = undefined;
       state = schedulerReducer(state, action);
-      expect(typeof(state)).toBe('object');
+      expect(typeof state).toBe('object');
       expect(state.step).toEqual(actions.STEP_ONE);
       expect(state.data.firstName).toEqual('');
       expect(state.data.lastName).toEqual('');
       expect(state.data.mobilePhone).toBe('');
-      expect(state.data.providerId).toEqual(undefined)
+      expect(state.data.providerId).toEqual(undefined);
       expect(state.data.date).toBeUndefined();
       expect(state.data.time).toBeUndefined();
       expect(state.data.validation).toBeUndefined();
@@ -25,16 +25,16 @@ describe('Appointment Scheduler Reducer', () => {
   describe('NEW_APPOINTMENT', () => {
     it('should return the initial state', () => {
       const action = {
-        type: actions.NEW_APPOINTMENT
+        type: actions.NEW_APPOINTMENT,
       };
       let state = undefined;
       state = schedulerReducer(state, action);
-      expect(typeof(state)).toBe('object');
+      expect(typeof state).toBe('object');
       expect(state.step).toEqual(actions.STEP_ONE);
       expect(state.data.firstName).toEqual('');
       expect(state.data.lastName).toEqual('');
       expect(state.data.mobilePhone).toBe('');
-      expect(state.data.providerId).toEqual(undefined)
+      expect(state.data.providerId).toEqual(undefined);
       expect(state.data.date).toBeUndefined();
       expect(state.data.time).toBeUndefined();
       expect(state.data.validation).toBeUndefined();
@@ -46,19 +46,19 @@ describe('Appointment Scheduler Reducer', () => {
       const data = {
         firstName: faker.name.findName(),
         lastName: faker.name.lastName(),
-        mobilePhone: faker.phone.phoneNumber()
-      }
+        mobilePhone: faker.phone.phoneNumber(),
+      };
       const action = {
         type: actions.NEXT_STEP,
-        data: data
-      }
+        data: data,
+      };
       let state = undefined;
       state = schedulerReducer(state, action);
       expect(state.step).toEqual(actions.STEP_TWO);
       expect(state.data.firstName).toEqual(data.firstName);
       expect(state.data.lastName).toEqual(data.lastName);
       expect(state.data.mobilePhone).toEqual(data.mobilePhone);
-      expect(state.data.providerId).toEqual(undefined)
+      expect(state.data.providerId).toEqual(undefined);
       expect(state.data.date).toBeUndefined();
       expect(state.data.time).toBeUndefined();
       expect(state.data.validation).toBeUndefined();

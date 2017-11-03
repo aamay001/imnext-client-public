@@ -9,13 +9,13 @@ import {
 } from '../actions/user.actions';
 
 const initialState = {
-  isLoggedIn : false,
+  isLoggedIn: false,
   isMenuOpen: false,
   loggingIn: false,
   loginFailed: false,
   loginStatusMessage: '',
   tryingAutoLogin: false,
-  user: undefined
+  user: undefined,
 };
 
 const userLoggedIn = (state, action) => {
@@ -25,40 +25,40 @@ const userLoggedIn = (state, action) => {
     loggingIn: false,
     loginFailed: false,
     loginStatusMessage: 'Login success!',
-    user: action.user
+    user: action.user,
   };
-}
+};
 
 const userLoggedOut = (state, action) => {
   return {
     ...state,
     isLoggedIn: false,
     loginStatusMessage: '',
-    user: undefined
-  }
-}
+    user: undefined,
+  };
+};
 
 const toggleMenu = (state, action) => {
   return {
     ...state,
-    isMenuOpen: !state.isMenuOpen
+    isMenuOpen: !state.isMenuOpen,
   };
-}
+};
 
 const signUp = (state, action) => {
   return {
-    ...state
-  }
-}
+    ...state,
+  };
+};
 
-const loggingIn = (state) => {
-  return  {
+const loggingIn = state => {
+  return {
     ...state,
     loggingIn: true,
     loginFailed: false,
-    loginStatusMessage: 'Please wait, logging you in...'
-  }
-}
+    loginStatusMessage: 'Please wait, logging you in...',
+  };
+};
 
 const loginFailed = (state, action) => {
   return {
@@ -66,36 +66,36 @@ const loginFailed = (state, action) => {
     loginStatusMessage: action.message.message || action.message.statusText,
     loggingIn: false,
     loginFailed: true,
-    isLoggedIn: false
-  }
-}
+    isLoggedIn: false,
+  };
+};
 
-const autoLoggingIn = (state) => {
+const autoLoggingIn = state => {
   return {
     ...state,
     tryingAutoLogin: true,
     loginStatusMessage: 'Please wait...',
-    loggingIn: true
-  }
-}
+    loggingIn: true,
+  };
+};
 
 export default (state = initialState, action) => {
-  switch(action.type) {
-    case USER_LOGGED_IN :
+  switch (action.type) {
+    case USER_LOGGED_IN:
       return userLoggedIn(state, action);
-    case USER_LOGGED_OUT :
+    case USER_LOGGED_OUT:
       return userLoggedOut(state, action);
-    case TOGGLE_MENU :
+    case TOGGLE_MENU:
       return toggleMenu(state, action);
-    case LOGGING_IN :
+    case LOGGING_IN:
       return loggingIn(state);
-    case LOG_IN_FAILED :
+    case LOG_IN_FAILED:
       return loginFailed(state, action);
-    case AUTO_LOGGING_IN :
+    case AUTO_LOGGING_IN:
       return autoLoggingIn(state);
-    case SIGN_UP :
+    case SIGN_UP:
       return signUp(state, action);
     default:
       return state;
   }
-}
+};

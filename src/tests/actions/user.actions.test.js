@@ -30,7 +30,7 @@ describe('User Actions', () => {
         lastName: faker.name.lastName(),
         mobilePhone: faker.phone.phoneNumber(),
         email: faker.internet.email(),
-        password: faker.internet.password(10)
+        password: faker.internet.password(10),
       };
       const action = actions.signUp(data);
       expect(action.type).toEqual(actions.SIGN_UP);

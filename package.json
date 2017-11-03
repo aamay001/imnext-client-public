@@ -21,13 +21,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "prettier": "prettier --single-quote --print-width 80 --trailing-comma all --write 'src/**/*.js'"
   },
   "devDependencies": {
     "enzyme": "^3.1.0",
     "enzyme-adapter-react-16": "^1.0.1",
     "faker": "^4.1.0",
     "jest": "^21.2.1",
+    "prettier": "^1.7.4",
     "react-test-renderer": "^16.0.0",
     "redux-logger": "^3.0.6"
   }

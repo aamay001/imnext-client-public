@@ -20,5 +20,5 @@ describe('Scheduler Actions', () => {
       const action = actions.newAppointment();
       expect(action.type).toEqual(actions.NEW_APPOINTMENT);
     });
-  })
+  });
 });

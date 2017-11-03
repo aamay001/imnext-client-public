@@ -1,6 +1,9 @@
 export const API = {
-  URL: (process.env.REACT_APP_ENV === 'dev' ? 'http://192.168.1.163:8080' : 'https://api.imnext.online'),
-  USER:  '/user',
+  URL:
+    process.env.REACT_APP_ENV === 'dev'
+      ? 'http://192.168.1.163:8080'
+      : 'https://api.imnext.online',
+  USER: '/user',
   USER_SETTINGS: '/user/settings',
   LOGIN: '/auth/login',
   REFRESH_JWT: '/auth/refresh',
@@ -8,8 +11,10 @@ export const API = {
   ACCOUNT_ACTIVATION: '/is-human/activate',
   VALIDATE_APPOINTMENT: '/is-human/validate',
   APPOINTMENT: '/appointment',
+  APPOINTMENTS: (email, date) => `/appointment/provider?email=${email}&date=${date}`,
   PROVIDERS: '/provider',
-  SCHEDULE: (email, date) => `/appointment/provider?email=${email}&date=${date}`,
-  AVAILABLE_TIMES: (provider, date) => `/appointment/available?provider=${provider}&date=${date}`
-}
-
+  SCHEDULE: (email, date) =>
+    `/appointment/provider?email=${email}&date=${date}`,
+  AVAILABLE_TIMES: (provider, date) =>
+    `/appointment/available?provider=${provider}&date=${date}`,
+};
