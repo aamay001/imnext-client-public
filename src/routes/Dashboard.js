@@ -33,12 +33,14 @@ export class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.appointments !== nextProps.appointments) {
-      const today = format(new Date(), DATE_FORMAT);
-      const newApps = this.getAppointments(today, nextProps.appointments);
-      this.setState({
-        dashboardAppointments: newApps,
-      });
+    if (nextProps.appointments){
+      if (this.props.appointments !== nextProps.appointments) {
+        const today = format(new Date(), DATE_FORMAT);
+        const newApps = this.getAppointments(today, nextProps.appointments);
+        this.setState({
+          dashboardAppointments: newApps,
+        });
+      }
     }
   }
 
@@ -70,7 +72,7 @@ export class Dashboard extends Component {
   };
 
   getAppointments(today, _appointments) {
-    if (_appointments.size > 0) {
+    if ( _appointments && _appointments.size > 0 && _appointments.get(today)) {
       const appointmentsToday = _appointments
         .get(today)
         .sort((a, b) => compareAsc(a.time, b.time));
@@ -143,8 +145,8 @@ export class Dashboard extends Component {
 
   render() {
     const today = format(new Date(), DATE_FORMAT);
-    const appointmentCount = this.props.appointments.size
-      ? this.props.appointments.get(today).length
+    const appointmentCount = this.props.appointments.size 
+      ? ( this.props.appointments.get(today) ? this.props.appointments.get(today).length : 0 )
       : 0;
     return (
       <section className="dashboard-page">
