@@ -1,14 +1,37 @@
 * {
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     -webkit-transition: all .5s;
     -moz-transition: all .5s;
     transition: all .5s;
+    font-family: 'Nunito Sans', sans-serif !important;
+    font-weight: 300;
 }
 
 html, body {
     min-width: 326px;
+    background-color: white;
+    height: 100%;
+    position: fixed;;
+    overflow-y: auto;
 }
 
-main {
-    margin-top: 55px;
+#logo {
+    background: #4B79A1 no-repeat;
+    background: -webkit-linear-gradient(to top, #283E51, #4B79A1) no-repeat;
+    background: linear-gradient(to top, #283E51, #4B79A1) no-repeat;
+    width:100%;
+    text-align: center;
+    padding-top: 75px;
+    padding-bottom: 125px;
+}
+
+footer {
+    color: black;
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 15px;
 }

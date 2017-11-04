@@ -197,7 +197,7 @@ const appointmentScheduled = (state, action) => {
       date: undefined,
       time: undefined,
       validation: undefined,
-    }
+    },
   };
 };
 

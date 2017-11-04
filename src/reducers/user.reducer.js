@@ -5,7 +5,7 @@ import {
   USER_LOGGED_OUT,
   LOGGING_IN,
   LOG_IN_FAILED,
-  AUTO_LOGGING_IN
+  AUTO_LOGGING_IN,
 } from '../actions/user.actions';
 
 const initialState = {

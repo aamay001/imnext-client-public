@@ -33,6 +33,7 @@ class App extends Component {
               <Route exact path={ROUTES.LOGOUT} component={Logout} />
               <Route exact path={ROUTES.ACTIVATE} component={Activation} />
             </main>
+            <footer>Copyright imNext.online © 2017</footer>
           </div>
         </Router>
       </Provider>

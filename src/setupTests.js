@@ -6,5 +6,5 @@ global.localStorage = {
   setItem() {},
   getItem() {},
   removeItem() {},
-  clear(){}
+  clear() {},
 };

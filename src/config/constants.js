@@ -6,7 +6,7 @@ export const ROUTES = {
   SCHEDULE: '/schedule',
   SIGNUP: '/signup',
   LOGOUT: '/logout',
-  ACTIVATE: '/user/activate'
+  ACTIVATE: '/user/activate',
 };
 
 export const REGEX = {

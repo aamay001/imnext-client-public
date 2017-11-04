@@ -35,7 +35,13 @@ export const loadScheduleAppointments = (startDate, offset = 5) => {
 export const GET_APPOINTMENTS = 'GET_APPOINTMENTS';
 export const getAppointments = (user, date) => dispatch => {
   dispatch(fetchingAppointments());
-  fetchHelper('GET', API.APPOINTMENTS(user.email, date), undefined, 'reaload', 'T')
+  fetchHelper(
+    'GET',
+    API.APPOINTMENTS(user.email, date),
+    undefined,
+    'reaload',
+    'T',
+  )
     .then(data => {
       const map = new Map(data);
       if (map.size === 0) {

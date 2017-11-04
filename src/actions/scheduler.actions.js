@@ -153,7 +153,7 @@ export const scheduleAppointment = formData => dispatch => {
     validationCode: formData.validationCode,
     mobilePhone: formData.mobilePhone,
   });
-  fetchHelper('PUT', API.VALIDATE_APPOINTMENT, validationData, 'reload' )
+  fetchHelper('PUT', API.VALIDATE_APPOINTMENT, validationData, 'reload')
     .then(data => {
       dispatch(schedulingAppointment());
       const appointmentData = JSON.stringify({
@@ -165,7 +165,7 @@ export const scheduleAppointment = formData => dispatch => {
         time: formData.time,
         authorization: data.authorization,
       });
-      return fetchHelper('POST', API.APPOINTMENT, appointmentData, 'reload' );
+      return fetchHelper('POST', API.APPOINTMENT, appointmentData, 'reload');
     })
     .then(appoinment => {
       dispatch(appointmentScheduled(appoinment));

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Logo from '../components/Logo.js';
 import '../styles/Landing.css';
 
 import { ROUTES } from '../config/constants';
@@ -9,8 +10,7 @@ export class Landing extends Component {
   render() {
     return (
       <section className="landing-page">
-        <h1>imNext</h1>
-        <em>puts you next inline!</em>
+        <Logo />
         <p>
           Welcome to imNext! imNext allows you to schedule an appointment with
           your personal service provider. No matter if it's your barber, hair
@@ -22,11 +22,14 @@ export class Landing extends Component {
         </p>
         <div className="user-action-buttons">
           <Link to={ROUTES.APPOINTMENT}>New Appointment</Link>
-          <Link to={ROUTES.LOGIN}>{this.props.isLoggedIn ? 'Dashboard' : 'Log In'}</Link>
-          {
-            !this.props.isLoggedIn ?
-            <Link to={ROUTES.SIGNUP}>Sign Up</Link> : ''
-          }
+          <Link to={ROUTES.LOGIN}>
+            {this.props.isLoggedIn ? 'Dashboard' : 'Log In'}
+          </Link>
+          {!this.props.isLoggedIn ? (
+            <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+          ) : (
+            ''
+          )}
         </div>
       </section>
     );
@@ -34,7 +37,7 @@ export class Landing extends Component {
 }
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.user.isLoggedIn
+  isLoggedIn: state.user.isLoggedIn,
 });
 
 const ConnectedLanding = connect(mapStateToProps)(Landing);

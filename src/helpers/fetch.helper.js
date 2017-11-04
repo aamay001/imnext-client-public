@@ -34,9 +34,8 @@ export default (
   };
   const request = new Request(API.URL + endpoint, init);
   return fetch(request).then(res => {
-    if (!res.ok && !(endpoint === API.HUMAN_VALIDATION && res.status === 429) ) {
-      return res.json()
-      .then(data =>
+    if (!res.ok && !(endpoint === API.HUMAN_VALIDATION && res.status === 429)) {
+      return res.json().then(data =>
         Promise.reject({
           statusText: res.statusText,
           message: data.message,

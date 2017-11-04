@@ -25,7 +25,7 @@ export class Dashboard extends Component {
   };
 
   componentDidMount() {
-    if (this.props.isLoggedIn && this.props.user.activated ) {
+    if (this.props.isLoggedIn && this.props.user.activated) {
       this.props.dispatch(
         getAppointments(this.props.user, format(new Date(), DATE_FORMAT)),
       );
@@ -44,9 +44,9 @@ export class Dashboard extends Component {
 
   componentWillMount() {
     // If no user is logged in, redirect to the landing page.
-    if (!this.props.isLoggedIn ) {
+    if (!this.props.isLoggedIn) {
       this.props.history.replace(ROUTES.LOGIN);
-    } else if ( !this.props.user.activated ) {
+    } else if (!this.props.user.activated) {
       this.props.history.replace(ROUTES.ACTIVATE);
     }
   }

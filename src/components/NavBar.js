@@ -24,7 +24,9 @@ export class NavBar extends Component {
     const height = this.props.showMenu ? '100%' : '0%';
     const show = this.props.showMenu ? 'block' : 'none';
     return (
-      <nav>
+      <nav style={{
+        backgroundColor: this.props.showMenu ? 'slategrey' : undefined
+      }}>
         <MenuButton />
         <h1>
           <Link to="/">imNext</Link>

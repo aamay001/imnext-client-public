@@ -1,5 +1,5 @@
 .landing-page {
-    padding: 15px;
+    background-color: transparent;
 }
 
 .landing-page h1 {
@@ -15,34 +15,48 @@
 }
 
 .landing-page p {
-    margin-top: 20px;
+    margin-top: -75px;
     padding: 25px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.25),
+    1px 1px 1px 1px rgba(0,0,0,0.22);
+    width: 90%;
+    margin-right: auto;
+    margin-left: auto;
     margin-bottom: 25px;
-    text-align: justify;
-    background-color: lightgray;
-    line-height: 24px;
+    color: black;
+    background-color: white;
+    line-height: 16pt;
 }
 
 .landing-page a {
-    display: inline-block;
+    display: block;
+    border: 1px solid rgb(255, 255, 255);
     text-align: center;
-    height: 45px;
-    background-color: lightblue;
+    height: 55px;
+    color: white;
+    background: #4B79A1;
+    background: -webkit-linear-gradient(to right, rgb(50, 66, 80), #4B79A1);
+    background: linear-gradient(to right, rgb(50, 66, 80), #4B79A1);
     width: 80%;
-    margin-right: 10%;
-    margin-left: 10%;
+    margin-right: auto;
+    margin-left: auto;
     margin-bottom: 15px;
     text-decoration: none;
-    padding-top: 13px;
+    padding-top: 17px;
 }
 
 .landing-page a:visited {
-    color: black;
+    color:white;
+}
+
+.landing-page a:active {
+    box-shadow: none;
 }
 
 .landing-page a:hover {
-    background-color: navy;
     color: white;
+    width: 85%;
+    border: 1px solid black;
 }
 
 @media only screen and (min-width: 768px) {

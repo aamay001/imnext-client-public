@@ -15,17 +15,17 @@ export class ProviderSearch extends Component {
   };
 
   componentDidMount() {
-    fetchHelper('GET', API.PROVIDERS )
-    .then(newProviders => {
-      this.setState({
-        providers: [...newProviders],
+    fetchHelper('GET', API.PROVIDERS)
+      .then(newProviders => {
+        this.setState({
+          providers: [...newProviders],
+        });
+      })
+      .catch(error => {
+        this.setState({
+          providers: [],
+        });
       });
-    })
-    .catch(error => {
-      this.setState({
-        providers: []
-      });
-    });
   }
 
   onSuggestionsFetchRequested = ({ value }) => {
@@ -34,12 +34,12 @@ export class ProviderSearch extends Component {
     return inputLength <= 3
       ? []
       : this.setState({
-        filteredProviders: this.state.providers.filter(
-          provider =>
-            provider.providerName.toLowerCase().slice(0, inputLength) ===
-            inputValue,
-        )
-      });;
+          filteredProviders: this.state.providers.filter(
+            provider =>
+              provider.providerName.toLowerCase().slice(0, inputLength) ===
+              inputValue,
+          ),
+        });
   };
 
   onSuggestionsClearRequested = () => {

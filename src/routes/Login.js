@@ -6,7 +6,7 @@ import { ROUTES } from '../config/constants';
 import {
   logUserIn,
   tryAutoLogin,
-  userLoggedOut
+  userLoggedOut,
 } from '../actions/user.actions';
 import { REGEX } from '../config/constants';
 
@@ -30,7 +30,7 @@ export class Login extends Component {
       nextProps.isLoggedIn !== this.props.isLoggedIn &&
       nextProps.isLoggedIn
     ) {
-      if ( nextProps.user.activated ) {
+      if (nextProps.user.activated) {
         this.navigateToDashboard();
       } else {
         this.props.history.replace(ROUTES.ACTIVATE);
@@ -107,7 +107,7 @@ const mapStateToProps = state => ({
   loginFailed: state.user.loginFailed,
   loginStatusMessage: state.user.loginStatusMessage,
   tryingAutoLogin: state.user.tryingAutoLogin,
-  user: state.user.user
+  user: state.user.user,
 });
 
 const ConnectedLogin = connect(mapStateToProps)(Login);

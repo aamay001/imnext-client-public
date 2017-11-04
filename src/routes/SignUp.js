@@ -13,7 +13,7 @@ export class SignUp extends Component {
     processing: false,
     processError: false,
     message: '',
-    success: false
+    success: false,
   };
 
   passwordConfirmationChanged = e => {
@@ -48,7 +48,7 @@ export class SignUp extends Component {
       processing: true,
       processError: false,
       success: false,
-      message: 'Processing...'
+      message: 'Processing...',
     });
     const body = {
       firstName: this.firstName.value,
@@ -61,8 +61,8 @@ export class SignUp extends Component {
       .then(res => {
         this.setState({
           message: `${res.message} Redirecting you in 5 seconds...`,
-          success: true
-        })
+          success: true,
+        });
         setTimeout(() => {
           this.props.history.replace(ROUTES.LOGIN);
         }, 5000);
@@ -72,8 +72,8 @@ export class SignUp extends Component {
           processError: true,
           processing: false,
           success: false,
-          message: error.message
-        })
+          message: error.message,
+        });
       });
   };
 
@@ -84,16 +84,24 @@ export class SignUp extends Component {
         <em>start accepting appointments today!</em>
         <p
           style={{
-            display: this.state.processing || this.state.processError ? 'block' : 'none',
+            display:
+              this.state.processing || this.state.processError
+                ? 'block'
+                : 'none',
             textAlign: 'center',
-            color: this.state.processError ? 'red' : 'dodgerblue'
+            color: this.state.processError ? 'red' : 'dodgerblue',
           }}
-        >{this.state.message}</p>
-        <form id="signup-form" onSubmit={this.onFormSubmit}
+        >
+          {this.state.message}
+        </p>
+        <form
+          id="signup-form"
+          onSubmit={this.onFormSubmit}
           style={{
-            display: this.state.success || this.state.processing ? 'none' : 'block'
+            display:
+              this.state.success || this.state.processing ? 'none' : 'block',
           }}
-          >
+        >
           <label htmlFor="first-name">First Name</label>
           <input
             type="text"
@@ -184,8 +192,10 @@ export class SignUp extends Component {
             pattern={REGEX.PASSWORD}
             onChange={this.passwordConfirmationChanged}
           />
-          <button type="submit"
-            disabled={!this.state.formValidationOk || this.state.processing}>
+          <button
+            type="submit"
+            disabled={!this.state.formValidationOk || this.state.processing}
+          >
             Sign Up
           </button>
         </form>

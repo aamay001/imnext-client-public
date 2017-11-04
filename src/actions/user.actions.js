@@ -62,7 +62,7 @@ export const tryAutoLogin = () => dispatch => {
     dispatch(autoLogin());
     const lastRefresh = Date.parse(localStorage.getItem('lastTokenRefresh'));
     if (differenceInDays(lastRefresh, new Date()) < 4) {
-      fetchHelper('GET', API.USER, undefined, 'no-store', 'T' )
+      fetchHelper('GET', API.USER, undefined, 'no-store', 'T')
         .then(data => {
           dispatch(userLoggedIn(data));
         })
@@ -74,7 +74,7 @@ export const tryAutoLogin = () => dispatch => {
           );
         });
     } else {
-      fetchHelper('POST', API.REFRESH_JWT, undefined, 'no-store', 'T' )
+      fetchHelper('POST', API.REFRESH_JWT, undefined, 'no-store', 'T')
         .then(data => {
           localStorage.setItem('authToken', data.authToken);
           localStorage.setItem('lastTokenRefresh', new Date());
@@ -95,12 +95,12 @@ export const LOG_USER_IN = 'LOG_USER_IN';
 export const logUserIn = (email, password) => dispatch => {
   dispatch(loggingIn());
   fetchHelper('POST', API.LOGIN, '', 'no-cache', 'B', email, password)
-  .then(data => {
-    localStorage.setItem('authToken', data.authToken);
-    localStorage.setItem('lastTokenRefresh', new Date());
-    dispatch(userLoggedIn(data.user));
-  })
-  .catch(error => {
-    dispatch(loginFailed(error));
-  });
+    .then(data => {
+      localStorage.setItem('authToken', data.authToken);
+      localStorage.setItem('lastTokenRefresh', new Date());
+      dispatch(userLoggedIn(data.user));
+    })
+    .catch(error => {
+      dispatch(loginFailed(error));
+    });
 };

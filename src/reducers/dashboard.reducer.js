@@ -77,11 +77,11 @@ const loadScheduleVisibleAppointments = (state, action) => {
   };
 };
 
-const userLoggedOut = (state) => {
+const userLoggedOut = state => {
   return {
-    ...initialState
+    ...initialState,
   };
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -93,7 +93,7 @@ export default (state = initialState, action) => {
       return noAppointments(state);
     case LOAD_SCHEDULE_APPOINTMENTS:
       return loadScheduleVisibleAppointments(state, action);
-    case USER_LOGGED_OUT :
+    case USER_LOGGED_OUT:
       return userLoggedOut(state);
     default:
       return state;
