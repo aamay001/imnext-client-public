@@ -68,6 +68,10 @@
         width: 40%;
     }
 
+    .landing-page a:hover {
+        width: 45%;
+    }
+    
     .landing-page p
     , .landing-page a {
         display: block;
@@ -83,6 +87,10 @@
 
     .landing-page a {
         width: 25%;
+    }
+
+    .landing-page a:hover {
+        width: 30%;
     }
 
     .landing-page p
