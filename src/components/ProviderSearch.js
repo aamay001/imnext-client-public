@@ -31,15 +31,13 @@ export class ProviderSearch extends Component {
   onSuggestionsFetchRequested = ({ value }) => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
-    return inputLength <= 3
-      ? []
-      : this.setState({
-          filteredProviders: this.state.providers.filter(
-            provider =>
-              provider.providerName.toLowerCase().slice(0, inputLength) ===
-              inputValue,
-          ),
-        });
+    if (inputLength >= 3) {
+      const provs = this.state.providers.filter( provider =>
+        provider.providerName.toLowerCase().slice(0, inputLength) ===  inputValue);
+      this.setState({
+        filteredProviders: provs
+      });
+    }
   };
 
   onSuggestionsClearRequested = () => {
