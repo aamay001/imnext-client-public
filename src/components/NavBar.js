@@ -25,7 +25,7 @@ export class NavBar extends Component {
     const show = this.props.showMenu ? 'block' : 'none';
     return (
       <nav style={{
-        backgroundColor: this.props.showMenu ? 'slategrey' : undefined
+        backgroundColor: this.props.showMenu ? 'black' : undefined
       }}>
         <MenuButton />
         <h1>

@@ -35,8 +35,8 @@
     height: 55px;
     color: white;
     background: #4B79A1;
-    background: -webkit-linear-gradient(to right, rgb(50, 66, 80), #4B79A1);
-    background: linear-gradient(to right, rgb(50, 66, 80), #4B79A1);
+    background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
+    background: radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
     width: 80%;
     margin-right: auto;
     margin-left: auto;

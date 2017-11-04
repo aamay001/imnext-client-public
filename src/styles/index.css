@@ -13,8 +13,8 @@ html, body {
     min-width: 326px;
     background-color: white;
     height: 100%;
-    position: fixed;;
-    overflow-y: auto;
+    /*position: fixed;;
+    overflow-y: auto;*/
 }
 
 #logo {
