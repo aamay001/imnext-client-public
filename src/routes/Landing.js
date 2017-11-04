@@ -1,9 +1,9 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import '../styles/Landing.css';
 
-import {ROUTES} from '../config/constants';
+import { ROUTES } from '../config/constants';
 
 export class Landing extends Component {
   render() {
@@ -22,8 +22,11 @@ export class Landing extends Component {
         </p>
         <div className="user-action-buttons">
           <Link to={ROUTES.APPOINTMENT}>New Appointment</Link>
-          <Link to={ROUTES.LOGIN}>Log In</Link>
-          <Link to={ROUTES.SIGNUP}>Sign Up</Link>
+          <Link to={ROUTES.LOGIN}>{this.props.isLoggedIn ? 'Dashboard' : 'Log In'}</Link>
+          {
+            !this.props.isLoggedIn ?
+            <Link to={ROUTES.SIGNUP}>Sign Up</Link> : ''
+          }
         </div>
       </section>
     );
@@ -31,6 +34,7 @@ export class Landing extends Component {
 }
 
 const mapStateToProps = state => ({
+  isLoggedIn: state.user.isLoggedIn
 });
 
 const ConnectedLanding = connect(mapStateToProps)(Landing);

@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import '../styles/NavBar.css';
 
 import MenuButton from './MenuButton';
-import {ROUTES} from '../config/constants';
-import {toggleMenu} from '../actions/user.actions';
+import { ROUTES } from '../config/constants';
+import { toggleMenu } from '../actions/user.actions';
 
 export class NavBar extends Component {
   constructor(props) {
@@ -26,7 +26,9 @@ export class NavBar extends Component {
     return (
       <nav>
         <MenuButton />
-        <h1><Link to="/">imNext</Link></h1>
+        <h1>
+          <Link to="/">imNext</Link>
+        </h1>
 
         <ul style={{ height: height }}>
           <li style={{ height: height }}>
@@ -34,7 +36,8 @@ export class NavBar extends Component {
               Home
             </Link>
           </li>
-          {this.props.isUserLoggedIn && this.props.location.pathname !== ROUTES.DASHBOARD ? (
+          {this.props.isUserLoggedIn &&
+          this.props.location.pathname !== ROUTES.DASHBOARD ? (
             <li style={{ height: height }}>
               <Link to={ROUTES.DASHBOARD} style={{ display: show }}>
                 Dashboard
@@ -43,7 +46,8 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {!this.props.isUserLoggedIn && this.props.location.pathname !== ROUTES.LOGIN ? (
+          {!this.props.isUserLoggedIn &&
+          this.props.location.pathname !== ROUTES.LOGIN ? (
             <li style={{ height: height }}>
               <Link to={ROUTES.LOGIN} style={{ display: show }}>
                 Log In
@@ -52,7 +56,8 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {this.props.isUserLoggedIn && this.props.location.pathname !== ROUTES.APPOINTMENT ? (
+          {this.props.isUserLoggedIn &&
+          this.props.location.pathname !== ROUTES.APPOINTMENT ? (
             <li style={{ height: height }}>
               <Link to={ROUTES.APPOINTMENT} style={{ display: show }}>
                 Appointment
@@ -61,7 +66,8 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {this.props.isUserLoggedIn && this.props.location.pathname !== ROUTES.SCHEDULE ? (
+          {this.props.isUserLoggedIn &&
+          this.props.location.pathname !== ROUTES.SCHEDULE ? (
             <li style={{ height: height }}>
               <Link to={ROUTES.SCHEDULE} style={{ display: show }}>
                 Schedule
