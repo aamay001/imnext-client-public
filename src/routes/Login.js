@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Login.css';
+import Logo from '../components/Logo.js'
 
 import { ROUTES } from '../config/constants';
 import {
@@ -48,54 +49,57 @@ export class Login extends Component {
   render() {
     return (
       <section className="login-page">
-        <h1>Log In</h1>
-        <em>access you dashboard!</em>
-        <p
-          style={{
-            display:
-              this.props.loggingIn || this.props.loginFailed ? 'block' : 'none',
-            textAlign: 'center',
-            color: this.props.loginFailed
-              ? 'red'
-              : this.props.loggingIn ? 'dodgerblue' : 'green',
-          }}
-        >
-          {this.props.loginStatusMessage}
-        </p>
-        <form
-          id="login-form"
-          onSubmit={this.onFormSubmit}
-          style={{
-            display: this.tryingAutoLogin ? 'none' : 'block',
-          }}
-        >
-          <label htmlFor="user-email">Email Address</label>
-          <input
-            type="email"
-            id="user-email"
-            name="email"
-            required
-            pattern={REGEX.EMAIL}
-            autoFocus={true}
-            disabled={this.props.loggingIn}
-            ref={email => (this.email = email)}
-          />
-          <label htmlFor="user-password">Password</label>
-          <input
-            type="password"
-            id="user-password"
-            name="password"
-            required
-            minLength={8}
-            maxLength={70}
-            pattern={REGEX.PASSWORD}
-            disabled={this.props.loggingIn}
-            ref={pw => (this.password = pw)}
-          />
-          <button type="submit" disabled={this.props.loggingIn}>
-            Log In
-          </button>
-        </form>
+        <Logo />
+        <div className="form-container">
+          <h1>Log In</h1>
+          <em>access you dashboard!</em>
+          <p
+            style={{
+              display:
+                this.props.loggingIn || this.props.loginFailed ? 'block' : 'none',
+              textAlign: 'center',
+              color: this.props.loginFailed
+                ? 'red'
+                : this.props.loggingIn ? 'dodgerblue' : 'green',
+            }}
+          >
+            {this.props.loginStatusMessage}
+          </p>
+          <form
+            id="login-form"
+            onSubmit={this.onFormSubmit}
+            style={{
+              display: this.tryingAutoLogin ? 'none' : 'block',
+            }}
+          >
+            <label htmlFor="user-email">Email Address</label>
+            <input
+              type="email"
+              id="user-email"
+              name="email"
+              required
+              pattern={REGEX.EMAIL}
+              autoFocus={true}
+              disabled={this.props.loggingIn}
+              ref={email => (this.email = email)}
+            />
+            <label htmlFor="user-password">Password</label>
+            <input
+              type="password"
+              id="user-password"
+              name="password"
+              required
+              minLength={8}
+              maxLength={70}
+              pattern={REGEX.PASSWORD}
+              disabled={this.props.loggingIn}
+              ref={pw => (this.password = pw)}
+            />
+            <button type="submit" disabled={this.props.loggingIn}>
+              Log In
+            </button>
+          </form>
+        </div>
       </section>
     );
   }
