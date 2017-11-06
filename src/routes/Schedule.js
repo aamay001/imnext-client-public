@@ -7,6 +7,7 @@ import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
 import Logo from '../components/Logo';
 import '../styles/Schedule.css';
+import '../styles/font-awesome.css'
 import FontAwesome from 'react-fontawesome';
 import {
   DISPLAY_DATE_FORMAT,
