@@ -10,23 +10,11 @@
   text-align: center;
 }
 
-.login-page div.form-container {
-  width: 90%;
-  box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.25),
-  1px 1px 1px 1px rgba(0,0,0,0.22);
-  padding: 25px;
-  padding-top: 5px;
-  margin-top: -75px;
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .login-page form {
   margin-right: auto;
   margin-left: auto;
   margin-top: 25px;
-  padding: 0px;
+  padding: 0;
   width: 100%;
 }
 
@@ -69,10 +57,6 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .login-page div.form-container {
-    width: 60%;
-  }
-
   .login-page input {
       width: 100%;
   }
@@ -82,7 +66,7 @@
   }
 
   .login-page button[type=submit]:hover {
-    width: 100%
+    width: 95%
   }
 
   .login-page input
@@ -93,10 +77,6 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .login-page div.form-container {
-    width: 35%;
-  }
-
   .login-page input {
     width: 100%;
   }
@@ -106,7 +86,7 @@
   }
 
   .login-page button[type=submit]:hover {
-    width: 100%
+    width: 95%
   }
 }
 

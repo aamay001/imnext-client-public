@@ -1,9 +1,3 @@
-.activation-page {
-  padding: 15px;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 100px;
-}
 
 .activation-page h1 {
   width: 100%;
@@ -25,7 +19,7 @@
   margin-right: auto;
   margin-left: auto;
   margin-top: 25px;
-  padding: 10px;
+  padding: 0;
   width: 100%;
 }
 
@@ -35,6 +29,7 @@
   display: block;
   width: 100%;
   text-align: center;
+  outline: none;
 }
 
 .activation-page label {
@@ -43,30 +38,41 @@
 
 .activation-page input {
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   margin-bottom: 15px;
   height: 45px;
 }
 
 .activation-page button[type=submit] {
   height: 45px;
-  background-color: lightblue;
+  background: #4B79A1;
+  background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
+  background: radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
+  width: 80%;
   border: none;
   outline: none;
   margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  color: white;
 }
 
-@media only screen and (min-width: 768px) {
-  .activation-page form {
-      width: 60%;
-  }
+.activation-page button[type=submit]:hover {
+  width: 60%;
+}
 
+
+@media only screen and (min-width: 768px) {
   .activation-page input {
-      width: 80%;
+      width: 100%;
   }
 
   .activation-page button[type=submit] {
-    width: 65%
+    width: 90%
+  }
+
+  .activation-page button[type=submit]:hover {
+    width: 95%
   }
 
   .activation-page input
@@ -77,12 +83,19 @@
 }
 
 @media only screen and (min-width: 1024px) {
+  .activation-page div.form-container {
+    width: 35%;
+  }
 
   .activation-page input {
-    width: 45%;
+    width: 100%;
   }
 
   .activation-page button[type=submit] {
-    width: 35%
+    width: 90%;
+  }
+
+  .activation-page button[type=submit]:hover {
+    width: 95%
   }
 }

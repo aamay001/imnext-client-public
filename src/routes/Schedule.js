@@ -5,7 +5,9 @@ import format from 'date-fns/format';
 import compareAsc from 'date-fns/compare_asc';
 import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
+import Logo from '../components/Logo';
 import '../styles/Schedule.css';
+import FontAwesome from 'react-fontawesome';
 import {
   DISPLAY_DATE_FORMAT,
   DISPLAY_TIME_FORMAT,
@@ -17,6 +19,10 @@ import {
 } from '../actions/dashboard.actions';
 
 export class Schedule extends Component {
+  state = {
+    clickedAppointment: ''
+  }
+
   componentDidMount() {
     if (this.props.isLoggedIn) {
       this.props.dispatch(loadScheduleAppointments(this.props.startDate));
@@ -43,6 +49,19 @@ export class Schedule extends Component {
     this.props.dispatch(getAppointments(this.props.user, this.props.startDate));
   }
 
+  onAppointmentClicked = e => {
+    e.stopPropagation();
+    if (this.state.clickedAppointment !== e.currentTarget.id) {
+      this.setState({
+        clickedAppointment: e.currentTarget.id
+      });
+    } else {
+      this.setState({
+        clickedAppointment: ""
+      });
+    }
+  }
+
   render() {
     let appointments;
     if (this.props.appointments.size > 0) {
@@ -51,16 +70,57 @@ export class Schedule extends Component {
           .get(key)
           .sort((a, b) => compareAsc(a.time, b.time))
           .map((time, tIndex) => {
+            console.log(time);
             return (
-              <div key={tIndex} className="schedule-appointment">
+              <div key={time.id} id={time.id} className="schedule-appointment"
+              onClick={this.onAppointmentClicked}>
                 <p>
                   {time.name} @ {format(time.time, DISPLAY_TIME_FORMAT)}
                 </p>
+                {
+                  this.state.clickedAppointment === time.id ?
+                  <div>
+                    <div className="options">
+                    <a href={`tel:${time.mobilePhone}`} >
+                      <FontAwesome className="fa fa-phone" name="fa-phone" size="1x" />
+                      <span style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Call`}</span>
+                      </a>
+                    </div>
+
+                    <div className="options">
+                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
+                      <FontAwesome className="fa-check-circle-o" name="fa-phone" size="1x" />
+                      <span style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Confirm`}</span>
+                      </a>
+                    </div>
+
+                    <div className="options">
+                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
+                      <FontAwesome className="fa fa-ban" name="fa-phone" size="1x" />
+                      <span style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Cancel`}</span>
+                      </a>
+                    </div>
+
+                  </div> :
+                  ''
+                }
               </div>
             );
           });
         return (
-          <div key={index}>
+          <div key={key}>
             <h2>
               {isToday(key)
                 ? 'Today'
@@ -75,10 +135,7 @@ export class Schedule extends Component {
     }
     return (
       <section className="schedule-page">
-        <header style={{ backgroundColor: 'white', width: '100%' }}>
-          <h1>Schedule</h1>
-          <em>so many appointments</em>
-        </header>
+        <Logo />
         <div>
           {appointments ? (
             <InfiniteScroll

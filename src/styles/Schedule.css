@@ -1,7 +1,7 @@
-.schedule-page {
-  padding: 15px;
-  height: 100%;
-  width: 100%;
+.schedule-page * {
+  -webkit-transition: none ! important;
+  -moz-transition: none ! important;
+  transition: none ! important;
 }
 
 .schedule-page h1 {
@@ -21,7 +21,59 @@
 }
 
 .schedule-page div.schedule-appointment {
-  border: 1px solid black;
-  margin-bottom: 5px;
+  border: 1px solid transparent;
+  margin-bottom: 10px;
   text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+}
+
+.schedule-page div.schedule-appointment:hover {
+  background-color: #283e51;
+  color:white;
+}
+
+.schedule-page .options a {
+  display: block;
+  text-decoration: none;
+  padding-top: 20px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.schedule-page .options a:visited {
+  color: inherit;
+}
+
+.schedule-page .options {
+  border: 1px solid lightgrey;
+  width: 33.3333%;
+  text-align: center;
+  display: inline-block;
+  height: 55px;
+  background-color: white;
+  color: black;
+}
+
+.schedule-page .options:hover {
+  background-color: #4b79a1;
+  color: white;
+}
+
+.infinite-scroll-component {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .schedule-page div.schedule-appointment {
+    width: 35%;
+  }
 }

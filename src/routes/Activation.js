@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { ROUTES } from '../config/constants';
 import { API } from '../config/settings';
 import fetchHelper from '../helpers/fetch.helper';
+
+import Logo from '../components/Logo';
 import '../styles/Activation.css';
 
 export class Activation extends Component {
@@ -72,44 +74,47 @@ export class Activation extends Component {
   render() {
     return (
       <section className="activation-page">
-        <div>
-          <h1>Account Activation</h1>
-          <em>your account needs to be activated...</em>
-        </div>
+        <Logo />
+        <div className="form-container" >
+          <div>
+            <h1>Account Activation</h1>
+            <em>your account needs to be activated...</em>
+          </div>
 
-        <p
-          style={{
-            textAlign: 'center',
-            color: this.state.processError ? 'red' : 'dodgerblue',
-          }}
-        >
-          {this.state.message}
-        </p>
-        <form
-          id="activation-form"
-          onSubmit={this.onSubmit}
-          style={{
-            display: this.state.success ? 'none' : 'block',
-          }}
-        >
-          <input
-            type="number"
-            id="validation-code"
-            required
-            autoComplete="off"
-            minLength={8}
-            maxLength={8}
-            autoFocus={true}
-            onChange={this.validationCodeEntered}
-            ref={input => (this.validation = input)}
-          />
-          <button
-            type="submit"
-            disabled={this.state.validationCode === undefined}
+          <p
+            style={{
+              textAlign: 'center',
+              color: this.state.processError ? 'red' : 'dodgerblue',
+            }}
           >
-            Submit
-          </button>
-        </form>
+            {this.state.message}
+          </p>
+          <form
+            id="activation-form"
+            onSubmit={this.onSubmit}
+            style={{
+              display: this.state.success ? 'none' : 'block',
+            }}
+          >
+            <input
+              type="number"
+              id="validation-code"
+              required
+              autoComplete="off"
+              minLength={8}
+              maxLength={8}
+              autoFocus={true}
+              onChange={this.validationCodeEntered}
+              ref={input => (this.validation = input)}
+            />
+            <button
+              type="submit"
+              disabled={this.state.validationCode === undefined}
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </section>
     );
   }

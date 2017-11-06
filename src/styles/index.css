@@ -1,37 +1,63 @@
-* {
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-transition: all .5s;
-    -moz-transition: all .5s;
-    transition: all .5s;
-    font-family: 'Nunito Sans', sans-serif !important;
-    font-weight: 300;
+*:not(.fa) {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  font-family: 'Nunito Sans', sans-serif !important;
+  font-weight: 300;
 }
 
-html, body {
-    min-width: 326px;
-    background-color: white;
-    height: 100%;
-    /*position: fixed;;
+html,
+body {
+  min-width: 326px;
+  background-color: white;
+  height: 100%;
+  /*position: fixed;;
     overflow-y: auto;*/
 }
 
 #logo {
-    background: #4B79A1 no-repeat;
-    background: -webkit-linear-gradient(to top, #283E51, #4B79A1) no-repeat;
-    background: linear-gradient(to top, #283E51, #4B79A1) no-repeat;
-    width:100%;
-    text-align: center;
-    padding-top: 75px;
-    padding-bottom: 125px;
+  background: #4b79a1 no-repeat;
+  background: -webkit-linear-gradient(to top, #283e51, #4b79a1) no-repeat;
+  background: linear-gradient(to top, #283e51, #4b79a1) no-repeat;
+  width: 100%;
+  text-align: center;
+  padding-top: 75px;
+  padding-bottom: 125px;
+  color: white;
+}
+
+div.form-container {
+  width: 90%;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+    1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  padding: 25px;
+  padding-top: 5px;
+  margin-top: -75px;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 footer {
-    color: black;
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-top: 45px;
-    margin-bottom: 15px;
+  color: black;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 45px;
+  margin-bottom: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+  div.form-container {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  div.form-container {
+    width: 35%;
+  }
 }

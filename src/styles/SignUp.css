@@ -1,6 +1,3 @@
-.signup-page {
-  padding: 15px;
-}
 
 .signup-page h1 {
   width: 100%;
@@ -18,7 +15,7 @@
   margin-right: auto;
   margin-left: auto;
   margin-top: 25px;
-  padding: 10px;
+  padding: 0;
   width: 100%;
 }
 
@@ -28,6 +25,7 @@
   display: block;
   width: 100%;
   text-align: center;
+  outline: none;
 }
 
 .signup-page label {
@@ -36,30 +34,48 @@
 
 .signup-page input {
   border: none;
-  border-bottom: 2px solid black;
+  border-bottom: 1px solid black;
   margin-bottom: 15px;
   height: 45px;
 }
 
 .signup-page button[type=submit] {
   height: 45px;
-  background-color: lightblue;
+  background: #4B79A1;
+  background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
+  background: radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
+  width: 80%;
   border: none;
   outline: none;
   margin-top: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  color: white;
+}
+
+.signup-page button[type=submit]:hover {
+  width: 85%;
+}
+
+.signup-page .password-helper {
+  padding: 8px;
+  margin-right: auto;
+  margin-left: auto;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
 }
 
 @media only screen and (min-width: 768px) {
-  .signup-page form {
-      width: 60%;
-  }
-
   .signup-page input {
-      width: 80%;
+      width: 100%;
   }
 
   .signup-page button[type=submit] {
-    width: 65%
+    width: 90%
+  }
+
+  .signup-page button[type=submit]:hover {
+    width: 95%
   }
 
   .signup-page input
@@ -70,12 +86,15 @@
 }
 
 @media only screen and (min-width: 1024px) {
-
   .signup-page input {
-    width: 45%;
+    width: 100%;
   }
 
   .signup-page button[type=submit] {
-    width: 35%
+    width: 90%
+  }
+
+  .signup-page button[type=submit]:hover {
+    width: 95%
   }
 }

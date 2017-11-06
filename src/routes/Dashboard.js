@@ -4,17 +4,18 @@ import { connect } from 'react-redux';
 import { ROUTES } from '../config/constants';
 import format from 'date-fns/format';
 import SwipeableViews from 'react-swipeable-views';
-import '../styles/Dashboard.css';
 import closestTo from 'date-fns/closest_to';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
 import compareAsc from 'date-fns/compare_asc';
 
+import Logo from '../components/Logo';
+import '../styles/Dashboard.css';
+
 import { getAppointments } from '../actions/dashboard.actions';
 
 import {
   DATE_FORMAT,
-  DISPLAY_DATE_FORMAT,
   DISPLAY_TIME_FORMAT,
 } from '../config/constants';
 
@@ -136,7 +137,7 @@ export class Dashboard extends Component {
       }
     } else {
       return (
-        <div className="appointment-details">
+        <div className="appointment-count">
           <p>You have no appointments today!</p>
         </div>
       );
@@ -145,15 +146,13 @@ export class Dashboard extends Component {
 
   render() {
     const today = format(new Date(), DATE_FORMAT);
-    const appointmentCount = this.props.appointments.size 
+    const appointmentCount = this.props.appointments.size
       ? ( this.props.appointments.get(today) ? this.props.appointments.get(today).length : 0 )
       : 0;
     return (
       <section className="dashboard-page">
+        <Logo />
         <div>
-          <h1>Dashboard</h1>
-          <em>see your next appiontments...</em>
-          <h2>{format(today, DISPLAY_DATE_FORMAT)}</h2>
           <p
             style={{
               display:
@@ -194,7 +193,7 @@ export class Dashboard extends Component {
                   textDecoration: 'none',
                 }}
               >
-                <p style={{ marginTop: '50px' }}>
+                <p>
                   You have<br />
                   <strong>{appointmentCount}</strong>
                   <br />

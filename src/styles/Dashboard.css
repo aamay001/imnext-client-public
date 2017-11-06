@@ -1,9 +1,3 @@
-.dashboard-page {
-  padding: 15px;
-  height: 100%;
-  width: 100%;
-  margin-bottom: 100px;
-}
 
 .dashboard-page h1 {
   width: 100%;
@@ -37,12 +31,14 @@
   font-size: 35px;
   text-align: center;
   margin-bottom: 10px;
+  padding-top: 35px;
 }
 
 div.appointment-details div {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
+  padding: 0 0 25px 0;
 }
 
 div.appointment-details div h3 {
