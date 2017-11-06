@@ -21,21 +21,17 @@ import {
 } from '../actions/scheduler.actions';
 
 export class Appointment extends Component {
+  state = {
+    verification: '',
+  };
+
   // Stub for test pass
   recaptcha = {
     reset() {},
   };
 
-  state = {
-    verification: '',
-  };
-
   componentDidMount() {
     this.props.dispatch(newAppointment());
-    this.resetRecaptcha();
-  }
-
-  componentDidUpdate(prevProps, prevState) {
     this.resetRecaptcha();
   }
 
