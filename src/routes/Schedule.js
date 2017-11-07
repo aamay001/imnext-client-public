@@ -87,7 +87,6 @@ export class Schedule extends Component {
                     <a href={`tel:${time.mobilePhone}`} >
                       <FontAwesome className="fa fa-phone" name="fa-phone" />
                       <span unselectable="on"
-                      onselectstart="return false;"
                       style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
@@ -100,7 +99,6 @@ export class Schedule extends Component {
                     <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
                       <FontAwesome className="fa-check-circle-o" name="fa-phone" />
                       <span unselectable="on"
-                      onselectstart="return false;"
                       style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
@@ -113,7 +111,6 @@ export class Schedule extends Component {
                     <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
                       <FontAwesome className="fa fa-ban" name="fa-phone" />
                       <span unselectable="on"
-                      onselectstart="return false;"
                       style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
