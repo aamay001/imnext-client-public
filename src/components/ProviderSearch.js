@@ -67,6 +67,7 @@ export class ProviderSearch extends Component {
     const inputProps = {
       type: 'search',
       id: this.props.inputId,
+      autoFocus: true,
       autoComplete: 'off',
       value: value,
       required: true,

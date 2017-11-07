@@ -160,7 +160,7 @@ export class Appointment extends Component {
             />
             <button type="submit">Next</button>
           </form>
-
+          { this.props.step === STEP_TWO ?
           <form
             id="appointment-form-2"
             onSubmit={this.onFormSubmit}
@@ -169,6 +169,7 @@ export class Appointment extends Component {
             <label htmlFor="provider-search">Find Service Provider</label>
             <ProviderSearch
               inputId="provider-search"
+              autoFocus={true}
               disabled={this.props.fetchingTimeSlots}
             />
             <label htmlFor="date-select">Appointment Date</label>
@@ -188,7 +189,7 @@ export class Appointment extends Component {
             <TimeSelector ref={time => (this.appointmentTime = time)} />
             <label htmlFor="validation-code">Validation Text Code</label>
             <input
-              type="number"
+              type="text"
               id="validation-code"
               required
               autoComplete="off"
@@ -202,12 +203,13 @@ export class Appointment extends Component {
               disabled={
                 this.props.requestingAuthorization ||
                 this.props.schedulingAppointment ||
+                !this.props.timeSelectionMade ||
                 !this.props.providerSelectionMade
               }
             >
               Submit
             </button>
-          </form>
+          </form> : undefined }
         </div>
       </section>
     );
@@ -221,6 +223,7 @@ const mapStateToProps = state => ({
   requestStatus: state.scheduler.requestStatus,
   fetchingTimeSlots: state.scheduler.fetchingTimeSlots,
   timeSlotsFetched: state.scheduler.timeSlotsFetched,
+  timeSelectionMade: state.scheduler.timeSelectionMade,
   providerSelectionMade: state.scheduler.providerSelectionMade,
   appointmentData: state.scheduler.data,
   requestingAuthorization: state.scheduler.requestingAuthorization,

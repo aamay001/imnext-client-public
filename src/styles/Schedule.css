@@ -70,10 +70,23 @@
 .infinite-scroll-component {
   padding-left: 10px;
   padding-right: 10px;
+  text-align: center;
 }
 
 @media only screen and (min-width: 768px) {
   .schedule-page div.schedule-appointment {
-    width: 35%;
+    width: 45%;
+    margin-left: 1%;
+    margin-right: 1%;
+    display: inline-block;
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  .schedule-page div.schedule-appointment {
+    width: 30%;
+    margin-left: .5%;
+    margin-right: .5%;
+  }
+}
+

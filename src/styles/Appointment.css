@@ -57,6 +57,12 @@
   color: white;
 }
 
+.scheduling-page button[disabled] {
+  background: #4b79a1;
+  background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #a14b4b);
+  background: radial-gradient(to right, rgb(50, 66, 80), #a14b4b);
+}
+
 .scheduling-page button[type='submit']:hover {
   width: 85%;
 }

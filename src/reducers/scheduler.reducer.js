@@ -26,6 +26,7 @@ const initialState = {
   fetchingTimeSlots: false,
   timeSlotsFetched: false,
   providerSelectionMade: false,
+  timeSelectionMade: false,
   requestingAuthorization: false,
   schedulingAppointment: false,
   timeSlots: [],
@@ -105,6 +106,7 @@ const timeSlotsFetched = (state, action) => {
 const timeSelectionMade = (state, action) => {
   return {
     ...state,
+    timeSelectionMade: true,
     data: {
       ...state.data,
       time: action.time,
@@ -116,6 +118,7 @@ const providerSelectionMade = (state, action) => {
   return {
     ...state,
     providerSelectionMade: true,
+    timeSelectionMade: false,
     timeSlotsFetched: false,
     errorMessage: false,
     timeSlots: [],
@@ -132,6 +135,7 @@ const dateSelectionMade = (state, action) => {
     ...state,
     timeSlots: [],
     errorMessage: false,
+    timeSelectionMade: false,
     timeSlotsFetched: false,
     data: {
       ...state.data,

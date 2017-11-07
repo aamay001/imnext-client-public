@@ -5,6 +5,7 @@ import format from 'date-fns/format';
 import compareAsc from 'date-fns/compare_asc';
 import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
+import isPast from 'date-fns/is_past';
 import Logo from '../components/Logo';
 import '../styles/Schedule.css';
 import '../styles/font-awesome.css'
@@ -71,11 +72,12 @@ export class Schedule extends Component {
           .get(key)
           .sort((a, b) => compareAsc(a.time, b.time))
           .map((time, tIndex) => {
-            console.log(time);
             return (
               <div key={time.id} id={time.id} className="schedule-appointment"
               onClick={this.onAppointmentClicked}>
-                <p>
+                <p style={{
+                  textDecoration: isPast(time.time) && 'line-through'
+                }} >
                   {time.name} @ {format(time.time, DISPLAY_TIME_FORMAT)}
                 </p>
                 {
@@ -83,8 +85,10 @@ export class Schedule extends Component {
                   <div>
                     <div className="options">
                     <a href={`tel:${time.mobilePhone}`} >
-                      <FontAwesome className="fa fa-phone" name="fa-phone" size="1x" />
-                      <span style={{
+                      <FontAwesome className="fa fa-phone" name="fa-phone" />
+                      <span unselectable="on"
+                      onselectstart="return false;"
+                      style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
                         dsplay: 'inline-block',
@@ -94,8 +98,10 @@ export class Schedule extends Component {
 
                     <div className="options">
                     <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa-check-circle-o" name="fa-phone" size="1x" />
-                      <span style={{
+                      <FontAwesome className="fa-check-circle-o" name="fa-phone" />
+                      <span unselectable="on"
+                      onselectstart="return false;"
+                      style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
                         dsplay: 'inline-block',
@@ -105,8 +111,10 @@ export class Schedule extends Component {
 
                     <div className="options">
                     <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa fa-ban" name="fa-phone" size="1x" />
-                      <span style={{
+                      <FontAwesome className="fa fa-ban" name="fa-phone" />
+                      <span unselectable="on"
+                      onselectstart="return false;"
+                      style={{
                         marginLeft: '10px',
                         paddingBottom: '5px',
                         dsplay: 'inline-block',

@@ -21,7 +21,9 @@ export class TimeSelector extends Component {
             className="time-selection-input"
             style={{
               backgroundColor:
-                this.props.selectedTimeSlot === slotValue && 'lightblue',
+                this.props.selectedTimeSlot === slotValue && '#4b79a1',
+              color: this.props.selectedTimeSlot === slotValue && 'white',
+              display: this.props.timeSelectionMade && this.props.selectedTimeSlot !== slotValue && 'none'
             }}
           >
             <label
@@ -43,11 +45,13 @@ export class TimeSelector extends Component {
         );
       });
     } else {
-      availableTimeSlots = <p>No time slots available! :(</p>;
+      availableTimeSlots = <p style={{
+        color: 'red'
+      }}>No time slots available! :(</p>;
     }
 
     return (
-      <div style={{ marginBottom: '15px' }}>
+      <div style={{ marginBottom: '15px', textAlign: 'center' }}>
         <label style={{ marginBottom: '15px' }}>Appointment Time</label>
         {this.props.fetchingTimeSlots ? (
           <p>Checking for available time slots.</p>
@@ -66,6 +70,7 @@ const mapStateToProps = state => ({
   timeSlotsFetched: state.scheduler.timeSlotsFetched,
   timeSlots: state.scheduler.timeSlots,
   selectedTimeSlot: state.scheduler.data.time,
+  timeSelectionMade: state.scheduler.timeSelectionMade
 });
 
 const connectedTimeSelector = connect(mapStateToProps)(TimeSelector);
