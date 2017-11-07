@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 
 import { ROUTES } from './config/constants';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Landing from './routes/Landing';
 import Login from './routes/Login';
@@ -24,6 +24,7 @@ class App extends Component {
               <NavBar />
             </header>
             <main>
+            <Switch>
               <Route exact path={ROUTES.LANDING} component={Landing} />
               <Route exact path={ROUTES.LOGIN} component={Login} />
               <Route exact path={ROUTES.SIGNUP} component={SignUp} />
@@ -32,6 +33,8 @@ class App extends Component {
               <Route exact path={ROUTES.SCHEDULE} component={Schedule} />
               <Route exact path={ROUTES.LOGOUT} component={Logout} />
               <Route exact path={ROUTES.ACTIVATE} component={Activation} />
+              <Route component={Landing} />
+            </Switch>
             </main>
             <footer>Copyright imNext.online © 2017</footer>
           </div>
