@@ -8,6 +8,8 @@ import closestTo from 'date-fns/closest_to';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
 import compareAsc from 'date-fns/compare_asc';
+import '../styles/font-awesome.css'
+import FontAwesome from 'react-fontawesome';
 
 import Logo from '../components/Logo';
 import '../styles/Dashboard.css';
@@ -101,7 +103,7 @@ export class Dashboard extends Component {
             }
           }
           return (
-            <div key={index}>
+            <div key={index} >
               <h2>
                 {isNextAppointment
                   ? 'Next Appointment'
@@ -109,28 +111,53 @@ export class Dashboard extends Component {
                     ? 'Future Appointment'
                     : 'Past Appointment'}
               </h2>
-              <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
-              <div className="appointment-details">
-                <div>
-                  <h3>
-                    Name: <span className="client-name">{name}</span>
-                  </h3>
-                  <h3>
-                    Phone:{' '}
-                    <span className="client-phone">
-                      <a href={`tel:${mobilePhone}`}>{mobilePhone}</a>
-                    </span>
-                  </h3>
-                  {/*<h3>
-                    Confirmed:{' '}
-                    <span className="client-confirmed">
-                      {confirmed ? 'Yes' : 'No'}
-                    </span>
-                  </h3>*/}
-                  <h4 style={{ textAlign: 'center' }}>{`${index +
-                    1} / ${appointmentsToday.length}`}</h4>
+              <div className="dashboard-appointment">
+                <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
+                <div className="appointment-details">
+                    <h3>
+                      <span className="client-name">{name}</span>
+                    </h3>
+                    <div>
+                    <div className="options">
+                    <a href={`tel:${mobilePhone}`} >
+                      <FontAwesome className="fa fa-phone" name="fa-phone" />
+                      <span unselectable="on"
+                      style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Call`}</span>
+                      </a>
+                    </div>
+
+                    <div className="options">
+                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
+                      <FontAwesome className="fa-check-circle-o" name="fa-phone" />
+                      <span unselectable="on"
+                      style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Confirm`}</span>
+                      </a>
+                    </div>
+
+                    <div className="options">
+                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
+                      <FontAwesome className="fa fa-ban" name="fa-phone" />
+                      <span unselectable="on"
+                      style={{
+                        marginLeft: '10px',
+                        paddingBottom: '5px',
+                        dsplay: 'inline-block',
+                      }}>{`Cancel`}</span>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <h4 style={{ textAlign: 'center' }}>{`${index +
+                1} / ${appointmentsToday.length}`}</h4>
             </div>
           );
         });
@@ -186,7 +213,7 @@ export class Dashboard extends Component {
                   : 'block',
             }}
           >
-            <div>
+            <div className="total-appointments">
               <Link
                 to={ROUTES.SCHEDULE}
                 style={{

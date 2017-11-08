@@ -90,6 +90,17 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
+          {this.props.isUserLoggedIn && this.props.user.activated &&
+            this.props.location.pathname !== ROUTES.SETTINGS &&
+            this.props.location.pathname !== ROUTES.LANDING ? (
+              <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+                <Link to={ROUTES.SETTINGS} style={{ display: show }}>
+                  Settings
+                </Link>
+              </li>
+            ) : (
+              ''
+            )}
           {this.props.isUserLoggedIn ? (
             <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
               <Link to={ROUTES.LOGOUT} style={{ display: show }}>

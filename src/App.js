@@ -13,6 +13,7 @@ import Dashboard from './routes/Dashboard';
 import Schedule from './routes/Schedule';
 import Logout from './routes/Logout';
 import Activation from './routes/Activation';
+import Settings from './routes/Settings';
 
 class App extends Component {
   render() {
@@ -33,6 +34,7 @@ class App extends Component {
               <Route exact path={ROUTES.SCHEDULE} component={Schedule} />
               <Route exact path={ROUTES.LOGOUT} component={Logout} />
               <Route exact path={ROUTES.ACTIVATE} component={Activation} />
+              <Route exact path={ROUTES.SETTINGS} component={Settings} />
               <Route component={Landing} />
             </Switch>
             </main>

@@ -1,8 +1,19 @@
 
+.dashboard-page .appointment-details * {
+  -webkit-transition: none ! important;
+  -moz-transition: none ! important;
+  transition: none ! important;
+}
+
 .dashboard-page h1 {
   width: 100%;
   text-align: center;
   margin-bottom: 0;
+}
+
+.dashboard-page h3 {
+  margin-top: 25px;
+  margin-bottom: 32px;
 }
 
 .dashboard-page em {
@@ -30,32 +41,18 @@
   font-weight: bold;
   font-size: 35px;
   text-align: center;
-  margin-bottom: 10px;
-  padding-top: 35px;
+  margin-bottom: 0;
+  padding-top: 20px;
 }
 
-div.appointment-details div {
-  width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 0 25px 0;
-}
-
-div.appointment-details div h3 {
-  text-align: left;
-  margin-top: 0;
-  margin-bottom: 2px;
-}
-
-div.appointment-details div h3 span {
-  font-weight: normal;
+.dashboard-page span.client-name {
+  font-size: 25px;
 }
 
 div.appointment-navigation {
   margin: 0;
   padding-bottom: 10px;
   padding-top: 10px;
-  border-top: 1px solid black;
   background-color: white;
   width: 100%;
   position: fixed;
@@ -63,13 +60,31 @@ div.appointment-navigation {
   bottom: 0;
 }
 
+div.appointment-details {
+  text-align: center;
+}
+
 div.appointment-navigation div {
   height: 55px;
   width: 40%;
-  border: 1px solid black;
   outline:  none;
   text-align: center;
   padding-top: 15px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  transition: none !important;
+}
+
+div.appointment-navigation div:active {
+  background-color: #4b79a1;
+  color: white;
+}
+
+div.appointment-navigation div:hover {
+  background-color: #4b79a1;
+  color: white;
 }
 
 div.appointment-navigation div:first-of-type {
@@ -88,4 +103,65 @@ div.appointment-navigation div:nth-of-type(2) {
 
 div.appointment-navigation div:nth-of-type(2)::after {
   content: ' >'
+}
+
+.dashboard-appointment {
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 200px;
+}
+
+.dashboard-page .options a {
+  display: block;
+  text-decoration: none;
+  padding-top: 20px;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  color: inherit;
+}
+
+.dashboard-page .options a:visited {
+  color: inherit;
+}
+
+.dashboard-page .options {
+  border: 1px solid lightgrey;
+  border-bottom: none;
+  width: 33.3333%;
+  text-align: center;
+  display: inline-block;
+  height: 55px;
+  background-color: white;
+  color: black;
+}
+
+.dashboard-page .options:hover {
+  background-color: #4b79a1;
+  color: white;
+}
+
+.total-appointments a{
+  text-decoration: none;
+  outline: none;
+}
+
+.total-appointments a:visited{
+  color: black;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .dashboard-appointment {
+    width: 45%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .dashboard-appointment {
+    width: 30%;
+  }
 }

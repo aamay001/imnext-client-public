@@ -127,7 +127,7 @@ export class Schedule extends Component {
           });
         return (
           <div key={key}>
-            <h2>
+            <h2 style={{fontWeight: 'bold'}}>
               {isToday(key)
                 ? 'Today'
                 : isTomorrow(key)

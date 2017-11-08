@@ -4,6 +4,7 @@ import Logo from '../components/Logo';
 import '../styles/Appointment.css';
 import { REGEX, DATE_FORMAT } from '../config/constants';
 import format from 'date-fns/format';
+import addMonths from 'date-fns/add_months';
 import ProviderSearch from '../components/ProviderSearch';
 import TimeSelector from '../components/TimeSelector';
 import Recaptcha from 'react-recaptcha';
@@ -77,6 +78,7 @@ export class Appointment extends Component {
   };
 
   render() {
+    const today = new Date();
     return (
       <section className="scheduling-page">
         <Logo />
@@ -86,7 +88,7 @@ export class Appointment extends Component {
           {this.props.step === STEP_ONE ? (
             <p>
               To schedule an appointment, first enter your information and then
-              click next.
+              hit next.
             </p>
           ) : this.props.step === STEP_TWO ? (
             <p>
@@ -183,7 +185,8 @@ export class Appointment extends Component {
                 this.props.fetchingTimeSlots ||
                 !this.props.providerSelectionMade
               }
-              min={format(new Date(), DATE_FORMAT)}
+              min={format(today, DATE_FORMAT)}
+              max={format(addMonths(today, 2), DATE_FORMAT)}
               onChange={this.getAvailbleTimeSlots}
             />
             <TimeSelector ref={time => (this.appointmentTime = time)} />

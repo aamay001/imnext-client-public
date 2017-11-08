@@ -56,6 +56,96 @@ export const autoLogin = () => {
   };
 };
 
+export const WORK_DAYS_CHANGED = 'WORK_DAYS_CHANGED';
+export const workDaysChanged = (workDay) => {
+  return {
+    type: WORK_DAYS_CHANGED,
+    workDay
+  };
+}
+
+export const WORK_DAY_START_TIME_CHANGED = 'WORK_DAY_START_TIME_CHANGED';
+export const workDayStartTimeChanged = (time) => {
+  return {
+    type: WORK_DAY_START_TIME_CHANGED,
+    time
+  };
+}
+
+export const WORK_DAY_END_TIME_CHANGED = 'WORK_DAY_END_TIME_CHANGED';
+export const workDayEndTimeChanged = (time) => {
+  return {
+    type: WORK_DAY_END_TIME_CHANGED,
+    time
+  };
+}
+
+export const WORK_BREAK_START_CHANGED = 'WORK_BREAK_START_CHANGED';
+export const workBreakStartChanged = (time) => {
+  return {
+    type: WORK_BREAK_START_CHANGED,
+    time
+  };
+}
+
+export const WORK_BREAK_LENGTH_CHANGED = 'WORK_BREAK_LENGTH_CHANGED';
+export const workBreakLengthChanged = (minutes) => {
+  return {
+    type: WORK_BREAK_LENGTH_CHANGED,
+    minutes
+  };
+}
+
+export const PROVIDER_NAME_CHANGED = 'PROVIDER_NAME_CHANGED';
+export const providerNameChanged = (name) => {
+  return {
+    type: PROVIDER_NAME_CHANGED,
+    name
+  };
+}
+
+export const APPOINTMENT_TIME_CHANGED = 'APPOINTMENT_TIME_CHANGED';
+export const appointmentTimeChanged = (time) => {
+  return {
+    type: APPOINTMENT_TIME_CHANGED,
+    time
+  };
+}
+
+export const UPDATING_SETTINGS = 'UPDATING_SETTINGS';
+export const updatingSettings = () => {
+  return {
+    type: UPDATING_SETTINGS
+  };
+}
+
+export const SETTINGS_UPDATED = 'SETTINGS_UPDATED';
+const settingsUpdated = data => {
+  return {
+    type: SETTINGS_UPDATED,
+    data
+  };
+}
+
+export const SETTINGS_UPDATE_FAILED = 'SETTINGS_UPDATE_FAILED';
+const settingsUpdatedFailed = (error) => {
+  return {
+    type: SETTINGS_UPDATE_FAILED,
+    error
+  };
+};
+
+export const updateSettings = (data) => dispatch => {
+  dispatch(updatingSettings());
+  fetchHelper('PUT', API.USER_SETTINGS, JSON.stringify(data), 'no-cache', 'T')
+    .then(data => {
+      dispatch(settingsUpdated(data));
+    })
+    .catch(error => {
+      dispatch(settingsUpdatedFailed(error));
+    });
+}
+
 export const TRY_AUTO_LOGIN = 'TRY_AUTO_LOGIN';
 export const tryAutoLogin = () => dispatch => {
   if (localStorage.getItem('authToken')) {
