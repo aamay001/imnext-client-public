@@ -55,7 +55,7 @@ export class Logo extends Component {
           </div> :
 
           <img src={logo}
-            alt="imNext logo."
+            alt="ImNext® puts you next in line."
             width="200px"
           />
         }
