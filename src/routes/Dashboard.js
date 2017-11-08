@@ -165,7 +165,7 @@ export class Dashboard extends Component {
     } else {
       return (
         <div className="appointment-count">
-          <p>You have no appointments today!<br/>Make sure you have your availability setup in setting</p>
+          <p>You have no appointments today!<br/><br/>Make sure you have your availability setup in settings!</p>
         </div>
       );
     }
