@@ -151,6 +151,7 @@ export class Appointment extends Component {
               required
               patter={REGEX.PHONE}
               autoComplete="off"
+              placeholder="xxx-xxx-xxxx"
               minLength={10}
               ref={input => (this.mobilePhoneInput = input)}
             />

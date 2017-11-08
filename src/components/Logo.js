@@ -32,7 +32,7 @@ export class Logo extends Component {
 
           <div>
             <h1>Dashboard</h1>
-            <em>see your next appiontments...</em>
+            <em>see your next appointments...</em>
             <h2>{format(today, DISPLAY_DATE_FORMAT)}</h2>
           </div> :
 

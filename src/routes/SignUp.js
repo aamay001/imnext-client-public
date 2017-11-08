@@ -170,6 +170,7 @@ export class SignUp extends Component {
               id="mobile-phone"
               name="mobilePhone"
               required
+              placeholder="xxx-xxx-xxxx"
               autoComplete="off"
               patter={REGEX.PHONE}
               ref={ph => (this.mobilePhone = ph)}
