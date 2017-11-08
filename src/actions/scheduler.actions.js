@@ -34,7 +34,7 @@ export const TIME_SELECTION_MADE = 'TIME_SELECTION_MADE';
 export const timeSelectionMade = time => {
   return {
     type: TIME_SELECTION_MADE,
-    time,
+    time
   };
 };
 

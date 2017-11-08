@@ -7,6 +7,10 @@ import '../styles/TimeSelector.css';
 
 export class TimeSelector extends Component {
   onSelectionMade = e => {
+    if ( e.currentTarget.id === 'changeSelectionButton' ) {
+      this.props.dispatch(timeSelectionMade(''));
+      return;
+    }
     this.props.dispatch(timeSelectionMade(e.target.value));
   };
 
@@ -60,6 +64,21 @@ export class TimeSelector extends Component {
         ) : (
           <p>Select a Provider and Appointment Date to see available times.</p>
         )}
+        { this.props.timeSelectionMade ?
+        <a id="changeSelectionButton"
+          onClick={this.onSelectionMade}
+          style={{
+            display: 'block',
+            backgroundColor: 'lightgreay',
+            marginRight: 'auto',
+            marginLeft: 'auto',
+            textDecoration: 'none',
+            marginTop: '15px',
+            cursor: 'pointer',
+            height: '25px',
+            color: 'dodgerblue'
+          }}
+        >Change Selection</a> : ''}
       </div>
     );
   }

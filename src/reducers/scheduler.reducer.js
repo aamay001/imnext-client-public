@@ -106,7 +106,7 @@ const timeSlotsFetched = (state, action) => {
 const timeSelectionMade = (state, action) => {
   return {
     ...state,
-    timeSelectionMade: true,
+    timeSelectionMade: action.time !== '',
     data: {
       ...state.data,
       time: action.time,

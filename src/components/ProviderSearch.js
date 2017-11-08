@@ -60,7 +60,7 @@ export class ProviderSearch extends Component {
     return suggestion.providerName;
   };
 
-  renderSuggestion = suggestion => <div>{suggestion.providerName}</div>;
+  renderSuggestion = suggestion => <div style={{cursor:'pointer'}}>{suggestion.providerName}</div>;
 
   render() {
     const { value } = this.state;
