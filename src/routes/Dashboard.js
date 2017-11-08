@@ -165,7 +165,7 @@ export class Dashboard extends Component {
     } else {
       return (
         <div className="appointment-count">
-          <p>You have no appointments today!</p>
+          <p>You have no appointments today!<br/>Make sure you have your availability setup in setting</p>
         </div>
       );
     }
@@ -190,7 +190,7 @@ export class Dashboard extends Component {
               color: 'dodgerblue',
             }}
           >
-            {this.props.dashboardStatus}
+            {this.props.dashboardStatus} <br/><br/> Make sure you have you availability setup in your settings!
           </p>
           <SwipeableViews
             enableMouseEvents={true}
