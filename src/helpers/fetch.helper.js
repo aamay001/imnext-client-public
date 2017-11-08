@@ -10,8 +10,6 @@ cache options:
 */
 const {API} = require( '../config/settings.js');
 
-console.log(API);
-
 export default (
   method,
   endpoint,
@@ -29,7 +27,7 @@ export default (
     request.headers.set('Authorization',  'Bearer ' + localStorage.getItem('authToken') );
   } else if ( auth === 'B' ) {
     request.headers.set('Authorization', 'Basic ' + btoa(`${email}:${password}`))
-  }  
+  }
   return fetch(request).then(res => {
     if (!res.ok && !(endpoint === API.HUMAN_VALIDATION && res.status === 429)) {
       return res.json().then(data =>
