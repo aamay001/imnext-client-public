@@ -24,20 +24,20 @@ class App extends Component {
             <header>
               <NavBar />
             </header>
-            <main>
-            <Switch>
-              <Route exact path={ROUTES.LANDING} component={Landing} />
-              <Route exact path={ROUTES.LOGIN} component={Login} />
-              <Route exact path={ROUTES.SIGNUP} component={SignUp} />
-              <Route exact path={ROUTES.APPOINTMENT} component={Appointment} />
-              <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
-              <Route exact path={ROUTES.SCHEDULE} component={Schedule} />
-              <Route exact path={ROUTES.LOGOUT} component={Logout} />
-              <Route exact path={ROUTES.ACTIVATE} component={Activation} />
-              <Route exact path={ROUTES.SETTINGS} component={Settings} />
-              <Route component={Landing} />
-            </Switch>
-            </main>
+            <div>
+              <Switch>
+                <Route exact path={ROUTES.LANDING} component={Landing} />
+                <Route exact path={ROUTES.LOGIN} component={Login} />
+                <Route exact path={ROUTES.SIGNUP} component={SignUp} />
+                <Route exact path={ROUTES.APPOINTMENT} component={Appointment} />
+                <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
+                <Route exact path={ROUTES.SCHEDULE} component={Schedule} />
+                <Route exact path={ROUTES.LOGOUT} component={Logout} />
+                <Route exact path={ROUTES.ACTIVATE} component={Activation} />
+                <Route exact path={ROUTES.SETTINGS} component={Settings} />
+                <Route component={Landing} />
+              </Switch>
+            </div>
             <footer>Copyright imNext.online © 2017</footer>
           </div>
         </Router>
