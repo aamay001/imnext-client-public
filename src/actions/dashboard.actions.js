@@ -39,7 +39,7 @@ export const getAppointments = (user, date) => dispatch => {
     'GET',
     API.APPOINTMENTS(user.email, date),
     undefined,
-    'reaload',
+    'reload',
     'T',
   )
     .then(data => {

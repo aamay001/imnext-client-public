@@ -8,7 +8,9 @@ cache options:
 
   reference: https://hacks.mozilla.org/2016/03/referrer-and-cache-control-apis-for-fetch/
 */
-import { API } from '../config/settings';
+const {API} = require( '../config/settings.js');
+
+console.log(API);
 
 export default (
   method,
@@ -19,20 +21,15 @@ export default (
   email = '',
   password = '',
 ) => {
-  const init = {
-    method: method,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      Authorization:
-        auth === 'T'
-          ? 'Bearer ' + localStorage.getItem('authToken')
-          : auth === 'B' ? 'Basic ' + btoa(`${email}:${password}`) : '',
-    },
-    cache: cache,
-    body: data,
-  };
-  const request = new Request(API.URL + endpoint, init);
+  const URL = API.URL + endpoint;
+  const request = new Request(URL, {method, body: data, cache});
+  request.headers.set('Accept', 'application/json');
+  request.headers.set('Content-Type', 'application/json' );
+  if ( auth === 'T') {
+    request.headers.set('Authorization',  'Bearer ' + localStorage.getItem('authToken') );
+  } else if ( auth === 'B' ) {
+    request.headers.set('Authorization', 'Basic ' + btoa(`${email}:${password}`))
+  }  
   return fetch(request).then(res => {
     if (!res.ok && !(endpoint === API.HUMAN_VALIDATION && res.status === 429)) {
       return res.json().then(data =>
