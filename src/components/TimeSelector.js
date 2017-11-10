@@ -7,7 +7,7 @@ import '../styles/TimeSelector.css';
 
 export class TimeSelector extends Component {
   onSelectionMade = e => {
-    if ( e.currentTarget.id === 'changeSelectionButton' ) {
+    if (e.currentTarget.id === 'changeSelectionButton') {
       this.props.dispatch(timeSelectionMade(''));
       return;
     }
@@ -27,7 +27,10 @@ export class TimeSelector extends Component {
               backgroundColor:
                 this.props.selectedTimeSlot === slotValue && '#4b79a1',
               color: this.props.selectedTimeSlot === slotValue && 'white',
-              display: this.props.timeSelectionMade && this.props.selectedTimeSlot !== slotValue && 'none'
+              display:
+                this.props.timeSelectionMade &&
+                this.props.selectedTimeSlot !== slotValue &&
+                'none',
             }}
           >
             <label
@@ -49,9 +52,15 @@ export class TimeSelector extends Component {
         );
       });
     } else {
-      availableTimeSlots = <p style={{
-        color: 'red'
-      }}>No time slots available! :(</p>;
+      availableTimeSlots = (
+        <p
+          style={{
+            color: 'red',
+          }}
+        >
+          No time slots available! :(
+        </p>
+      );
     }
 
     return (
@@ -64,21 +73,27 @@ export class TimeSelector extends Component {
         ) : (
           <p>Select a Provider and Appointment Date to see available times.</p>
         )}
-        { this.props.timeSelectionMade ?
-        <a id="changeSelectionButton"
-          onClick={this.onSelectionMade}
-          style={{
-            display: 'block',
-            backgroundColor: 'lightgreay',
-            marginRight: 'auto',
-            marginLeft: 'auto',
-            textDecoration: 'none',
-            marginTop: '15px',
-            cursor: 'pointer',
-            height: '25px',
-            color: 'dodgerblue'
-          }}
-        >Change Selection</a> : ''}
+        {this.props.timeSelectionMade ? (
+          <a
+            id="changeSelectionButton"
+            onClick={this.onSelectionMade}
+            style={{
+              display: 'block',
+              backgroundColor: 'lightgreay',
+              marginRight: 'auto',
+              marginLeft: 'auto',
+              textDecoration: 'none',
+              marginTop: '15px',
+              cursor: 'pointer',
+              height: '25px',
+              color: 'dodgerblue',
+            }}
+          >
+            Change Selection
+          </a>
+        ) : (
+          ''
+        )}
       </div>
     );
   }
@@ -89,7 +104,7 @@ const mapStateToProps = state => ({
   timeSlotsFetched: state.scheduler.timeSlotsFetched,
   timeSlots: state.scheduler.timeSlots,
   selectedTimeSlot: state.scheduler.data.time,
-  timeSelectionMade: state.scheduler.timeSelectionMade
+  timeSelectionMade: state.scheduler.timeSelectionMade,
 });
 
 const connectedTimeSelector = connect(mapStateToProps)(TimeSelector);

@@ -32,10 +32,13 @@ export class ProviderSearch extends Component {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     if (inputLength >= 3) {
-      const provs = this.state.providers.filter( provider =>
-        provider.providerName.toLowerCase().slice(0, inputLength) ===  inputValue);
+      const provs = this.state.providers.filter(
+        provider =>
+          provider.providerName.toLowerCase().slice(0, inputLength) ===
+          inputValue,
+      );
       this.setState({
-        filteredProviders: provs
+        filteredProviders: provs,
       });
     }
   };
@@ -60,7 +63,9 @@ export class ProviderSearch extends Component {
     return suggestion.providerName;
   };
 
-  renderSuggestion = suggestion => <div style={{cursor:'pointer'}}>{suggestion.providerName}</div>;
+  renderSuggestion = suggestion => (
+    <div style={{ cursor: 'pointer' }}>{suggestion.providerName}</div>
+  );
 
   render() {
     const { value } = this.state;

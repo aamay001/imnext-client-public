@@ -75,7 +75,7 @@ export class Activation extends Component {
     return (
       <section className="activation-page">
         <Logo />
-        <div className="form-container" >
+        <div className="form-container">
           <div>
             <h1>Account Activation</h1>
             <em>your account needs to be activated...</em>

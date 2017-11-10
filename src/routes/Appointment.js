@@ -82,7 +82,7 @@ export class Appointment extends Component {
     return (
       <section className="scheduling-page">
         <Logo />
-        <div className ='form-container'>
+        <div className="form-container">
           <h1>Appointment</h1>
           <em>schedule an appointment with your service provider</em>
           {this.props.step === STEP_ONE ? (
@@ -163,57 +163,62 @@ export class Appointment extends Component {
             />
             <button type="submit">Next</button>
           </form>
-          { this.props.step === STEP_TWO ?
-          <form
-            id="appointment-form-2"
-            onSubmit={this.onFormSubmit}
-            style={{ display: this.props.step === STEP_TWO ? 'block' : 'none' }}
-          >
-            <label htmlFor="provider-search">Find Service Provider</label>
-            <ProviderSearch
-              inputId="provider-search"
-              autoFocus={true}
-              disabled={this.props.fetchingTimeSlots}
-            />
-            <label htmlFor="date-select">Appointment Date</label>
-            <input
-              type="date"
-              id="date-select"
-              required
-              autoComplete="off"
-              disabled={
-                this.props.requestingHumanValidation ||
-                this.props.fetchingTimeSlots ||
-                !this.props.providerSelectionMade
-              }
-              min={format(today, DATE_FORMAT)}
-              max={format(addMonths(today, 2), DATE_FORMAT)}
-              onChange={this.getAvailbleTimeSlots}
-            />
-            <TimeSelector ref={time => (this.appointmentTime = time)} />
-            <label htmlFor="validation-code">Validation Text Code</label>
-            <input
-              type="text"
-              id="validation-code"
-              required
-              autoComplete="off"
-              minLength={8}
-              maxLength={8}
-              onChange={this.validationCodeEntered}
-              ref={input => (this.validation = input)}
-            />
-            <button
-              type="submit"
-              disabled={
-                this.props.requestingAuthorization ||
-                this.props.schedulingAppointment ||
-                !this.props.timeSelectionMade ||
-                !this.props.providerSelectionMade
-              }
+          {this.props.step === STEP_TWO ? (
+            <form
+              id="appointment-form-2"
+              onSubmit={this.onFormSubmit}
+              style={{
+                display: this.props.step === STEP_TWO ? 'block' : 'none',
+              }}
             >
-              Submit
-            </button>
-          </form> : undefined }
+              <label htmlFor="provider-search">Find Service Provider</label>
+              <ProviderSearch
+                inputId="provider-search"
+                autoFocus={true}
+                disabled={this.props.fetchingTimeSlots}
+              />
+              <label htmlFor="date-select">Appointment Date</label>
+              <input
+                type="date"
+                id="date-select"
+                required
+                autoComplete="off"
+                disabled={
+                  this.props.requestingHumanValidation ||
+                  this.props.fetchingTimeSlots ||
+                  !this.props.providerSelectionMade
+                }
+                min={format(today, DATE_FORMAT)}
+                max={format(addMonths(today, 2), DATE_FORMAT)}
+                onChange={this.getAvailbleTimeSlots}
+              />
+              <TimeSelector ref={time => (this.appointmentTime = time)} />
+              <label htmlFor="validation-code">Validation Text Code</label>
+              <input
+                type="text"
+                id="validation-code"
+                required
+                autoComplete="off"
+                minLength={8}
+                maxLength={8}
+                onChange={this.validationCodeEntered}
+                ref={input => (this.validation = input)}
+              />
+              <button
+                type="submit"
+                disabled={
+                  this.props.requestingAuthorization ||
+                  this.props.schedulingAppointment ||
+                  !this.props.timeSelectionMade ||
+                  !this.props.providerSelectionMade
+                }
+              >
+                Submit
+              </button>
+            </form>
+          ) : (
+            undefined
+          )}
         </div>
       </section>
     );

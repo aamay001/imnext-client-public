@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/Login.css';
-import Logo from '../components/Logo.js'
+import Logo from '../components/Logo.js';
 
 import { ROUTES } from '../config/constants';
 import {
@@ -56,7 +56,9 @@ export class Login extends Component {
           <p
             style={{
               display:
-                this.props.loggingIn || this.props.loginFailed ? 'block' : 'none',
+                this.props.loggingIn || this.props.loginFailed
+                  ? 'block'
+                  : 'none',
               textAlign: 'center',
               color: this.props.loginFailed
                 ? 'red'

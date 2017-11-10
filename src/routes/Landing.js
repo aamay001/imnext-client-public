@@ -16,8 +16,8 @@ export class Landing extends Component {
           your personal service provider. No matter if it's your barber, hair
           dresser, mobile carwash, or mobile notary, imNext puts you next in
           line. Ready? Go! Select New Appointment to schedule your appointment,
-          Log In if you're a service provider to access your dashboard, or Sign Up
-          to create a service provider account.
+          Log In if you're a service provider to access your dashboard, or Sign
+          Up to create a service provider account.
         </p>
         <div className="user-action-buttons">
           <Link to={ROUTES.APPOINTMENT}>New Appointment</Link>

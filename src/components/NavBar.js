@@ -10,8 +10,8 @@ import { toggleMenu } from '../actions/user.actions';
 
 export class NavBar extends Component {
   state = {
-    scrollPosition: 0
-  }
+    scrollPosition: 0,
+  };
 
   constructor(props) {
     super();
@@ -25,34 +25,52 @@ export class NavBar extends Component {
   };
 
   componentDidMount() {
-    document.body.onscroll = (e) => {
+    document.body.onscroll = e => {
       this.setState({
-        scrollPosition: e.target.scrollingElement.scrollTop
+        scrollPosition: e.target.scrollingElement.scrollTop,
       });
-    }
+    };
   }
 
   render() {
     const height = this.props.showMenu ? '100%' : '0%';
     const show = this.props.showMenu ? 'block' : 'none';
     return (
-      <nav style={{
-        backgroundColor: this.props.showMenu || this.state.scrollPosition > 10 ? 'black' : undefined
-      }}>
+      <nav
+        style={{
+          backgroundColor:
+            this.props.showMenu || this.state.scrollPosition > 10
+              ? 'black'
+              : undefined,
+        }}
+      >
         <MenuButton />
         <h1>
           <Link to="/">imNext</Link>
         </h1>
 
         <ul style={{ height: height }}>
-          <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+          <li
+            style={{
+              height: height,
+              borderBottom: this.props.showMenu ? '1px solid gray' : undefined,
+            }}
+          >
             <Link to={ROUTES.LANDING} style={{ display: show }}>
               Home
             </Link>
           </li>
-          {this.props.isUserLoggedIn && this.props.user.activated &&
+          {this.props.isUserLoggedIn &&
+          this.props.user.activated &&
           this.props.location.pathname !== ROUTES.DASHBOARD ? (
-            <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
               <Link to={ROUTES.DASHBOARD} style={{ display: show }}>
                 Dashboard
               </Link>
@@ -62,7 +80,14 @@ export class NavBar extends Component {
           )}
           {!this.props.isUserLoggedIn &&
           this.props.location.pathname !== ROUTES.LOGIN ? (
-            <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
               <Link to={ROUTES.LOGIN} style={{ display: show }}>
                 Log In
               </Link>
@@ -70,9 +95,17 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {this.props.isUserLoggedIn && this.props.user.activated &&
+          {this.props.isUserLoggedIn &&
+          this.props.user.activated &&
           this.props.location.pathname !== ROUTES.APPOINTMENT ? (
-            <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
               <Link to={ROUTES.APPOINTMENT} style={{ display: show }}>
                 Appointment
               </Link>
@@ -80,9 +113,17 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {this.props.isUserLoggedIn && this.props.user.activated &&
+          {this.props.isUserLoggedIn &&
+          this.props.user.activated &&
           this.props.location.pathname !== ROUTES.SCHEDULE ? (
-            <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
               <Link to={ROUTES.SCHEDULE} style={{ display: show }}>
                 Schedule
               </Link>
@@ -90,19 +131,34 @@ export class NavBar extends Component {
           ) : (
             ''
           )}
-          {this.props.isUserLoggedIn && this.props.user.activated &&
-            this.props.location.pathname !== ROUTES.SETTINGS &&
-            this.props.location.pathname !== ROUTES.LANDING ? (
-              <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
-                <Link to={ROUTES.SETTINGS} style={{ display: show }}>
-                  Settings
-                </Link>
-              </li>
-            ) : (
-              ''
-            )}
+          {this.props.isUserLoggedIn &&
+          this.props.user.activated &&
+          this.props.location.pathname !== ROUTES.SETTINGS &&
+          this.props.location.pathname !== ROUTES.LANDING ? (
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
+              <Link to={ROUTES.SETTINGS} style={{ display: show }}>
+                Settings
+              </Link>
+            </li>
+          ) : (
+            ''
+          )}
           {this.props.isUserLoggedIn ? (
-            <li style={{ height: height, borderBottom: this.props.showMenu ? '1px solid gray' : undefined }}>
+            <li
+              style={{
+                height: height,
+                borderBottom: this.props.showMenu
+                  ? '1px solid gray'
+                  : undefined,
+              }}
+            >
               <Link to={ROUTES.LOGOUT} style={{ display: show }}>
                 Log Out
               </Link>
@@ -119,7 +175,7 @@ export class NavBar extends Component {
 const mapStateToProps = state => ({
   isUserLoggedIn: state.user.isLoggedIn,
   showMenu: state.user.isMenuOpen,
-  user: state.user.user
+  user: state.user.user,
 });
 
 const ConnectedNavBar = withRouter(connect(mapStateToProps)(NavBar));

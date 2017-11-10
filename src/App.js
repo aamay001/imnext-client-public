@@ -29,7 +29,11 @@ class App extends Component {
                 <Route exact path={ROUTES.LANDING} component={Landing} />
                 <Route exact path={ROUTES.LOGIN} component={Login} />
                 <Route exact path={ROUTES.SIGNUP} component={SignUp} />
-                <Route exact path={ROUTES.APPOINTMENT} component={Appointment} />
+                <Route
+                  exact
+                  path={ROUTES.APPOINTMENT}
+                  component={Appointment}
+                />
                 <Route exact path={ROUTES.DASHBOARD} component={Dashboard} />
                 <Route exact path={ROUTES.SCHEDULE} component={Schedule} />
                 <Route exact path={ROUTES.LOGOUT} component={Logout} />

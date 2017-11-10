@@ -7,7 +7,7 @@ export const ROUTES = {
   SIGNUP: '/signup',
   LOGOUT: '/logout',
   ACTIVATE: '/user/activate',
-  SETTINGS: '/user/settings'
+  SETTINGS: '/user/settings',
 };
 
 export const REGEX = {

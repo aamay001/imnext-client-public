@@ -8,7 +8,7 @@ import closestTo from 'date-fns/closest_to';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
 import compareAsc from 'date-fns/compare_asc';
-import '../styles/font-awesome.css'
+import '../styles/font-awesome.css';
 import FontAwesome from 'react-fontawesome';
 
 import Logo from '../components/Logo';
@@ -16,10 +16,7 @@ import '../styles/Dashboard.css';
 
 import { getAppointments } from '../actions/dashboard.actions';
 
-import {
-  DATE_FORMAT,
-  DISPLAY_TIME_FORMAT,
-} from '../config/constants';
+import { DATE_FORMAT, DISPLAY_TIME_FORMAT } from '../config/constants';
 
 export class Dashboard extends Component {
   state = {
@@ -36,7 +33,7 @@ export class Dashboard extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.appointments){
+    if (nextProps.appointments) {
       if (this.props.appointments !== nextProps.appointments) {
         const today = format(new Date(), DATE_FORMAT);
         const newApps = this.getAppointments(today, nextProps.appointments);
@@ -75,7 +72,7 @@ export class Dashboard extends Component {
   };
 
   getAppointments(today, _appointments) {
-    if ( _appointments && _appointments.size > 0 && _appointments.get(today)) {
+    if (_appointments && _appointments.size > 0 && _appointments.get(today)) {
       const appointmentsToday = _appointments
         .get(today)
         .sort((a, b) => compareAsc(a.time, b.time));
@@ -103,7 +100,7 @@ export class Dashboard extends Component {
             }
           }
           return (
-            <div key={index} >
+            <div key={index}>
               <h2>
                 {isNextAppointment
                   ? 'Next Appointment'
@@ -114,43 +111,62 @@ export class Dashboard extends Component {
               <div className="dashboard-appointment">
                 <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
                 <div className="appointment-details">
-                    <h3>
-                      <span className="client-name">{name}</span>
-                    </h3>
-                    <div>
+                  <h3>
+                    <span className="client-name">{name}</span>
+                  </h3>
+                  <div>
                     <div className="options">
-                    <a href={`tel:${mobilePhone}`} >
-                      <FontAwesome className="fa fa-phone" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Call`}</span>
+                      <a href={`tel:${mobilePhone}`}>
+                        <FontAwesome className="fa fa-phone" name="fa-phone" />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Call`}</span>
                       </a>
                     </div>
 
                     <div className="options">
-                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa-check-circle-o" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Confirm`}</span>
+                      <a
+                        onClick={() =>
+                          alert(
+                            "This feature is not available yet. But it's coming soon!",
+                          )}
+                      >
+                        <FontAwesome
+                          className="fa-check-circle-o"
+                          name="fa-phone"
+                        />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Confirm`}</span>
                       </a>
                     </div>
 
                     <div className="options">
-                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa fa-ban" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Cancel`}</span>
+                      <a
+                        onClick={() =>
+                          alert(
+                            "This feature is not available yet. But it's coming soon!",
+                          )}
+                      >
+                        <FontAwesome className="fa fa-ban" name="fa-phone" />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Cancel`}</span>
                       </a>
                     </div>
                   </div>
@@ -165,7 +181,10 @@ export class Dashboard extends Component {
     } else {
       return (
         <div className="appointment-count">
-          <p>You have no appointments today!<br/><br/>Make sure you have your availability setup in settings!</p>
+          <p>
+            You have no appointments today!<br />
+            <br />Make sure you have your availability setup in settings!
+          </p>
         </div>
       );
     }
@@ -174,14 +193,16 @@ export class Dashboard extends Component {
   render() {
     const today = format(new Date(), DATE_FORMAT);
     const appointmentCount = this.props.appointments.size
-      ? ( this.props.appointments.get(today) ? this.props.appointments.get(today).length : 0 )
+      ? this.props.appointments.get(today)
+        ? this.props.appointments.get(today).length
+        : 0
       : 0;
     return (
       <section className="dashboard-page">
         <Logo />
         <div className="appointment-navigation">
-          <div onClick={this.slideToPrevAppointment}></div>
-          <div onClick={this.slideToNextAppointment}></div>
+          <div onClick={this.slideToPrevAppointment} />
+          <div onClick={this.slideToNextAppointment} />
         </div>
         <div>
           <p
@@ -194,7 +215,8 @@ export class Dashboard extends Component {
               color: 'dodgerblue',
             }}
           >
-            {this.props.dashboardStatus} <br/><br/> Make sure you have you availability setup in your settings!
+            {this.props.dashboardStatus} <br />
+            <br /> Make sure you have you availability setup in your settings!
           </p>
           <SwipeableViews
             enableMouseEvents={true}

@@ -8,7 +8,7 @@ import isToday from 'date-fns/is_today';
 import isPast from 'date-fns/is_past';
 import Logo from '../components/Logo';
 import '../styles/Schedule.css';
-import '../styles/font-awesome.css'
+import '../styles/font-awesome.css';
 import FontAwesome from 'react-fontawesome';
 import {
   DISPLAY_DATE_FORMAT,
@@ -22,8 +22,8 @@ import {
 
 export class Schedule extends Component {
   state = {
-    clickedAppointment: ''
-  }
+    clickedAppointment: '',
+  };
 
   componentDidMount() {
     if (this.props.isLoggedIn) {
@@ -55,14 +55,14 @@ export class Schedule extends Component {
     e.stopPropagation();
     if (this.state.clickedAppointment !== e.currentTarget.id) {
       this.setState({
-        clickedAppointment: e.currentTarget.id
+        clickedAppointment: e.currentTarget.id,
       });
     } else {
       this.setState({
-        clickedAppointment: ""
+        clickedAppointment: '',
       });
     }
-  }
+  };
 
   render() {
     let appointments;
@@ -73,61 +73,85 @@ export class Schedule extends Component {
           .sort((a, b) => compareAsc(a.time, b.time))
           .map((time, tIndex) => {
             return (
-              <div key={time.id} id={time.id} className="schedule-appointment"
-              onClick={this.onAppointmentClicked}>
-                <p style={{
-                  textDecoration: isPast(time.time) && 'line-through'
-                }} >
+              <div
+                key={time.id}
+                id={time.id}
+                className="schedule-appointment"
+                onClick={this.onAppointmentClicked}
+              >
+                <p
+                  style={{
+                    textDecoration: isPast(time.time) && 'line-through',
+                  }}
+                >
                   {time.name} @ {format(time.time, DISPLAY_TIME_FORMAT)}
                 </p>
-                {
-                  this.state.clickedAppointment === time.id ?
+                {this.state.clickedAppointment === time.id ? (
                   <div>
                     <div className="options">
-                    <a href={`tel:${time.mobilePhone}`} >
-                      <FontAwesome className="fa fa-phone" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Call`}</span>
+                      <a href={`tel:${time.mobilePhone}`}>
+                        <FontAwesome className="fa fa-phone" name="fa-phone" />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Call`}</span>
                       </a>
                     </div>
 
                     <div className="options">
-                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa-check-circle-o" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Confirm`}</span>
+                      <a
+                        onClick={() =>
+                          alert(
+                            "This feature is not available yet. But it's coming soon!",
+                          )}
+                      >
+                        <FontAwesome
+                          className="fa-check-circle-o"
+                          name="fa-phone"
+                        />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Confirm`}</span>
                       </a>
                     </div>
 
                     <div className="options">
-                    <a onClick={ () => alert('This feature is not available yet. But it\'s coming soon!')} >
-                      <FontAwesome className="fa fa-ban" name="fa-phone" />
-                      <span unselectable="on"
-                      style={{
-                        marginLeft: '10px',
-                        paddingBottom: '5px',
-                        dsplay: 'inline-block',
-                      }}>{`Cancel`}</span>
+                      <a
+                        onClick={() =>
+                          alert(
+                            "This feature is not available yet. But it's coming soon!",
+                          )}
+                      >
+                        <FontAwesome className="fa fa-ban" name="fa-phone" />
+                        <span
+                          unselectable="on"
+                          style={{
+                            marginLeft: '10px',
+                            paddingBottom: '5px',
+                            dsplay: 'inline-block',
+                          }}
+                        >{`Cancel`}</span>
                       </a>
                     </div>
-
-                  </div> :
+                  </div>
+                ) : (
                   ''
-                }
+                )}
               </div>
             );
           });
         return (
           <div key={key}>
-            <h2 style={{fontWeight: 'bold'}}>
+            <h2 style={{ fontWeight: 'bold' }}>
               {isToday(key)
                 ? 'Today'
                 : isTomorrow(key)

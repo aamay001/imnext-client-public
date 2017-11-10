@@ -5,7 +5,6 @@ import { REGEX, ROUTES } from '../config/constants';
 import { API } from '../config/settings';
 import fetchHelper from '../helpers/fetch.helper';
 
-
 import Logo from '../components/Logo';
 import '../styles/SignUp.css';
 
@@ -18,7 +17,7 @@ export class SignUp extends Component {
     processError: false,
     message: '',
     success: false,
-    verification: ''
+    verification: '',
   };
 
   // Stub for test pass
@@ -181,7 +180,7 @@ export class SignUp extends Component {
               className="password-helper"
               style={{
                 textAlign: 'center',
-                display: !this.state.passwordOk ? 'block' : 'none'
+                display: !this.state.passwordOk ? 'block' : 'none',
               }}
             >
               Minimum 8 characters. Must have at least 1 number, at least 1
@@ -222,11 +221,11 @@ export class SignUp extends Component {
               onChange={this.passwordConfirmationChanged}
             />
             <Recaptcha
-            ref={recap => (this.recaptcha = recap)}
-            sitekey="6LfBzjUUAAAAAIaHX2kPeF-43w7oLF5fV9DWCHFh"
-            verifyCallback={this.recaptchaVerification}
-            required
-          />
+              ref={recap => (this.recaptcha = recap)}
+              sitekey="6LfBzjUUAAAAAIaHX2kPeF-43w7oLF5fV9DWCHFh"
+              verifyCallback={this.recaptchaVerification}
+              required
+            />
             <button
               type="submit"
               disabled={!this.state.formValidationOk || this.state.processing}

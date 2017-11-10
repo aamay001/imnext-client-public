@@ -12,7 +12,7 @@ let middleware;
 if (process.env.REACT_APP_ENV === 'dev') {
   middleware = [createLogger(), thunk];
 } else {
-  middleware = [thunk]
+  middleware = [thunk];
 }
 
 const enhancer = composeEnhancers(applyMiddleware(...middleware));

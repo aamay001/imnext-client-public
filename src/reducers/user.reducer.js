@@ -15,7 +15,7 @@ import {
   APPOINTMENT_TIME_CHANGED,
   UPDATING_SETTINGS,
   SETTINGS_UPDATED,
-  SETTINGS_UPDATE_FAILED
+  SETTINGS_UPDATE_FAILED,
 } from '../actions/user.actions';
 
 const initialState = {
@@ -29,15 +29,7 @@ const initialState = {
   updatingSettings: false,
   tryingAutoLogin: false,
   user: {
-    workDays: [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false
-    ]
+    workDays: [false, false, false, false, false, false, false],
   },
 };
 
@@ -111,64 +103,64 @@ const workDaysChanged = (state, action) => {
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      workDays
-    }
-  }
-}
+      workDays,
+    },
+  };
+};
 
 const workDayStartTimeChanged = (state, action) => {
-  const {hour, minutes} = getHourAndMinutes(action.time);
-  let time = new Date(0,0,0, hour, minutes);
+  const { hour, minutes } = getHourAndMinutes(action.time);
+  let time = new Date(0, 0, 0, hour, minutes);
   return {
     ...state,
     settingsChanged: true,
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      workDayStartTime: time
-    }
+      workDayStartTime: time,
+    },
   };
-}
+};
 
 const workDayEndTimeChanged = (state, action) => {
-  const {hour, minutes} = getHourAndMinutes(action.time);
-  let time = new Date(0,0,0, hour, minutes);
+  const { hour, minutes } = getHourAndMinutes(action.time);
+  let time = new Date(0, 0, 0, hour, minutes);
   return {
     ...state,
     settingsChanged: true,
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      workDayEndTime: time
-    }
+      workDayEndTime: time,
+    },
   };
-}
+};
 
 const workBreakStartChanged = (state, action) => {
-  const {hour, minutes} = getHourAndMinutes(action.time);
-  let time = new Date(0,0,0, hour, minutes);
+  const { hour, minutes } = getHourAndMinutes(action.time);
+  let time = new Date(0, 0, 0, hour, minutes);
   return {
     ...state,
     settingsChanged: true,
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      workBreakStartTime: time
-    }
+      workBreakStartTime: time,
+    },
   };
-}
+};
 
 const workBreakLengthChanged = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
     settingsUpdateMessage: 'Unsaved changed!',
-    user : {
+    user: {
       ...state.user,
-      workBreakLengthMinutes: action.minutes
-    }
+      workBreakLengthMinutes: action.minutes,
+    },
   };
-}
+};
 
 const providerNameChanged = (state, action) => {
   return {
@@ -177,10 +169,10 @@ const providerNameChanged = (state, action) => {
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      providerName: action.name
-    }
+      providerName: action.name,
+    },
   };
-}
+};
 
 const appointmentTimeChanged = (state, action) => {
   return {
@@ -189,18 +181,18 @@ const appointmentTimeChanged = (state, action) => {
     settingsUpdateMessage: 'Unsaved changed!',
     user: {
       ...state.user,
-      appointmentTime: action.time
-    }
+      appointmentTime: action.time,
+    },
   };
-}
+};
 
 const updatingSettings = state => {
   return {
     ...state,
     updatingSettings: true,
-    settingsUpdateMessage: 'Saving settings...'
+    settingsUpdateMessage: 'Saving settings...',
   };
-}
+};
 
 const settingsUpdated = (state, action) => {
   return {
@@ -210,27 +202,27 @@ const settingsUpdated = (state, action) => {
     settingsUpdateMessage: 'Settings saved!',
     user: {
       ...state.user,
-      ...action.data
-    }
-  }
-}
+      ...action.data,
+    },
+  };
+};
 
 const settingsUpdateFailed = (state, action) => {
   return {
     ...state,
     updatingSettings: false,
-    settingsUpdateMessage: action.error.message
-  }
-}
+    settingsUpdateMessage: action.error.message,
+  };
+};
 
-const getHourAndMinutes = (time) => {
-  const hour = parseInt(time.substring(0,2), 10);
+const getHourAndMinutes = time => {
+  const hour = parseInt(time.substring(0, 2), 10);
   const minutes = parseInt(time.substring(3), 10);
   return {
     hour,
-    minutes
+    minutes,
   };
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
