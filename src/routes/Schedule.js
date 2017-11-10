@@ -181,7 +181,7 @@ export class Schedule extends Component {
               refreshFunction={this.refreshData}
               hasChildren={true}
               children={appointments}
-              scrollThreshold={0.5}
+              scrollThreshold={0.9}
             />
           ) : (
             <p
