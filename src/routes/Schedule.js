@@ -42,9 +42,9 @@ export class Schedule extends Component {
   loadMoreAppointments = () => {
     setTimeout(() => {
       this.props.dispatch(
-        loadScheduleAppointments(this.props.startDate, this.props.offset + 5),
+        loadScheduleAppointments(this.props.startDate, this.props.offset + 10),
       );
-    }, 250);
+    }, 500);
   };
 
   refreshData() {
@@ -181,7 +181,7 @@ export class Schedule extends Component {
               refreshFunction={this.refreshData}
               hasChildren={true}
               children={appointments}
-              scrollThreshold={0.9}
+              scrollThreshold={0.5}
             />
           ) : (
             <p
