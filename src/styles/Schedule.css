@@ -31,6 +31,7 @@
   -webkit-transition: none;
   -moz-transition: none;
   transition: none;
+  cursor: pointer;
 }
 
 .schedule-page div.schedule-appointment:hover {
@@ -60,6 +61,7 @@
   height: 55px;
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 
 .schedule-page .options:hover {

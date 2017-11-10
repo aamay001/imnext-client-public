@@ -179,6 +179,10 @@ export class Dashboard extends Component {
     return (
       <section className="dashboard-page">
         <Logo />
+        <div className="appointment-navigation">
+          <div onClick={this.slideToPrevAppointment}></div>
+          <div onClick={this.slideToNextAppointment}></div>
+        </div>
         <div>
           <p
             style={{
@@ -227,10 +231,6 @@ export class Dashboard extends Component {
                   {`appointment${appointmentCount === 1 ? '' : 's'} today.`}
                 </p>
               </Link>
-            </div>
-            <div className="appointment-navigation">
-              <div onClick={this.slideToPrevAppointment}>Prev</div>
-              <div onClick={this.slideToNextAppointment}>Next</div>
             </div>
           </div>
         </div>

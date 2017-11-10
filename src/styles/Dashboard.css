@@ -1,3 +1,6 @@
+.dashboard-page {
+  margin-bottom: 150px;
+}
 
 .dashboard-page .appointment-details * {
   -webkit-transition: none ! important;
@@ -57,24 +60,11 @@ div.appointment-navigation {
   width: 100%;
   position: fixed;
   left: 0;
-  bottom: 0;
+  bottom: 35px;
 }
 
 div.appointment-details {
   text-align: center;
-}
-
-div.appointment-navigation div {
-  height: 55px;
-  width: 40%;
-  outline:  none;
-  text-align: center;
-  padding-top: 15px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
-  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  transition: none !important;
 }
 
 div.appointment-navigation div:active {
@@ -92,17 +82,17 @@ div.appointment-navigation div:first-of-type {
   margin-left: 15px;
 }
 
-div.appointment-navigation div:first-of-type::before {
-  content: '< '
-}
-
 div.appointment-navigation div:nth-of-type(2) {
   float: right;
   margin-right: 15px;
 }
 
+div.appointment-navigation div:first-of-type::before {
+  content: '< Prev'
+}
+
 div.appointment-navigation div:nth-of-type(2)::after {
-  content: ' >'
+  content: 'Next >'
 }
 
 .dashboard-appointment {
@@ -122,6 +112,7 @@ div.appointment-navigation div:nth-of-type(2)::after {
   width: 100%;
   height: 100%;
   color: inherit;
+  cursor: pointer;
 }
 
 .dashboard-page .options a:visited {
@@ -147,16 +138,66 @@ div.appointment-navigation div:nth-of-type(2)::after {
 .total-appointments a{
   text-decoration: none;
   outline: none;
+  cursor: pointer;
 }
 
 .total-appointments a:visited{
   color: black;
 }
 
+div.appointment-navigation div {
+  height: 55px;
+  width: 40%;
+  outline:  none;
+  text-align: center;
+  padding-top: 15px;
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  transition: none !important;
+}
 
 @media only screen and (min-width: 768px) {
   .dashboard-appointment {
     width: 45%;
+  }
+  div.appointment-navigation {
+    top: 35%;
+    background-color: transparent;
+    margin: 0;
+  }
+
+  div.appointment-navigation div {
+    width: 35px;
+    height: 400px;
+    margin: 0;
+    padding-top: 175px;
+    font-size: 30px;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
+    1px 1px 1px 1px rgba(0, 0, 0, 0.22);
+  }
+
+  div.appointment-navigation div:first-of-type::before {
+    content: '<'
+  }
+
+  div.appointment-navigation div:nth-of-type(2)::after {
+    content: '>'
+  }
+
+  .react-swipeable-view-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .react-swipeable-view-container div[aria-hidden=true] {
+    z-index: -1;
+  }
+
+  .react-swipeable-view-container div[aria-hidden=false] {
+    z-index: 0;
   }
 }
 

@@ -1,4 +1,4 @@
-import './config/plolyfill';
+import 'babel-polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/normalize.css';

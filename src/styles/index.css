@@ -18,6 +18,10 @@ body {
     overflow-y: auto;*/
 }
 
+.App {
+  margin-bottom: 60px;
+}
+
 #logo {
   background: #4b79a1 no-repeat;
   background: -webkit-linear-gradient(to top, #283e51, #4b79a1) no-repeat;
@@ -42,12 +46,15 @@ div.form-container {
 }
 
 footer {
-  color: black;
+  color: white;
   display: block;
   width: 100%;
   text-align: center;
-  margin-top: 45px;
-  margin-bottom: 15px;
+  position: fixed;
+  bottom: 0;
+  background-color: #4b79a1;
+  padding-bottom: 7.5px;
+  padding-top: 7.5px;
 }
 
 @media only screen and (min-width: 768px) {
