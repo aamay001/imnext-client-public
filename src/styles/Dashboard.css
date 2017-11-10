@@ -1,5 +1,6 @@
 .dashboard-page {
   margin-bottom: 150px;
+  background-color: white;
 }
 
 .dashboard-page .appointment-details * {
@@ -164,7 +165,6 @@ div.appointment-navigation div {
   }
   div.appointment-navigation {
     top: 35%;
-    background-color: transparent;
     margin: 0;
   }
 

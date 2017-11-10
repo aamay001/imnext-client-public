@@ -77,7 +77,7 @@ export class ProviderSearch extends Component {
       value: value,
       required: true,
       onChange: this.onChange,
-      placeholder: 'type your providers name.',
+      placeholder: 'type your providers name (Demo for mock)',
     };
     return (
       <Autosuggest

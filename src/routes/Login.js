@@ -46,6 +46,11 @@ export class Login extends Component {
     this.props.history.push(location);
   }
 
+  demo = e => {
+    this.email.value = 'demo@imnext.online';
+    this.password.value = '1234Abc!';
+  }
+
   render() {
     return (
       <section className="login-page">
@@ -53,6 +58,15 @@ export class Login extends Component {
         <div className="form-container">
           <h1>Log In</h1>
           <em>access you dashboard!</em>
+          <a onClick={this.demo}
+            style={{
+              textAlign: 'center',
+              display: 'block',
+              textDecoration: 'underline',
+              cursor: 'pointer',
+              margin: '10px auto 5px auto'
+            }}
+          >Login with Demo Account</a>
           <p
             style={{
               display:

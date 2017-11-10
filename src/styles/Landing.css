@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(255, 255, 255)
+}
+
 .landing-page {
     background-color: transparent;
 }
@@ -30,7 +34,7 @@
 
 .landing-page a {
     display: block;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(0, 0, 0);
     text-align: center;
     height: 55px;
     color: white;
