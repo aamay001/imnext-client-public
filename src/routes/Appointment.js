@@ -153,6 +153,7 @@ export class Appointment extends Component {
               autoComplete="off"
               placeholder="xxx-xxx-xxxx"
               minLength={10}
+              maxLength={12}
               ref={input => (this.mobilePhoneInput = input)}
             />
             <Recaptcha
