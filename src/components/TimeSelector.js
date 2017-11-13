@@ -14,6 +14,16 @@ export class TimeSelector extends Component {
     this.props.dispatch(timeSelectionMade(e.target.value));
   };
 
+  onKeyDown = e => {
+    if (e.keyCode === 32 || e.keyCode === 13) {
+      if (e.currentTarget.id === 'changeSelectionButton') {
+        this.props.dispatch(timeSelectionMade(''));
+        return;
+      }
+      this.props.dispatch(timeSelectionMade(e.target.childNodes[1].value));
+    }
+  }
+
   render() {
     let availableTimeSlots;
     if (this.props.timeSlots.length > 0) {
@@ -23,6 +33,9 @@ export class TimeSelector extends Component {
           <div
             key={index}
             className="time-selection-input"
+            onKeyDown={this.onKeyDown}
+            value={slotValue}
+            tabIndex={0}
             style={{
               backgroundColor:
                 this.props.selectedTimeSlot === slotValue && '#4b79a1',
@@ -36,17 +49,16 @@ export class TimeSelector extends Component {
             <label
               htmlFor={'timeSlot' + index + Date.now()}
               className="time-selection-input"
+              value={slotValue}
             >
               {slotValue}
             </label>
             <input
               type="radio"
-              name="time-slot"
+              name={'timeSlot' + index + Date.now()}
               value={slotValue}
               id={'timeSlot' + index + Date.now()}
               className="time-selection-input"
-              onClick={this.onSelectionMade}
-              required
             />
           </div>
         );
@@ -77,6 +89,8 @@ export class TimeSelector extends Component {
           <a
             id="changeSelectionButton"
             onClick={this.onSelectionMade}
+            onKeyDown={this.onKeyDown}
+            tabIndex={0}
             style={{
               display: 'block',
               backgroundColor: 'lightgreay',

@@ -193,7 +193,7 @@ export class Appointment extends Component {
                 max={format(addMonths(today, 2), DATE_FORMAT)}
                 onChange={this.getAvailbleTimeSlots}
               />
-              <TimeSelector ref={time => (this.appointmentTime = time)} />
+              <TimeSelector ref={time => (this.appointmentTime = time)} tabIndex={0}/>
               <label htmlFor="validation-code">Validation Text Code</label>
               <input
                 type="text"

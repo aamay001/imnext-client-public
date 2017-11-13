@@ -13,6 +13,12 @@ div.time-selection-input:hover {
   color: white;
 }
 
+div.time-selection-input:focus {
+  background-color: #4b79a1;
+  color: white;
+  outline: none;
+}
+
 label.time-selection-input {
   display: inline-block;
   margin: 0;
