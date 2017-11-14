@@ -57,7 +57,7 @@ div.appointment-navigation {
   margin: 0;
   padding-bottom: 10px;
   padding-top: 10px;
-  background-color: white;
+  background-color: transparent;
   width: 100%;
   position: fixed;
   left: 0;
