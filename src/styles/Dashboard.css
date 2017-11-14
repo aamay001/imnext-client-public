@@ -157,6 +157,7 @@ div.appointment-navigation div {
   -webkit-transition: none !important;
   -moz-transition: none !important;
   transition: none !important;
+  background-color: transparent;
 }
 
 @media only screen and (min-width: 768px) {
