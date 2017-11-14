@@ -56,6 +56,7 @@ export class TimeSelector extends Component {
             <input
               type="radio"
               name={'timeSlot' + index + Date.now()}
+              onClick={this.onSelectionMade}
               value={slotValue}
               id={'timeSlot' + index + Date.now()}
               className="time-selection-input"
