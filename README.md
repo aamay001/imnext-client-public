@@ -1,3 +1,5 @@
+[![StackShare](https://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](https://stackshare.io/aamay001/imnext)
+
 # imNext.online Client
 
 This repository contains the client side code for the imNext.online project. The imNext.online project is a self-service appointment scheduling system that enables users to schedule appointments directly with their service providers. The client is written in JavaScript and uses **React and Redux** as the front-end framework.
