@@ -22,7 +22,7 @@ export class TimeSelector extends Component {
       }
       this.props.dispatch(timeSelectionMade(e.target.childNodes[1].value));
     }
-  }
+  };
 
   render() {
     let availableTimeSlots;
