@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logo from '../components/Logo';
 import '../styles/Appointment.css';
-import { REGEX, DATE_FORMAT } from '../config/constants';
+import { REGEX, DATE_FORMAT, VALIDATION_CODE_LENGTH } from '../config/constants';
 import format from 'date-fns/format';
 import addMonths from 'date-fns/add_months';
 import ProviderSearch from '../components/ProviderSearch';
@@ -63,7 +63,7 @@ export class Appointment extends Component {
   };
 
   validationCodeEntered = e => {
-    if (e.target.value.length === 8) {
+    if (e.target.value.length === VALIDATION_CODE_LENGTH) {
       this.props.dispatch(validationCodeEntered(e.target.value));
     }
   };
@@ -205,8 +205,8 @@ export class Appointment extends Component {
                 id="validation-code"
                 required
                 autoComplete="off"
-                minLength={8}
-                maxLength={8}
+                minLength={VALIDATION_CODE_LENGTH}
+                maxLength={VALIDATION_CODE_LENGTH}
                 onChange={this.validationCodeEntered}
                 ref={input => (this.validation = input)}
               />
