@@ -46,6 +46,7 @@ export class Appointment extends Component {
         'g-recaptcha-response': this.state.verification,
       };
       this.props.dispatch(getValidationCode(data));
+      this.resetRecaptcha();
     } else if (this.props.step === STEP_TWO) {
       this.props.dispatch(scheduleAppointment(this.props.data));
     }
@@ -160,6 +161,7 @@ export class Appointment extends Component {
               ref={recap => (this.recaptcha = recap)}
               sitekey="6LfBzjUUAAAAAIaHX2kPeF-43w7oLF5fV9DWCHFh"
               verifyCallback={this.recaptchaVerification}
+
               required
             />
             <button type="submit">Next</button>
