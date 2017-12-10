@@ -18,7 +18,7 @@ import {
   UPDATING_SETTINGS,
   SETTINGS_UPDATED,
   SETTINGS_UPDATE_FAILED,
-  SET_SCHEDULE_TYPE
+  SET_SCHEDULE_TYPE,
 } from '../actions/user.actions';
 
 const initialState = {
@@ -34,7 +34,7 @@ const initialState = {
   tryingAutoLogin: false,
   user: {
     workDays: [false, false, false, false, false, false, false],
-    workTimes: [{},{},{},{},{},{},{}],
+    workTimes: [{}, {}, {}, {}, {}, {}, {}],
     scheduleType: 'FIXED',
   },
 };
@@ -106,7 +106,8 @@ const workDaysChanged = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
-    settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
     user: {
       ...state.user,
       workDays,
@@ -119,7 +120,8 @@ const appointmentTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
         appointmentTime: action.time,
@@ -131,12 +133,13 @@ const appointmentTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
-        workTimes : [...newWorkTimes]
+        workTimes: [...newWorkTimes],
       },
-    }
+    };
   }
 };
 
@@ -147,7 +150,8 @@ const workDayStartTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
         workDayStartTime: time,
@@ -161,12 +165,13 @@ const workDayStartTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
-        workTimes : [...newWorkTimes]
+        workTimes: [...newWorkTimes],
       },
-    }
+    };
   }
 };
 
@@ -177,7 +182,8 @@ const workDayEndTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
         workDayEndTime: time,
@@ -191,12 +197,13 @@ const workDayEndTimeChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
-        workTimes : [...newWorkTimes]
+        workTimes: [...newWorkTimes],
       },
-    }
+    };
   }
 };
 
@@ -207,7 +214,8 @@ const workBreakStartChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
         workBreakStartTime: time,
@@ -221,12 +229,13 @@ const workBreakStartChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
-        workTimes : [...newWorkTimes]
+        workTimes: [...newWorkTimes],
       },
-    }
+    };
   }
 };
 
@@ -235,7 +244,8 @@ const workBreakLengthChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
         workBreakLengthMinutes: action.time,
@@ -247,12 +257,13 @@ const workBreakLengthChanged = (state, action) => {
     return {
       ...state,
       settingsChanged: true,
-      settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
       user: {
         ...state.user,
-        workTimes : [...newWorkTimes]
+        workTimes: [...newWorkTimes],
       },
-    }
+    };
   }
 };
 
@@ -260,7 +271,8 @@ const providerNameChanged = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
-    settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
     user: {
       ...state.user,
       providerName: action.name,
@@ -293,12 +305,12 @@ const settingsLoaded = (state, action) => {
   return {
     ...state,
     loadingSettings: false,
-    user : {
+    user: {
       ...state.user,
-      ...action.data
-    }
+      ...action.data,
+    },
   };
-}
+};
 
 const settingsUpdateFailed = (state, action) => {
   return {
@@ -321,20 +333,21 @@ const setScheduleType = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
-    settingsUpdateMessage: "Unsaved changes! Don't forget to save your changes!",
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
     user: {
       ...state.user,
-      scheduleType: action.scheduleType
-    }
+      scheduleType: action.scheduleType,
+    },
   };
-}
+};
 
-const loadingSettings = (state) => {
+const loadingSettings = state => {
   return {
     ...state,
-    loadingSettings: true
+    loadingSettings: true,
   };
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -377,7 +390,7 @@ export default (state = initialState, action) => {
     case LOADING_SETTINGS:
       return loadingSettings(state);
     case SETTINGS_LOADED:
-      return settingsLoaded(state,action);
+      return settingsLoaded(state, action);
     default:
       return state;
   }
