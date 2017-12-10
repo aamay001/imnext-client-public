@@ -346,6 +346,7 @@ const loadingSettings = state => {
   return {
     ...state,
     loadingSettings: true,
+    settingsUpdateMessage: ''
   };
 };
 
