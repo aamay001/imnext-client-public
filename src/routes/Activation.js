@@ -5,7 +5,6 @@ import { API } from '../config/settings';
 import fetchHelper from '../helpers/fetch.helper';
 
 import Logo from '../components/Logo';
-import '../styles/Activation.css';
 
 export class Activation extends Component {
   state = {

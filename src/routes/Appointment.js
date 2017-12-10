@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Logo from '../components/Logo';
-import '../styles/Appointment.css';
-import { REGEX, DATE_FORMAT, VALIDATION_CODE_LENGTH } from '../config/constants';
+import {
+  REGEX,
+  DATE_FORMAT,
+  VALIDATION_CODE_LENGTH,
+} from '../config/constants';
 import format from 'date-fns/format';
 import addMonths from 'date-fns/add_months';
 import ProviderSearch from '../components/ProviderSearch';
@@ -161,7 +164,6 @@ export class Appointment extends Component {
               ref={recap => (this.recaptcha = recap)}
               sitekey="6LfBzjUUAAAAAIaHX2kPeF-43w7oLF5fV9DWCHFh"
               verifyCallback={this.recaptchaVerification}
-
               required
             />
             <button type="submit">Next</button>

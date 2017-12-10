@@ -4,9 +4,7 @@ import Recaptcha from 'react-recaptcha';
 import { REGEX, ROUTES } from '../config/constants';
 import { API } from '../config/settings';
 import fetchHelper from '../helpers/fetch.helper';
-
 import Logo from '../components/Logo';
-import '../styles/SignUp.css';
 
 export class SignUp extends Component {
   state = {

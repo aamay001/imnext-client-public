@@ -8,14 +8,10 @@ import closestTo from 'date-fns/closest_to';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
 import compareAsc from 'date-fns/compare_asc';
-import '../styles/font-awesome.css';
 import FontAwesome from 'react-fontawesome';
-
 import Logo from '../components/Logo';
-import '../styles/Dashboard.css';
 
 import { getAppointments } from '../actions/dashboard.actions';
-
 import { DATE_FORMAT, DISPLAY_TIME_FORMAT } from '../config/constants';
 
 export class Dashboard extends Component {

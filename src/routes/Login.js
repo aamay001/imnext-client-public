@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/Login.css';
 import Logo from '../components/Logo.js';
 
 import { ROUTES } from '../config/constants';

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { API } from '../config/settings.js';
 import { providerSelectionMade } from '../actions/scheduler.actions';
 import fetchHelper from '../helpers/fetch.helper';
-import '../styles/ProviderSearch.css';
 
 export class ProviderSearch extends Component {
   state = {

@@ -4,6 +4,8 @@ import {
   USER_LOGGED_IN,
   USER_LOGGED_OUT,
   LOGGING_IN,
+  LOADING_SETTINGS,
+  SETTINGS_LOADED,
   LOG_IN_FAILED,
   AUTO_LOGGING_IN,
   WORK_DAYS_CHANGED,
@@ -16,6 +18,7 @@ import {
   UPDATING_SETTINGS,
   SETTINGS_UPDATED,
   SETTINGS_UPDATE_FAILED,
+  SET_SCHEDULE_TYPE,
 } from '../actions/user.actions';
 
 const initialState = {
@@ -27,9 +30,12 @@ const initialState = {
   settingsChanged: false,
   settingsUpdateMessage: '',
   updatingSettings: false,
+  loadingSettings: false,
   tryingAutoLogin: false,
   user: {
     workDays: [false, false, false, false, false, false, false],
+    workTimes: [{}, {}, {}, {}, {}, {}, {}],
+    scheduleType: 'FIXED',
   },
 };
 
@@ -100,7 +106,8 @@ const workDaysChanged = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
     user: {
       ...state.user,
       workDays,
@@ -108,80 +115,167 @@ const workDaysChanged = (state, action) => {
   };
 };
 
+const appointmentTimeChanged = (state, action) => {
+  if (state.user.scheduleType === 'FIXED') {
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        appointmentTime: action.time,
+      },
+    };
+  } else {
+    const newWorkTimes = [...state.user.workTimes];
+    newWorkTimes[action.time.index].appointmentTime = action.time.value;
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workTimes: [...newWorkTimes],
+      },
+    };
+  }
+};
+
 const workDayStartTimeChanged = (state, action) => {
-  const { hour, minutes } = getHourAndMinutes(action.time);
-  let time = new Date(0, 0, 0, hour, minutes);
-  return {
-    ...state,
-    settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
-    user: {
-      ...state.user,
-      workDayStartTime: time,
-    },
-  };
+  if (state.user.scheduleType === 'FIXED') {
+    const { hour, minutes } = getHourAndMinutes(action.time);
+    let time = new Date(0, 0, 0, hour, minutes);
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workDayStartTime: time,
+      },
+    };
+  } else {
+    const { hour, minutes } = getHourAndMinutes(action.time.value);
+    let time = new Date(0, 0, 0, hour, minutes);
+    const newWorkTimes = [...state.user.workTimes];
+    newWorkTimes[action.time.index].startTime = time;
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workTimes: [...newWorkTimes],
+      },
+    };
+  }
 };
 
 const workDayEndTimeChanged = (state, action) => {
-  const { hour, minutes } = getHourAndMinutes(action.time);
-  let time = new Date(0, 0, 0, hour, minutes);
-  return {
-    ...state,
-    settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
-    user: {
-      ...state.user,
-      workDayEndTime: time,
-    },
-  };
+  if (state.user.scheduleType === 'FIXED') {
+    const { hour, minutes } = getHourAndMinutes(action.time);
+    let time = new Date(0, 0, 0, hour, minutes);
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workDayEndTime: time,
+      },
+    };
+  } else {
+    const { hour, minutes } = getHourAndMinutes(action.time.value);
+    let time = new Date(0, 0, 0, hour, minutes);
+    const newWorkTimes = [...state.user.workTimes];
+    newWorkTimes[action.time.index].endTime = time;
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workTimes: [...newWorkTimes],
+      },
+    };
+  }
 };
 
 const workBreakStartChanged = (state, action) => {
-  const { hour, minutes } = getHourAndMinutes(action.time);
-  let time = new Date(0, 0, 0, hour, minutes);
-  return {
-    ...state,
-    settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
-    user: {
-      ...state.user,
-      workBreakStartTime: time,
-    },
-  };
+  if (state.user.scheduleType === 'FIXED') {
+    const { hour, minutes } = getHourAndMinutes(action.time);
+    let time = new Date(0, 0, 0, hour, minutes);
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workBreakStartTime: time,
+      },
+    };
+  } else {
+    const { hour, minutes } = getHourAndMinutes(action.time.value);
+    let time = new Date(0, 0, 0, hour, minutes);
+    const newWorkTimes = [...state.user.workTimes];
+    newWorkTimes[action.time.index].breakStartTime = time;
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workTimes: [...newWorkTimes],
+      },
+    };
+  }
 };
 
 const workBreakLengthChanged = (state, action) => {
-  return {
-    ...state,
-    settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
-    user: {
-      ...state.user,
-      workBreakLengthMinutes: action.minutes,
-    },
-  };
+  if (state.user.scheduleType === 'FIXED') {
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workBreakLengthMinutes: action.time,
+      },
+    };
+  } else {
+    const newWorkTimes = [...state.user.workTimes];
+    newWorkTimes[action.time.index].breakLength = action.time.value;
+    return {
+      ...state,
+      settingsChanged: true,
+      settingsUpdateMessage:
+        "Unsaved changes! Don't forget to save your changes!",
+      user: {
+        ...state.user,
+        workTimes: [...newWorkTimes],
+      },
+    };
+  }
 };
 
 const providerNameChanged = (state, action) => {
   return {
     ...state,
     settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
     user: {
       ...state.user,
       providerName: action.name,
-    },
-  };
-};
-
-const appointmentTimeChanged = (state, action) => {
-  return {
-    ...state,
-    settingsChanged: true,
-    settingsUpdateMessage: 'Unsaved changed!',
-    user: {
-      ...state.user,
-      appointmentTime: action.time,
     },
   };
 };
@@ -207,6 +301,17 @@ const settingsUpdated = (state, action) => {
   };
 };
 
+const settingsLoaded = (state, action) => {
+  return {
+    ...state,
+    loadingSettings: false,
+    user: {
+      ...state.user,
+      ...action.data,
+    },
+  };
+};
+
 const settingsUpdateFailed = (state, action) => {
   return {
     ...state,
@@ -221,6 +326,26 @@ const getHourAndMinutes = time => {
   return {
     hour,
     minutes,
+  };
+};
+
+const setScheduleType = (state, action) => {
+  return {
+    ...state,
+    settingsChanged: true,
+    settingsUpdateMessage:
+      "Unsaved changes! Don't forget to save your changes!",
+    user: {
+      ...state.user,
+      scheduleType: action.scheduleType,
+    },
+  };
+};
+
+const loadingSettings = state => {
+  return {
+    ...state,
+    loadingSettings: true,
   };
 };
 
@@ -260,6 +385,12 @@ export default (state = initialState, action) => {
       return settingsUpdated(state, action);
     case SETTINGS_UPDATE_FAILED:
       return settingsUpdateFailed(state, action);
+    case SET_SCHEDULE_TYPE:
+      return setScheduleType(state, action);
+    case LOADING_SETTINGS:
+      return loadingSettings(state);
+    case SETTINGS_LOADED:
+      return settingsLoaded(state, action);
     default:
       return state;
   }

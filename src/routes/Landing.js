@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logo from '../components/Logo.js';
-import '../styles/Landing.css';
 
 import { ROUTES } from '../config/constants';
 
@@ -15,7 +14,8 @@ export class Landing extends Component {
           Welcome to imNext! imNext allows you to schedule an appointment with
           your personal service provider. Ready? Go! Select New Appointment to
           schedule your appointment, Log In if you're a service provider to
-          access your dashboard, or Sign Up to create a service provider account.
+          access your dashboard, or Sign Up to create a service provider
+          account.
         </p>
         <div className="user-action-buttons">
           <Link to={ROUTES.APPOINTMENT}>New Appointment</Link>

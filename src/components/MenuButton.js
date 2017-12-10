@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/MenuButton.css';
-
 import { toggleMenu } from '../actions/user.actions';
 
 export class MenuButton extends Component {
