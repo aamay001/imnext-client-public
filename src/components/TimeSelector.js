@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import format from 'date-fns/format';
+
 import { timeSelectionMade } from '../actions/scheduler.actions';
 import { DISPLAY_TIME_FORMAT } from '../config/constants';
-import '../styles/TimeSelector.css';
 
 export class TimeSelector extends Component {
   onSelectionMade = e => {

@@ -89,10 +89,10 @@ export const workBreakStartChanged = time => {
 };
 
 export const WORK_BREAK_LENGTH_CHANGED = 'WORK_BREAK_LENGTH_CHANGED';
-export const workBreakLengthChanged = minutes => {
+export const workBreakLengthChanged = time => {
   return {
     type: WORK_BREAK_LENGTH_CHANGED,
-    minutes,
+    time,
   };
 };
 
@@ -127,12 +127,46 @@ const settingsUpdated = data => {
   };
 };
 
+export const LOADING_SETTINGS = 'LOADING_SETTINGS';
+const loadingSettings = () => {
+  return {
+    type: LOADING_SETTINGS
+  };
+}
+
+export const SETTINGS_LOADED = 'SETTINGS_LOADED';
+const settingsLoaded = data => {
+  return {
+    type: SETTINGS_LOADED,
+    data
+  };
+}
+
 export const SETTINGS_UPDATE_FAILED = 'SETTINGS_UPDATE_FAILED';
 const settingsUpdatedFailed = error => {
   return {
     type: SETTINGS_UPDATE_FAILED,
     error,
   };
+};
+
+export const SET_SCHEDULE_TYPE = 'SET_SCHEDULE_TYPE';
+export const setScheduleType = scheduleType => {
+  return {
+    type: SET_SCHEDULE_TYPE,
+    scheduleType
+  };
+}
+
+export const getUser = () => dispatch => {
+  dispatch(loadingSettings());
+  fetchHelper('GET', API.USER, undefined, 'reload', 'T')
+  .then(data => {
+    dispatch(settingsLoaded(data));
+  })
+  .catch(error => {
+    dispatch(settingsUpdatedFailed(error));
+  });
 };
 
 export const updateSettings = data => dispatch => {

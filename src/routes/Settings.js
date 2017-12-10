@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../styles/Availability.css';
 import format from 'date-fns/format';
 
 import { ROUTES } from '../config/constants';

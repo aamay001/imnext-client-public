@@ -6,10 +6,9 @@ import compareAsc from 'date-fns/compare_asc';
 import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
 import isPast from 'date-fns/is_past';
-import Logo from '../components/Logo';
-import '../styles/Schedule.css';
-import '../styles/font-awesome.css';
 import FontAwesome from 'react-fontawesome';
+import Logo from '../components/Logo';
+
 import {
   DISPLAY_DATE_FORMAT,
   DISPLAY_TIME_FORMAT,

@@ -1,133 +1,104 @@
-.availability-page .form-container {
+.availability-page-2 .form-container {
   margin-top: 5px;
   padding-bottom: 0px;
   box-shadow: none;
+  margin-bottom: 175px;
 }
 
-.availability-page h1 {
+.availability-page-2 h1 {
   width: 100%;
   text-align: center;
   margin-bottom: 0;
 }
 
-.availability-page .form-container h2 {
+.availability-page-2 .form-container h2 {
   margin: 20px 0 5px 0;
   font-size: 19px;
   font-weight: bold;
   padding: 0;
 }
 
-.availability-page h3 {
+.availability-page-2 h3 {
   margin-top: 25px;
   margin-bottom: 32px;
 }
 
-.availability-page em {
+.availability-page-2 em {
   display: inline-block;
   width: 100%;
   text-align: center;
 }
 
-.availability-page form {
-  margin: 0;
-  padding: 0;
-}
-
-.availability-page fieldset.check-boxes {
-  outline: none;
-  border: none;
-  margin: 0;
-  padding: 0;
-}
-
-.availability-page input[type=number]
-,.availability-page input[type=text]
-,.availability-page input[type=time]
-,.availability-page button[type=submit] {
-  display: block;
+.availability-page-2 div.time-selector {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  height: 40px;
   width: 100%;
-  text-align: center;
+  padding: 0 0 0 10px;
+}
+
+.availability-page-2 div.time-selector:hover {
+  border-color: dodgerblue;
+}
+
+.availability-page-2 div.time-selector:active {
+  border-color: dodgerblue;
+  outline: dodgerblue;
+}
+
+.availability-page-2 input[type=time] {
+  width: 90%;
+  height: 100%;
   outline: none;
-}
-
-.availability-page label {
-  text-align: left;
-}
-
-.availability-page input[type=number]
-,.availability-page input[type=text]
-,.availability-page input[type=time] {
   border: none;
-  border-bottom: 1px solid black;
-  margin-bottom: 15px;
-  height: 45px;
+  display: inline-block;
+  padding-left: 15px;
+  background-color: transparent;
 }
 
-.availability-page button[type=submit] {
-  height: 45px;
-  background: #4B79A1;
-  background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
-  background: radial-gradient(to right, rgb(50, 66, 80), #4B79A1);
-  width: 80%;
-  border: none;
-  outline: none;
-  margin-top: 20px;
+.form-container button.ant-btn-lg:last-child {
   margin-right: auto;
   margin-left: auto;
-  color: white;
-}
-
-.availability-page button[type=submit]:hover:not([disabled]) {
-  width: 85%;
-}
-
-.availability-page button[disabled] {
-  background: #a14b4b;
-  background: -webkit-radial-gradient(to right, rgb(50, 66, 80), #a14b4b);
-  background: radial-gradient(to right, rgb(50, 66, 80), #a14b4b);
-}
-
-.availability-page .workday-checkbox input[type=checkbox] {
-  float: left;
-  margin: 0;
-  margin-left: 15px;
-}
-
-label.workday-checkbox {
+  margin-top: 45px;
+  width: 75%;
   display: block;
-  height: 55px;
-  margin-top: 10px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
-  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
-  padding-top: 17px;
-  text-align: center;
-
 }
 
-.availability-page label.workday-checkbox:active {
-  background-color: #4b79a1;
-  color: white;
+.availability-page-2 label {
+  display: block;
+  margin-bottom: 10px;
 }
 
-.availability-page label.workday-checkbox[data-checked=true] {
-  border-bottom: 3px solid dodgerblue;
-  border-right: 3px solid dodgerblue;
+div.settings-toggle-switch {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  height: 42px;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  margin-bottom: 5px;
+}
+
+.fixed-settings > div:nth-child(10) {
+  width: 100%;
+  display: block;
+}
+
+.settings-antd-switch {
+  float: right;
 }
 
 @media only screen and (min-width: 768px) {
-  .availability-page label.workday-checkbox
-  , .field-group {
-      width: 45%;
-      margin-left: 2.5%;
-      margin-right: 2.5%;
-      display: inline-block;
+  .field-group:nth-child(1n+2),
+  .fixed-settings > .settings-toggle-switch {
+    width: 45%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    display: inline-block;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .availability-page label.workday-checkbox {
-    width: 30%;
-    margin-left: 1.5%;
-    margin-right: 1.5%;
-  }
+
 }
