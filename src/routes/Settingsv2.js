@@ -52,7 +52,7 @@ export class Settings extends Component {
     if (nextProps.updatingSettings) {
       message.loading(nextProps.updateMessage, 0);
     } else if (nextProps.settingsChanged) {
-      message.warning(nextProps.updateMessage, 500);
+      message.warning(nextProps.updateMessage, 0);
     }
     if (nextProps.updateMessage === 'Settings saved!') {
       message.success(nextProps.updateMessage, 3);

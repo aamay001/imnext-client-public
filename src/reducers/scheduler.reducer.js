@@ -16,6 +16,10 @@ import {
   SCHEDULE_APPOINTMENT_FAILED,
   VALIDATION_CODE_ENTERED,
   APPOINTMENT_SCHEDULED,
+  CANCELLING_APPOINTMENT,
+  APPOINTMENT_CANCEL_ERROR,
+  APPOINTMENT_CANCEL_SUCCESS,
+  APPOINTMENT_CANCEL_ACTION_COMPLETE
 } from '../actions/scheduler.actions';
 
 const initialState = {
@@ -39,6 +43,9 @@ const initialState = {
     time: undefined,
     validation: undefined,
   },
+  cancellingAppointment: false,
+  appointmentCancelStatus: undefined,
+  appointmentCancelMessage: ''
 };
 
 const newAppointment = () => {
@@ -205,6 +212,42 @@ const appointmentScheduled = (state, action) => {
   };
 };
 
+const cancellingAppointment = (state) => {
+  return {
+    ...state,
+    cancellingAppointment: true,
+    appointmentCancelStatus: -1,
+    appointmentCancelMessage: ''
+  };
+}
+
+const cancelAppointmentFailed = (state, action) => {
+  return {
+    ...state,
+    appointmentCancelStatus: 0,
+    cancellingAppointment: false,
+    appointmentCancelMessage: action.message
+  };
+}
+
+const appointmentCancelled = (state, action) => {
+  return {
+    ...state,
+    appointmentCancelStatus: 1,
+    cancellingAppointment: false,
+    appointmentCancelMessage: action.message
+  };
+}
+
+const appointmentCancelActionComplete = (state) => {
+  return {
+    ...state,
+    cancellingAppointment: false,
+    appointmentCancelStatus: -1,
+    appointmentCancelMessage: ''
+  };
+}
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case NEW_APPOINTMENT:
@@ -235,6 +278,14 @@ export default (state = initialState, action) => {
       return scheduleAppointmentFailed(state, action);
     case APPOINTMENT_SCHEDULED:
       return appointmentScheduled(state, action);
+    case CANCELLING_APPOINTMENT:
+      return cancellingAppointment(state);
+    case APPOINTMENT_CANCEL_ERROR:
+      return cancelAppointmentFailed(state, action);
+    case APPOINTMENT_CANCEL_SUCCESS:
+      return appointmentCancelled(state, action);
+    case APPOINTMENT_CANCEL_ACTION_COMPLETE:
+      return appointmentCancelActionComplete(state);
     default:
       return state;
   }

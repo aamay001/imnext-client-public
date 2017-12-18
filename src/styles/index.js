@@ -1,8 +1,13 @@
 import './normalize.css';
-import './font-awesome.css';
+
+import './index.css';
+
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 import './anticon.css';
 import './antmotion.css';
+import 'antd/lib/card/style/index.css';
 import 'antd/lib/form/style/index.css';
 import 'antd/lib/input/style/index.css';
 import 'antd/lib/input-number/style/index.css';
@@ -13,8 +18,6 @@ import 'antd/lib/modal/style/index.css';
 import 'antd/lib/message/style/index.css';
 import 'antd/lib/spin/style/index.css';
 import 'antd/lib/style/core/motion.less';
-
-import './index.css';
 
 import './Activation.css';
 import './Appointment.css';

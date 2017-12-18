@@ -1,3 +1,5 @@
+import format from 'date-fns/format';
+
 export const ROUTES = {
   LANDING: '/',
   LOGIN: '/login',
@@ -34,4 +36,11 @@ export const INFO = {
     FIXED_WORD_DAYS_MESSAGE:
       'In FIXED schedule mode, you can select which days you work on and use the same schedule for each day. For example, if you work from Monday - Friday, set Saturday and Sunday to off and Monday - Friday to on.',
   },
+  DASHBOARD: {
+    AVAILABILITY_SETTINGS: 'Make sure you have your availability setup in your settings!'
+  }
+};
+
+export const APPOINTMENTS = {
+  CANCEL_CONFIRM: (time, name) => `Are you sure you want to cancel your ${format(time, DISPLAY_TIME_FORMAT)} appointment with ${name}?`
 };

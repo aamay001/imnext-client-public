@@ -1,24 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { ROUTES } from '../config/constants';
+import * as constants from '../config/constants';
 import format from 'date-fns/format';
-import SwipeableViews from 'react-swipeable-views';
+import Slider from 'react-slick';
+import { Card, Icon, Modal, Spin, message } from 'antd';
+
 import closestTo from 'date-fns/closest_to';
 import isAfter from 'date-fns/is_after';
 import isEqual from 'date-fns/is_equal';
+import isPast from 'date-fns/is_past';
 import compareAsc from 'date-fns/compare_asc';
-import FontAwesome from 'react-fontawesome';
 import Logo from '../components/Logo';
 
 import { getAppointments } from '../actions/dashboard.actions';
+import CustomArrow from '../components/CustomSliderArrow';
+import {
+  cancelAppointment,
+  appointmentCancelActionComplete
+} from '../actions/scheduler.actions';
 import { DATE_FORMAT, DISPLAY_TIME_FORMAT } from '../config/constants';
 
+const { ROUTES } = constants;
+
 export class Dashboard extends Component {
-  state = {
-    currentAppointmentIndex: 0,
-    dashboardAppointments: [],
-  };
 
   componentDidMount() {
     if (this.props.isLoggedIn && this.props.user.activated) {
@@ -28,57 +33,74 @@ export class Dashboard extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.appointments) {
-      if (this.props.appointments !== nextProps.appointments) {
-        const today = format(new Date(), DATE_FORMAT);
-        const newApps = this.getAppointments(today, nextProps.appointments);
-        this.setState({
-          dashboardAppointments: newApps,
-        });
-      }
-    }
-  }
-
   componentWillMount() {
-    // If no user is logged in, redirect to the landing page.
     if (!this.props.isLoggedIn) {
       this.props.history.replace(ROUTES.LOGIN);
-    } else if (!this.props.user.activated) {
+    }
+    else if (!this.props.user.activated) {
       this.props.history.replace(ROUTES.ACTIVATE);
     }
   }
 
-  slideToNextAppointment = e => {
-    const today = format(new Date(), DATE_FORMAT);
-    const nextIndex = Math.min(
-      this.props.appointments.get(today).length - 1,
-      this.slider.props.index + 1,
+  componentWillReceiveProps(nextProps) {
+    message.destroy();
+    if (nextProps.appointmentCancelStatus === 1) {
+      message.success(nextProps.appointmentCancelMessage, 5, () => {
+        this.refreshAppointments();
+      });
+    }
+    else if (nextProps.appointmentCancelStatus === 0) {
+      message.warning(nextProps.appointmentCancelMessage, 5, () => {
+        this.refreshAppointments();
+      });
+    }
+  }
+
+  refreshAppointments = () => {
+    this.props.dispatch(
+      getAppointments(this.props.user, format(new Date(), DATE_FORMAT))
     );
-    this.setState({
-      currentAppointmentIndex: nextIndex,
-    });
-  };
+    this.props.dispatch(appointmentCancelActionComplete());
+  }
 
-  slideToPrevAppointment = e => {
-    const nextIndex = Math.max(0, this.slider.props.index - 1);
-    this.setState({
-      currentAppointmentIndex: nextIndex,
+  cancelAppointment = (name, time, id) => {
+    Modal.confirm({
+      title: 'Cancel Appointment',
+      content: constants.APPOINTMENTS.CANCEL_CONFIRM(time, name),
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: () => {
+        message.destroy();
+        message.loading('Cancelling appointment...', 0);
+        this.cancelAppointmentConfirmed(id)
+      }
     });
-  };
+  }
 
-  getAppointments(today, _appointments) {
+  cancelAppointmentConfirmed = (id) => {
+    this.props.dispatch(
+      cancelAppointment({
+        email: this.props.user.email,
+        id: id
+      })
+    );
+  }
+
+  getDashboardAppointments(today, _appointments) {
+    let nextAppIndex = -1;
     if (_appointments && _appointments.size > 0 && _appointments.get(today)) {
       const appointmentsToday = _appointments
         .get(today)
         .sort((a, b) => compareAsc(a.time, b.time));
-      let nextAppIndex;
       if (appointmentsToday.length > 0) {
         const appointmentTimesToday = appointmentsToday.map(a => a.time);
         const now = new Date();
-        return appointmentsToday.map((appointment, index) => {
-          const { name, mobilePhone, /*confirmed,*/ time } = appointment;
-          const isNextAppointment =
+        let nextFound = false;
+        const _arr = appointmentsToday.map((appointment, index) => {
+          const { name, mobilePhone, /*confirmed,*/ time, id } = appointment;
+          let isNextAppointment = false;
+          if (!nextFound) {
+            isNextAppointment =
             isAfter(time, now) &&
             isEqual(
               closestTo(
@@ -87,12 +109,9 @@ export class Dashboard extends Component {
               ),
               time,
             );
-          if (isNextAppointment) {
-            nextAppIndex = index;
-            if (this.state.currentAppointmentIndex !== nextAppIndex) {
-              this.setState({
-                currentAppointmentIndex: nextAppIndex,
-              });
+            if (isNextAppointment) {
+              nextFound = true;
+              nextAppIndex = index;
             }
           }
           return (
@@ -105,152 +124,139 @@ export class Dashboard extends Component {
                     : 'Past Appointment'}
               </h2>
               <div className="dashboard-appointment">
-                <big>{format(time, DISPLAY_TIME_FORMAT)}</big>
-                <div className="appointment-details">
-                  <h3>
-                    <span className="client-name">{name}</span>
-                  </h3>
-                  <div>
-                    <div className="options">
-                      <a href={`tel:${mobilePhone}`}>
-                        <FontAwesome className="fa fa-phone" name="fa-phone" />
-                        <span
-                          unselectable="on"
-                          style={{
-                            marginLeft: '10px',
-                            paddingBottom: '5px',
-                            dsplay: 'inline-block',
-                          }}
-                        >{`Call`}</span>
-                      </a>
-                    </div>
-
-                    <div className="options">
-                      <a
-                        onClick={() =>
-                          alert(
-                            "This feature is not available yet. But it's coming soon!",
-                          )}
-                      >
-                        <FontAwesome
-                          className="fa-check-circle-o"
-                          name="fa-phone"
-                        />
-                        <span
-                          unselectable="on"
-                          style={{
-                            marginLeft: '10px',
-                            paddingBottom: '5px',
-                            dsplay: 'inline-block',
-                          }}
-                        >{`Confirm`}</span>
-                      </a>
-                    </div>
-
-                    <div className="options">
-                      <a
-                        onClick={() =>
-                          alert(
-                            "This feature is not available yet. But it's coming soon!",
-                          )}
-                      >
-                        <FontAwesome className="fa fa-ban" name="fa-phone" />
-                        <span
-                          unselectable="on"
-                          style={{
-                            marginLeft: '10px',
-                            paddingBottom: '5px',
-                            dsplay: 'inline-block',
-                          }}
-                        >{`Cancel`}</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
+                <Card actions={[
+                    <a href={`tel:${mobilePhone}`}>
+                      <Icon type="phone" >Call</Icon>
+                    </a>,
+                    <Icon type="check">Confirm</Icon>,
+                    <Icon type="close" onClick={
+                      () => { isPast(time) ? Modal.warning({
+                        title: 'Cancel Appointment',
+                        content: 'Sorry, you can\'t cancel an appointment in the past!'
+                      })
+                      : this.cancelAppointment(name, time, id)}
+                    }>Cancel</Icon>
+                  ]}
+                  title={
+                    <span>
+                      <Icon type="clock-circle-o"/> {format(time, DISPLAY_TIME_FORMAT)}
+                    </span>
+                  }
+                  style={{
+                    display: this.props.fetching || this.props.showMessage ? 'none' : undefined,
+                    width: '100%'
+                  }}
+                >
+                  {name}
+                </Card>
               </div>
               <h4 style={{ textAlign: 'center' }}>{`${index +
                 1} / ${appointmentsToday.length}`}</h4>
             </div>
           );
         });
+        return { dashboardAppointments: (
+          <Slider
+              slidesToShow={1}
+              slidesToScroll={1}
+              arrows={true}
+              initialSlide={nextAppIndex}
+              nextArrow={<CustomArrow type="right-square" />}
+              prevArrow={<CustomArrow type="left-square" />}
+              dots={true}
+              vertical={false}
+              dotsClass="slick-dots"
+              responsive={[{
+                breakpoint: 768,
+                settings: {
+                  arrows: false,
+                }},{
+                breakpoint: 1024,
+                settings: {
+                  arrows: true,
+                }}
+              ]}
+              style={{
+                display: this.props.fetching || this.props.showMessage ? 'none' : undefined,
+              }}
+            >
+              {_arr}
+            </Slider>
+        ) };
       }
-    } else {
-      return (
-        <div className="appointment-count">
-          <p>
-            You have no appointments today!<br />
-            <br />Make sure you have your availability setup in settings!
-          </p>
-        </div>
-      );
     }
   }
 
   render() {
     const today = format(new Date(), DATE_FORMAT);
+    let dashboardAppointments;
     const appointmentCount = this.props.appointments.size
       ? this.props.appointments.get(today)
         ? this.props.appointments.get(today).length
         : 0
       : 0;
+    if (appointmentCount > 0 ) {
+      ({dashboardAppointments} = this.getDashboardAppointments(today, this.props.appointments));
+    }
     return (
       <section className="dashboard-page">
         <Logo />
-        <div className="appointment-navigation">
-          <div onClick={this.slideToPrevAppointment} />
-          <div onClick={this.slideToNextAppointment} />
-        </div>
         <div>
-          <p
-            style={{
+
+          <div style={{
               display:
                 this.props.fetching || this.props.showMessage
                   ? 'block'
                   : 'none',
               marginTop: '55px',
-              color: 'dodgerblue',
+              textAlign: 'center',
+              padding: '15px',
+              color: 'dodgerblue'
             }}
           >
             {this.props.dashboardStatus} <br />
-            <br /> Make sure you have you availability setup in your settings!
-          </p>
-          <SwipeableViews
-            enableMouseEvents={true}
-            ref={slider => (this.slider = slider)}
-            index={this.state.currentAppointmentIndex}
-            style={{
-              display:
-                this.props.fetching || this.props.showMessage
-                  ? 'none'
-                  : 'block',
-            }}
-          >
-            {this.state.dashboardAppointments}
-          </SwipeableViews>
-          <div
-            style={{
-              display:
-                this.props.fetching || this.props.showMessage
-                  ? 'none'
-                  : 'block',
-            }}
-          >
-            <div className="total-appointments">
-              <Link
-                to={ROUTES.SCHEDULE}
-                style={{
-                  textDecoration: 'none',
-                }}
-              >
-                <p>
-                  You have<br />
-                  <strong>{appointmentCount}</strong>
-                  <br />
-                  {`appointment${appointmentCount === 1 ? '' : 's'} today.`}
-                </p>
-              </Link>
-            </div>
+            <br /> {constants.INFO.DASHBOARD.AVAILABILITY_SETTINGS}
+            {
+              this.props.fetching ?
+              <span><br/><Spin size="large" style={{marginTop: '25px'}}/></span> :
+              ''
+            }
           </div>
+
+          <div style={{
+              width: '92%',
+              marginLeft: 'auto',
+              marginRight:'auto',
+              display:
+                this.props.fetching || this.props.showMessage
+                  ? 'none'
+                  : 'block',
+            }}
+            >
+              {dashboardAppointments}
+          </div>
+
+          <div className="total-appointments"
+            style={{
+              marginTop: '60px',
+              display:
+                this.props.fetching || this.props.showMessage
+                  ? 'none'
+                  : 'block',
+            }}
+            >
+            <Link to={ROUTES.SCHEDULE}
+              style={{textDecoration: 'none'}}
+              >
+              <p>
+                You have<br />
+                <strong>{appointmentCount}</strong>
+                <br />
+                {`appointment${appointmentCount === 1 ? '' : 's'} today.`}
+              </p>
+            </Link>
+          </div>
+
         </div>
       </section>
     );
@@ -269,6 +275,9 @@ const mapStateToProps = state => ({
   dashboardStatus: state.dashboard.dashboardStatus,
   showMessage: state.dashboard.showMessage,
   user: state.user.user,
+  cancellingAppointment: state.scheduler.cancelAppointment,
+  appointmentCancelStatus: state.scheduler.appointmentCancelStatus,
+  appointmentCancelMessage: state.scheduler.appointmentCancelMessage
 });
 
 const ConnectedDashboard = connect(mapStateToProps)(Dashboard);

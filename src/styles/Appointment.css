@@ -4,6 +4,12 @@
   margin-bottom: 0;
 }
 
+.scheduling-page * {
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
 .scheduling-page em {
   display: inline-block;
   width: 100%;

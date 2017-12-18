@@ -11,6 +11,7 @@ export const API = {
   ACCOUNT_ACTIVATION: '/is-human/activate',
   VALIDATE_APPOINTMENT: '/is-human/validate',
   APPOINTMENT: '/appointment',
+  CANCEL_APPOINTMENT: '/appointment/cancel',
   APPOINTMENTS: (email, date) =>
     `/appointment/provider?email=${email}&date=${date}`,
   PROVIDERS: '/provider',

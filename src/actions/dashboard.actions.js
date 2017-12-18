@@ -46,12 +46,11 @@ export const getAppointments = (user, date) => dispatch => {
       const map = new Map(data);
       if (map.size === 0) {
         dispatch(noAppointments());
-        return;
+      } else {
+        dispatch(appointmentsFetched(map));
       }
-      dispatch(appointmentsFetched(map));
     })
     .catch(error => {
-      //dispatch(loginFailed(error));
       console.log(error);
     });
 };

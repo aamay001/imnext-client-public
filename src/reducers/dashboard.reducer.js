@@ -31,6 +31,10 @@ const fetchingAppointments = state => {
     ...state,
     fetching: true,
     dashboardStatus: 'Loading appointments...',
+    appointments: new Map(),
+    scheduleVisibleAppointments: new Map(),
+    scheduleOffset: DEFAULT_OFFSET,
+    showMessage: true
   };
 };
 
@@ -39,6 +43,7 @@ const appointmentsFetched = (state, action) => {
     ...state,
     fetching: false,
     appointments: action.appointments,
+    showMessage: false
   };
 };
 

@@ -1,12 +1,5 @@
 .dashboard-page {
-  margin-bottom: 150px;
   background-color: white;
-}
-
-.dashboard-page .appointment-details * {
-  -webkit-transition: none ! important;
-  -moz-transition: none ! important;
-  transition: none ! important;
 }
 
 .dashboard-page h1 {
@@ -39,100 +32,19 @@
   font-size: 20px;
 }
 
-.dashboard-page big {
-  display: inline-block;
-  width: 100%;
-  font-weight: bold;
-  font-size: 35px;
-  text-align: center;
-  margin-bottom: 0;
-  padding-top: 20px;
-}
-
-.dashboard-page span.client-name {
-  font-size: 25px;
-}
-
-div.appointment-navigation {
-  margin: 0;
-  padding-bottom: 10px;
-  padding-top: 10px;
-  width: 100%;
-  position: fixed;
-  left: 0;
-  bottom: 35px;
-}
-
-div.appointment-details {
-  text-align: center;
-}
-
-div.appointment-navigation div:active {
-  background-color: #4b79a1;
-  color: white;
-}
-
-div.appointment-navigation div:hover {
-  background-color: #4b79a1;
-  color: white;
-}
-
-div.appointment-navigation div:first-of-type {
-  float: left;
-  margin-left: 15px;
-}
-
-div.appointment-navigation div:nth-of-type(2) {
-  float: right;
-  margin-right: 15px;
-}
-
-div.appointment-navigation div:first-of-type::before {
-  content: '< Prev'
-}
-
-div.appointment-navigation div:nth-of-type(2)::after {
-  content: 'Next >'
-}
-
 .dashboard-appointment {
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
-  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
-  width: 90%;
   margin-left: auto;
   margin-right: auto;
-  height: 200px;
 }
 
-.dashboard-page .options a {
-  display: block;
-  text-decoration: none;
-  padding-top: 20px;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  color: inherit;
-  cursor: pointer;
-}
-
-.dashboard-page .options a:visited {
-  color: inherit;
-}
-
-.dashboard-page .options {
-  border: 1px solid lightgrey;
-  border-bottom: none;
-  width: 33.3333%;
+.dashboard-page .ant-card-head-title {
   text-align: center;
-  display: inline-block;
-  height: 55px;
-  background-color: white;
-  color: black;
+  font-size: 20px;
 }
 
-.dashboard-page .options:hover {
-  background-color: #4b79a1;
-  color: white;
+.dashboard-page .ant-card-body {
+  font-size: 20px;
+  text-align: center;
 }
 
 .total-appointments a{
@@ -145,64 +57,31 @@ div.appointment-navigation div:nth-of-type(2)::after {
   color: black;
 }
 
-div.appointment-navigation div {
+.total-appointments {
+  width: fit-content;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: black;
+  font-size: 55px;
+}
+
+.slick-arrow {
+  width: 55px;
   height: 55px;
-  width: 40%;
-  outline:  none;
-  text-align: center;
-  padding-top: 15px;
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
-  1px 1px 1px 1px rgba(0, 0, 0, 0.22);
-  -webkit-transition: none !important;
-  -moz-transition: none !important;
-  transition: none !important;
-  background-color: white;
+  z-index: 10;
 }
 
 @media only screen and (min-width: 768px) {
   .dashboard-appointment {
-    width: 45%;
-  }
-  div.appointment-navigation {
-    top: 35%;
-    margin: 0;
-  }
-
-  div.appointment-navigation div {
-    width: 35px;
-    height: 400px;
-    margin: 0;
-    padding-top: 175px;
-    font-size: 30px;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.25),
-    1px 1px 1px 1px rgba(0, 0, 0, 0.22);
-  }
-
-  div.appointment-navigation div:first-of-type::before {
-    content: '<'
-  }
-
-  div.appointment-navigation div:nth-of-type(2)::after {
-    content: '>'
-  }
-
-  .react-swipeable-view-container {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-  }
-
-  .react-swipeable-view-container div[aria-hidden=true] {
-    z-index: -1;
-  }
-
-  .react-swipeable-view-container div[aria-hidden=false] {
-    z-index: 0;
+    width: 60%;
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .dashboard-appointment {
-    width: 30%;
+    width: 40%;
   }
 }

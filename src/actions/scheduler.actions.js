@@ -114,6 +114,55 @@ export const appointmentScheduled = details => {
   };
 };
 
+export const CANCELLING_APPOINTMENT = 'CANCELLING_APPOINTMENT';
+const cancellingAppointment = () => {
+  return {
+    type: CANCEL_APPOINTMENT
+  };
+}
+
+export const APPOINTMENT_CANCEL_SUCCESS = 'APPOINTMENT_CANCEL_SUCCESS';
+const appointmentCancelSuccess = (data) => {
+  return {
+    type: APPOINTMENT_CANCEL_SUCCESS,
+    message: data.message
+  };
+}
+
+
+export const APPOINTMENT_CANCEL_ERROR = 'APPOINTMENT_CANCEL_ERROR';
+const appointmentCancelError = (data) => {
+  return {
+    type: APPOINTMENT_CANCEL_ERROR,
+    message: data.message
+  };
+}
+
+export const APPOINTMENT_CANCEL_ACTION_COMPLETE = 'APPOINTMENT_CANCEL_ACTION_COMPLETE';
+export const appointmentCancelActionComplete = () => {
+  return {
+    type: APPOINTMENT_CANCEL_ACTION_COMPLETE
+  };
+}
+
+const CANCEL_APPOINTMENT = 'CANCEL_APPOINTMENT';
+export const cancelAppointment = appointmentInfo => dispatch => {
+  dispatch(cancellingAppointment());
+  const data = {
+    appointmentId: appointmentInfo.id,
+    email: appointmentInfo.email
+  };
+  fetchHelper('PUT', API.CANCEL_APPOINTMENT, JSON.stringify(data), 'reload', 'T')
+    .then(res => {
+      if (res.ok) {
+        dispatch(appointmentCancelSuccess(res));
+      }
+    })
+    .catch(error => {
+      dispatch(appointmentCancelError(error));
+    })
+}
+
 export const GET_VALIDATION_CODE = 'GET_VALIDATION_CODE';
 export const getValidationCode = formData => dispatch => {
   dispatch(requestingHumanValidation());

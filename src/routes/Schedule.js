@@ -1,23 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import { Modal, message } from 'antd';
 import format from 'date-fns/format';
 import compareAsc from 'date-fns/compare_asc';
 import isTomorrow from 'date-fns/is_tomorrow';
 import isToday from 'date-fns/is_today';
 import isPast from 'date-fns/is_past';
-import FontAwesome from 'react-fontawesome';
 import Logo from '../components/Logo';
 
+import * as constants from '../config/constants';
 import {
-  DISPLAY_DATE_FORMAT,
-  DISPLAY_TIME_FORMAT,
-  ROUTES,
-} from '../config/constants';
+  cancelAppointment,
+  appointmentCancelActionComplete
+} from '../actions/scheduler.actions';
 import {
   loadScheduleAppointments,
   getAppointments,
 } from '../actions/dashboard.actions';
+
+const {
+  DISPLAY_DATE_FORMAT,
+  DISPLAY_TIME_FORMAT,
+  ROUTES,
+} = constants;
 
 export class Schedule extends Component {
   state = {
@@ -38,6 +44,20 @@ export class Schedule extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    message.destroy();
+    if (nextProps.appointmentCancelStatus === 1) {
+      message.success(nextProps.appointmentCancelMessage, 3, () => {
+        this.refreshData();
+      });
+    }
+    else if (nextProps.appointmentCancelStatus === 0) {
+      message.warning(nextProps.appointmentCancelMessage, 5, () => {
+        this.refreshData();
+      });
+    }
+  }
+
   loadMoreAppointments = () => {
     setTimeout(() => {
       this.props.dispatch(
@@ -48,6 +68,10 @@ export class Schedule extends Component {
 
   refreshData() {
     this.props.dispatch(getAppointments(this.props.user, this.props.startDate));
+    this.props.dispatch(appointmentCancelActionComplete());
+    message.loading('Updating schedule...', 2, () => {
+      this.props.dispatch(loadScheduleAppointments(this.props.startDate));
+    }, 1500);
   }
 
   onAppointmentClicked = e => {
@@ -62,6 +86,29 @@ export class Schedule extends Component {
       });
     }
   };
+
+  cancelAppointment = (name, time, id) => {
+    Modal.confirm({
+      title: 'Cancel Appointment',
+      content: constants.APPOINTMENTS.CANCEL_CONFIRM(time, name),
+      okText: 'Yes',
+      cancelText: 'No',
+      onOk: () => {
+        message.destroy();
+        message.loading('Cancelling appointment...', 0);
+        this.cancelAppointmentConfirmed(id)
+      }
+    });
+  }
+
+  cancelAppointmentConfirmed = (id) => {
+    this.props.dispatch(
+      cancelAppointment({
+        email: this.props.user.email,
+        id: id
+      })
+    );
+  }
 
   render() {
     let appointments;
@@ -89,7 +136,7 @@ export class Schedule extends Component {
                   <div>
                     <div className="options">
                       <a href={`tel:${time.mobilePhone}`}>
-                        <FontAwesome className="fa fa-phone" name="fa-phone" />
+
                         <span
                           unselectable="on"
                           style={{
@@ -108,10 +155,7 @@ export class Schedule extends Component {
                             "This feature is not available yet. But it's coming soon!",
                           )}
                       >
-                        <FontAwesome
-                          className="fa-check-circle-o"
-                          name="fa-phone"
-                        />
+
                         <span
                           unselectable="on"
                           style={{
@@ -126,11 +170,14 @@ export class Schedule extends Component {
                     <div className="options">
                       <a
                         onClick={() =>
-                          alert(
-                            "This feature is not available yet. But it's coming soon!",
-                          )}
+                          isPast(time.time) ? Modal.warning({
+                            title: 'Cancel Appointment',
+                            content: 'Sorry, you can\'t cancel an appointment in the past!'
+                          }) :
+                          this.cancelAppointment(time.name, time.time, time.id )
+                        }
                       >
-                        <FontAwesome className="fa fa-ban" name="fa-phone" />
+
                         <span
                           unselectable="on"
                           style={{
@@ -209,6 +256,9 @@ const mapStateToProps = state => ({
   offset: state.dashboard.scheduleOffset,
   startDate: state.dashboard.scheduleStartDate,
   user: state.user.user,
+  cancellingAppointment: state.scheduler.cancelAppointment,
+  appointmentCancelStatus: state.scheduler.appointmentCancelStatus,
+  appointmentCancelMessage: state.scheduler.appointmentCancelMessage
 });
 
 const ConnectedSchedule = connect(mapStateToProps)(Schedule);
